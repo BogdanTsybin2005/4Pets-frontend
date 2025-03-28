@@ -1,0 +1,80 @@
+.main__page-body {
+    min-height: 100vh;
+}
+.main__start-screen {
+    position: relative;
+    height: 100vh;
+}
+.main-aside-decor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: calc((397 / 1780) * 100%);
+    background: #200B63;
+}
+.main__start-context {
+    max-width: 1400px;
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main__start-title-context {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+.main__bishkek-access {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    position: relative;
+    margin-left: 125px;
+}
+.main__bishkek-access p {
+    font-size: 35px;
+    font-weight: 700;
+    color: #200B63;
+    opacity: .6;
+}
+.main__bishkek-access span {
+    position: absolute;
+    transform: rotate(-15deg) translateY(15%) translateX(-110%);
+    left: 0;
+}
+h1 {
+    max-width: 800px;
+    font-size: 80px;
+    font-weight: 600;
+}
+h1 > div:first-child {
+    font-size: 80px;
+    position: relative;
+    font-weight: 600;
+}
+._4Petst--purple-text {
+    display: inline-block;
+    font-size: 80px;
+    color: #D5007F;
+    font-weight: 600;
+}
+.main__start-image {
+    background: red;
+    width: 418px;
+    height: 642px;
+    position: relative;
+}
+.main__start-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

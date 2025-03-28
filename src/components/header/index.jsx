@@ -9,16 +9,15 @@ export default function Header() {
         <>
             <header className="header">
                 <div className="header-container">
-                    <div className="header-block">
-                        <Main4PetsLogo width={45} height={24}/>
+                    <Main4PetsLogo width={105} height={55}/>
+                    <ul className="header-likst-block">
+                        <li><NavLink className={'header-link-item'} to={'/info'}>Инфо</NavLink></li>
+                        <li><NavLink className={'header-link-item'} to={'/blog'}>Блог</NavLink></li>
+                        <li><NavLink className={'header-link-item'} to={'/our-team'}>Наша команда</NavLink></li>
+                    </ul>
+                    <div className="header-button-block">
+                        <NavLink to={'/login'} className={'header-button'}>Войти</NavLink>
                     </div>
-                    <div className="header-block">
-                        <NavLink to={'/info'}>Инфо</NavLink>
-                        <NavLink to={'/blog'}>Блог</NavLink>
-                        <NavLink to={'/our-team'}>Наша команда</NavLink>
-                        <NavLink to={'/contacts'}>Контакты</NavLink>
-                    </div>
-                    <div className="header-block"></div>
                 </div>
             </header>
         </>
