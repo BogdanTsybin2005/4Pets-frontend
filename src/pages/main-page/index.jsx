@@ -22,10 +22,10 @@ export default function MainPage() {
 
     useEffect(() => {
         if (
-            swiperRef.current &&
-            swiperRef.current.params &&
-            prevSliderButton.current &&
-            nextSliderButton.current
+          swiperRef.current &&
+          swiperRef.current.params &&
+          prevSliderButton.current &&
+          nextSliderButton.current
         ) {
             swiperRef.current.params.navigation.prevEl = prevSliderButton.current;
             swiperRef.current.params.navigation.nextEl = nextSliderButton.current;
@@ -34,7 +34,7 @@ export default function MainPage() {
             swiperRef.current.navigation.init();
             swiperRef.current.navigation.update();
         }
-    }, []);
+      }, []);
 
     return <div className="main__page-body">
         <div className="main__start-screen">
@@ -72,14 +72,9 @@ export default function MainPage() {
                 <Swiper
                     modules={[Navigation]}
                     slidesPerView={2.5}
-                    onBeforeInit={(swiper) => {
-                        swiper.params.navigation.prevEl = prevSliderButton.current;
-                        swiper.params.navigation.nextEl = nextSliderButton.current;
-                    }}
-                    navigation={{
-                        prevEl: prevSliderButton.current,
-                        nextEl: nextSliderButton.current,
-                    }}
+                    spaceBetween={30}
+                    navigation={false}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
                     {allMyLanguageData[interfaceLanguage].possibilitiesSection.allPossibilities.map((item, index) => (
                     <SwiperSlide key={`slide-${index}`}>

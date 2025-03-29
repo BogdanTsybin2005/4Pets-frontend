@@ -100,7 +100,7 @@ h1 > div:first-child {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 35px;
+    gap: 70px;
 }
 
 .main__slider-block {
@@ -192,6 +192,9 @@ h1 > div:first-child {
     flex: 1 1 auto;
 }
 
+.swiper {
+    padding-right: 250px;
+}
 
 .main__slider-block .swiper .swiper-wrapper {
     display: flex;
@@ -223,34 +226,38 @@ h1 > div:first-child {
     justify-content: center;
     padding: 20px;
     box-sizing: border-box;
-    margin-top: 20px;
     position: relative;
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
 }
 
 .main__slide-buttons div {
-    background-color: #D5007F;
-    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
     width: 60px;
     height: 60px;
-    cursor: pointer;
-    user-select: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    background-color: #D5007F;
+    border-radius: 50%;
     border: 2px solid white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
     color: white;
 }
 
 .main__slide-buttons div:hover {
-    background-color: #3730a3;
+    background-color: #670a42;
 }
 
 .main__slide-buttons div::after {
     content: '';
 }
 
-.main__slide-buttons div:hover {
-    background-color: #3730a3;
-}
 
 .swiper-button-disabled {
     position: absolute;
@@ -260,4 +267,17 @@ h1 > div:first-child {
 .main__slide-buttons div:not(.swiper-button-disabled) {
     position: absolute;
     z-index:  10;
+}
+
+
+
+
+.main__slide-buttons .swiper-button-prev {
+    left: -35px;
+}
+.main__slide-buttons .swiper-button-next {
+    right: -35px;
+}
+.swiper-button-disabled {
+    opacity: 1;
 }
