@@ -16,8 +16,7 @@ function GenerateDecorCircles() {
 export default function Section({option = 1}) {
     
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();    
-    
-
+  
     const sectionTextMessage = allMyLanguageData[interfaceLanguage].heroText;
     let result = {
         '1': (

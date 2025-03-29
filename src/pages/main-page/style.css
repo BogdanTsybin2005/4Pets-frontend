@@ -1,3 +1,9 @@
+body, html {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
 .main__page-body {
     min-height: 100vh;
 }
@@ -77,4 +83,181 @@ h1 > div:first-child {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+
+
+
+
+
+
+.main__slider-section {
+    padding: 80px 20px;
+    background: #f7f7f7;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.main__slider-block {
+    width: 100%;
+    padding-left: 250px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.main__slider-item {
+    max-width: 600px;
+    padding: 45px 30px 70px 30px;
+    font-size: 18px;
+    position: relative;
+    transition-duration: .3s;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main__slider-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(32, 11, 99, .2);
+    border-radius: 66px;
+    transition-duration: .3s;
+    opacity: .6;
+}
+.main__slider-item ol li, .main__slider-item h2 {
+    transition-duration: .3s;
+    position: relative;
+    z-index: 10;
+}
+.main__slider-item:hover::before {
+    content: '';
+    background: rgba(32, 11, 99, 1);
+    opacity: 1;
+}
+.main__slider-item:hover .main__slider-subtitle, 
+.main__slider-item:hover .main__slider-item-list,
+.main__slider-item:hover .main__slider-title {
+    color: white;
+}
+
+.main__slider-title {
+    font-size: 30px;
+}
+.main__slider-subtitle {
+    font-size: 24px;
+}
+.main__slider-item-list {
+    padding-left: 20px;
+}
+.main__slider-item-list li {
+    font-size: 20px;
+    text-wrap: balance;
+}
+
+.main__slider-list-title {
+    color: rgba(32, 11, 99, 1);
+    font-size: 64px;
+    font-weight: 700;
+    padding-left: 40px;
+}
+
+.swiper-slide:nth-child(odd) .main__slider-item::before {
+    transform: skewY(5deg) translateY(20px);
+}
+  
+.swiper-slide:nth-child(even) .main__slider-item::before {
+    transform: skewY(-5deg) translateY(20px);
+}
+  
+
+.swiper-slide:nth-child(even) .main__slider-item {
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+.main__slider-block .swiper {
+    display: flex;
+    flex-direction: row;
+}
+.swiper-slide {
+    flex: 1 1 auto;
+}
+
+
+.main__slider-block .swiper .swiper-wrapper {
+    display: flex;
+}
+.swiper-wrapper {
+    display: flex;
+    gap: 25px;
+}
+.main__circle-block-for-icon {
+    width: 111px;
+    height: 111px;
+    border-radius: 50%;
+    background: #200B63;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    transition-duration: .3s;
+}
+
+.main__slider-item:hover .main__circle-block-for-icon {
+    background: #D5007F;
+}
+
+.main__slide-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    position: relative;
+}
+
+.main__slide-buttons div {
+    background-color: #D5007F;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid white;
+    color: white;
+}
+
+.main__slide-buttons div:hover {
+    background-color: #3730a3;
+}
+
+.main__slide-buttons div::after {
+    content: '';
+}
+
+.main__slide-buttons div:hover {
+    background-color: #3730a3;
+}
+
+.swiper-button-disabled {
+    position: absolute;
+    z-index: -10;
+}
+
+.main__slide-buttons div:not(.swiper-button-disabled) {
+    position: absolute;
+    z-index:  10;
 }
