@@ -2,34 +2,27 @@ import './style.css';
 import Main4PetsArrow from '../../svg_pictures/4pets-arrow-to-main-title';
 import Section from '../../components/section';
 import { useLanguageContext } from '../../context/LanguageContext';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
 import { useRef, useEffect } from 'react';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 
 
-
 export default function MainPage() {
     const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
+
+
     const prevSliderButton = useRef(null);
     const nextSliderButton = useRef(null);
     const swiperRef = useRef(null);
     
-
-
     useEffect(() => {
-        if (
-          swiperRef.current &&
-          swiperRef.current.params &&
-          prevSliderButton.current &&
-          nextSliderButton.current
-        ) {
+        if (swiperRef.current && swiperRef.current.params && prevSliderButton.current && nextSliderButton.current) {
             swiperRef.current.params.navigation.prevEl = prevSliderButton.current;
             swiperRef.current.params.navigation.nextEl = nextSliderButton.current;
-        
             swiperRef.current.navigation.destroy();
             swiperRef.current.navigation.init();
             swiperRef.current.navigation.update();
@@ -72,7 +65,6 @@ export default function MainPage() {
                 <Swiper
                     modules={[Navigation]}
                     slidesPerView={2.5}
-                    spaceBetween={30}
                     navigation={false}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
@@ -104,5 +96,16 @@ export default function MainPage() {
 
 
         <Section option={2}/>
+        
+
+        <br />
+
+
+        <Section option={3}/>
+
+
+        
+
+
     </div>
 }
