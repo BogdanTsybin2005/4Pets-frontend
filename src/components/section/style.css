@@ -92,7 +92,7 @@
     justify-content: space-between;
 }
 .main__section-image-block {
-    flex: 1;
+    flex: 1.2;
 }
 .main__section-image-block > div {
     width: 90%;
@@ -115,7 +115,7 @@
     object-fit: cover;
 }
 .main__section-title-block {
-    flex: 1.35;
+    flex: 1.5;
     background: #D5007F;
     padding: 125px 30px 160px 60px;
 }
@@ -124,6 +124,8 @@
     font-size: 64px;
     position: relative;
     display: inline-block;
+    text-wrap: balance;
+    max-width: 700px;
 }
 .main__section-title::before {
     content: '';

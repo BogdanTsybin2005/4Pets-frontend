@@ -1,0 +1,56 @@
+.footer {
+    padding: 50px 15px;
+    box-sizing: border-box;
+}
+.footer-container {
+    display: flex;
+    align-items: center;
+}
+.footer__4pets-icon-block {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.footer-contacts-information-block {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 25px;
+}
+.footer__instagram-info {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.footer__instagram-icon-block {
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(213, 0, 127, 1);
+}
+.footer__instagram-links-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.footer__instagram-links-block a {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+}
+.footer__contacts-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.footer__contacts-info p {
+    font-size: 20px;
+    font-weight: 600;
+}
