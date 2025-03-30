@@ -1,10 +1,13 @@
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import InstagramIcon from '../../svg_pictures/instagram-icon';
+import {useLanguageContext} from '../../context/LanguageContext';
 import './style.css';
 
 
 
 export default function Footer() {
+    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+
     return (
         <>
             <div className="footer">
@@ -25,7 +28,7 @@ export default function Footer() {
                         <div className="footer__contacts-info">
                             <p>+996 502 296 444, </p>
                             <p>+996 705 916 001</p>
-                            <p>Email:</p>
+                            <p>{allMyLanguageData[interfaceLanguage].email}</p>
                             <p>4pets.tsi@gmail.com</p>
                         </div>
                     </div>

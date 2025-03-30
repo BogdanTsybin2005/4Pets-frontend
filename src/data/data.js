@@ -103,6 +103,7 @@ const allMyLanguageData = {
         ],
       },
       contactUs: 'СВЯЗАТЬСЯ С НАМИ',
+      email: 'Электронная почта:'
     },
     kg: {
       bishkekAccess: 'БИШКЕКТЕ ЖЕТКИЛИКТҮҮ',
@@ -202,6 +203,7 @@ const allMyLanguageData = {
         ],
       },
       contactUs: 'БИЗ МЕНЕН БАЙЛАНЫШУУ',
+      email: 'Электрондук почтасы:'
     },
     en: {
       bishkekAccess: 'AVAILABLE IN BISHKEK',
@@ -298,6 +300,7 @@ const allMyLanguageData = {
         ],
       },
       contactUs: 'CONTACT US',
+      email: 'Email:'
     },
   };
   
