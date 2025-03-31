@@ -38,7 +38,7 @@
 .footer__instagram-links-block {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 .footer__instagram-links-block a {
     color: black;

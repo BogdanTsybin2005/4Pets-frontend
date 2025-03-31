@@ -26,7 +26,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="footer__contacts-info">
-                            <p>+996 502 296 444, </p>
+                            <p>+996 502 296 444,</p>
                             <p>+996 705 916 001</p>
                             <p>{allMyLanguageData[interfaceLanguage].email}</p>
                             <p>4pets.tsi@gmail.com</p>

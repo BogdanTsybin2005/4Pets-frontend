@@ -6,6 +6,34 @@ import Vector3 from "../svg_pictures/possibilities/Vector3";
 
 const allMyLanguageData = {
     ru: {
+      headerLoginButton: 'ВОЙТИ',
+      header: [
+        {
+          linkID: 1,
+          text: 'ИНФО',
+          url: '/info',
+        },
+        {
+          linkID: 2,
+          text: 'БЛОГ',
+          url: '/blog',
+        },
+        {
+          linkID: 3,
+          text: 'ЧАТБОТ',
+          url: '/chat-bot'
+        },
+        {
+          linkID: 4,
+          text: 'КАРТА',
+          url: '/map'
+        },
+        {
+          linkID: 5,
+          text: 'КОНТАКТЫ',
+          url: '/contacts',
+        }
+      ],
       bishkekAccess: 'ДОСТУПНО В БИШКЕКЕ',
       heroText: 'НАША ПЛАТФОРМА ОБЪЕДИНЯЕТ ВЛАДЕЛЬЦЕВ ДОМАШНИХ ЖИВОТНЫХ. ЗДЕСЬ МОЖНО ОБСУЖДАТЬ УХОД ЗА ПИТОМЦАМИ, ИСКАТЬ СОВЕТЫ, ДЕЛИТЬСЯ ОПЫТОМ И ПОМОГАТЬ БЕЗДОМНЫМ ЖИВОТНЫМ.',
       howItWorks: {
@@ -106,6 +134,34 @@ const allMyLanguageData = {
       email: 'Электронная почта:'
     },
     kg: {
+      headerLoginButton: 'КИРҮҮ',
+      header: [
+        {
+          linkID: 1,
+          text: 'ИНФО',
+          url: '/info',
+        },
+        {
+          linkID: 2,
+          text: 'БЛОГ',
+          url: '/blog',
+        },
+        {
+          linkID: 3,
+          text: 'ЧАТБОТ',
+          url: '/chat-bot'
+        },
+        {
+          linkID: 4,
+          text: 'КАРТА',
+          url: '/map'
+        },
+        {
+          linkID: 5,
+          text: 'БАЙЛАНЫШУУ',
+          url: '/contacts',
+        }
+      ],
       bishkekAccess: 'БИШКЕКТЕ ЖЕТКИЛИКТҮҮ',
       heroText: 'БИЗДИН ПЛАТФОРМА ҮЙ ЖАНЫБАРЛАРЫНЫН ЭЭЛЕРИН БИРИКТИРЕТ. БУЛ ЖЕРДЕ СИЗ ЖАНЫБАРЛАРДЫ БАГУУ БОЮНЧА ТАЛКУУЛАРДЫ ЖҮРГҮЗҮП, КЕҢЕШТЕРДИ АЛЫП, ӨЗ ТАЖРЫЙБАҢЫЗДЫ БӨЛҮШҮП ЖАНА БАШ КАЛКАЛООЧУ ЖАНЫБАРЛАРГА ЖАРДАМ БЕРЕ АЛАСЫЗ.',
       howItWorks: {
@@ -206,6 +262,34 @@ const allMyLanguageData = {
       email: 'Электрондук почтасы:'
     },
     en: {
+      headerLoginButton: 'LOGIN',
+      header: [
+        {
+          linkID: 1,
+          text: 'INFO',
+          url: '/info',
+        },
+        {
+          linkID: 2,
+          text: 'BLOG',
+          url: '/blog',
+        },
+        {
+          linkID: 3,
+          text: 'CHATBOT',
+          url: '/chat-bot'
+        },
+        {
+          linkID: 4,
+          text: 'MAP',
+          url: '/map'
+        },
+        {
+          linkID: 5,
+          text: 'CONTACTS',
+          url: '/contacts',
+        }
+      ],
       bishkekAccess: 'AVAILABLE IN BISHKEK',
       heroText: 'OUR PLATFORM BRINGS TOGETHER PET OWNERS TO DISCUSS PET CARE, SEEK ADVICE, SHARE EXPERIENCES AND HELP HOMELESS ANIMALS.',
       howItWorks: {

@@ -1,5 +1,4 @@
 import './style.css';
-import Main4PetsArrow from '../../svg_pictures/4pets-arrow-to-main-title';
 import Section from '../../components/section';
 import { useLanguageContext } from '../../context/LanguageContext';
 import { useRef, useEffect } from 'react';
@@ -8,12 +7,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import MainPageTitle from '../../components/main-page-title';
 
 
 
 export default function MainPage() {
     const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
-
 
     const prevSliderButton = useRef(null);
     const nextSliderButton = useRef(null);
@@ -33,20 +32,7 @@ export default function MainPage() {
         <div className="main__start-screen">
             <div className="main__start-context">
                 <div className="main__start-title-context">
-                    <div className='main__bishkek-access'>
-                        <p>{allMyLanguageData[interfaceLanguage].bishkekAccess}</p>
-                        <span>
-                            <Main4PetsArrow/>
-                        </span>
-                    </div>
-                    <h1>
-                        <div>
-                            <div className='_4Petst--purple-text'>
-                                4Pets
-                            </div> – онлайн-
-                        </div> 
-                            пространство для общения, заботы и помощи <div className='_4Petst--purple-text'>питомцам</div>
-                    </h1>
+                    <MainPageTitle language={interfaceLanguage}/>
                 </div>
                 <div className="main__start-image">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL5lkD-vMcSbKV1dek1EBuzRzbN2oiELkWCg&s" alt="img" />
@@ -68,22 +54,24 @@ export default function MainPage() {
                     navigation={false}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
-                    {allMyLanguageData[interfaceLanguage].possibilitiesSection.allPossibilities.map((item, index) => (
-                    <SwiperSlide key={`slide-${index}`}>
-                        <div className="main__slider-item">
-                            <div className="main__circle-block-for-icon">{item.image && <item.image />}</div>
-                            <h2 className="main__slider-title">{item.title}</h2>
-                            <div>
-                            <h2 className="main__slider-subtitle">{item.subtitle}</h2>
-                                <ol className="main__slider-item-list">
-                                    {item.steps.map((step, stepIndex) => (
-                                    <li key={`step-${index}-${stepIndex}`}>{step.stepID}. {step.text}</li>
-                                    ))}
-                                </ol>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                    ))}
+                    {allMyLanguageData[interfaceLanguage].possibilitiesSection.allPossibilities.map((item, index) => {
+                        return (
+                            <SwiperSlide key={`slide-${index}`}>
+                                <div className="main__slider-item">
+                                    <div className="main__circle-block-for-icon">{item.image && <item.image />}</div>
+                                    <h2 className="main__slider-title">{item.title}</h2>
+                                    <div>
+                                    <h2 className="main__slider-subtitle">{item.subtitle}</h2>
+                                        <ol className="main__slider-item-list">
+                                            {item.steps.map((step, stepIndex) => (
+                                            <li key={`step-${index}-${stepIndex}`}>{step.stepID}. {step.text}</li>
+                                            ))}
+                                        </ol>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        )
+                    })}
 
 
                 </Swiper>

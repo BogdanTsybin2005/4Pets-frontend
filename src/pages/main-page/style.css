@@ -54,22 +54,8 @@ body, html {
     transform: rotate(-15deg) translateY(15%) translateX(-110%);
     left: 0;
 }
-h1 {
-    max-width: 800px;
-    font-size: 80px;
-    font-weight: 600;
-}
-h1 > div:first-child {
-    font-size: 80px;
-    position: relative;
-    font-weight: 600;
-}
-._4Petst--purple-text {
-    display: inline-block;
-    font-size: 80px;
-    color: #D5007F;
-    font-weight: 600;
-}
+
+
 .main__start-image {
     background: red;
     width: 418px;

@@ -1,24 +1,31 @@
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import { NavLink } from "react-router";
 import './style.css';
+import { useRef } from "react";
+import {useLanguageContext} from '../../context/LanguageContext';
 
 
 
 export default function Header() {
+    const header = useRef(null);
+    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+    
     return (
         <>
-            <header className="header">
+            <header className="header" ref={header}>
                 <div className="header-container">
                     <Main4PetsLogo width={105} height={55}/>
                     <ul className="header-likst-block">
-                        <li><NavLink className={'header-link-item'} to={'/info'}>ИНФО</NavLink></li>
-                        <li><NavLink className={'header-link-item'} to={'/blog'}>БЛОГ</NavLink></li>
-                        <li><NavLink className={'header-link-item'} to={'/our-team'}>ЧАТБОТ</NavLink></li>
-                        <li><NavLink className={'header-link-item'} to={'/our-team'}>КАРТА</NavLink></li>
-                        <li><NavLink className={'header-link-item'} to={'/our-team'}>КОНТАКТЫ</NavLink></li>
+                        {allMyLanguageData[interfaceLanguage].header.map((item) => {
+                            return (
+                                <li key={item.linkID}>
+                                    <NavLink className={'header-link-item'} to={item.url}>{item.text}</NavLink>
+                                </li>
+                            )
+                        })}
                     </ul>
                     <div className="header-button-block">
-                        <NavLink to={'/login'} className={'header-button'}>Войти</NavLink>
+                        <NavLink to={'/login'} className={'header-button'}>{allMyLanguageData[interfaceLanguage].headerLoginButton}</NavLink>
                     </div>
                 </div>
             </header>
