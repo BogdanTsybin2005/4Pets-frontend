@@ -2,6 +2,7 @@ import './style.css';
 import Large4PetsSectionIcon from '../../svg_pictures/4pets-large-section-icon';
 import { useLanguageContext } from '../../context/LanguageContext';
 import myImg from '../../svg_pictures/icons/photo_2025-03-30_00-02-52.jpg';
+import { LoginButton } from '../button';
 
 
 
@@ -16,7 +17,6 @@ function GenerateDecorCircles() {
 export default function Section({option = 1}) {
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();    
     const sectionTextMessage = allMyLanguageData[interfaceLanguage].heroText;
-    
     let result = {
         '1': (
             <div className='main__section-1'>
@@ -45,6 +45,7 @@ export default function Section({option = 1}) {
                                 )
                             })}
                         </ul>
+                        <LoginButton option='secondary' buttonText={allMyLanguageData[interfaceLanguage].howItWorks.buttonText}/>
                     </div>
                 </div>
             </div>
@@ -66,10 +67,9 @@ export default function Section({option = 1}) {
             </div>
         )
     }
-    
     return (
         <>
-            {result[String(option)]}    
+            {result[String(option)]}
         </>
     )
 }

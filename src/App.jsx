@@ -1,5 +1,3 @@
-import Header from './components/header'
-import Footer from './components/footer'
 import Main from './components/main'
 
 import MainPage from './pages/main-page'
@@ -19,7 +17,6 @@ import './App.css'
 function App() {
   return (
     <div className='wrapper'>
-      <Header/>
       <Main>
         <Routes>
           <Route path='/' element={<MainPage/>}/>
@@ -32,7 +29,6 @@ function App() {
           <Route path='/subscription' element={<Subscription/>}/>
         </Routes>
       </Main>
-      <Footer/>
     </div>
   )
 }

@@ -16,16 +16,10 @@
 }
 .header-likst-block {
     display: flex;
-    gap: 25px;
+    gap: 50px;
     align-items: center;
-}
-.header-button {
-    text-transform: uppercase;
-    color: white;
-    border: 2px solid white;
-    padding: 12px 32px;
-    border-radius: 32px;
 }
 .header-link-item {
     color: #1A1A1A;
+    font-weight: 700;
 }

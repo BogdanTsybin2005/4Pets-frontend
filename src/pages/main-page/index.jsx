@@ -8,6 +8,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import MainPageTitle from '../../components/main-page-title';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
 
 
 
@@ -29,6 +31,7 @@ export default function MainPage() {
       }, []);
 
     return <div className="main__page-body">
+        <Header/>
         <div className="main__start-screen">
             <div className="main__start-context">
                 <div className="main__start-title-context">
@@ -87,6 +90,16 @@ export default function MainPage() {
         
 
         <br />
+        <br />
+        <br />
+        
+        <br />
+        <br />
+        <br />
+        
+        <br />
+        <br />
+        <br />
 
 
         <Section option={3}/>
@@ -94,6 +107,6 @@ export default function MainPage() {
 
         
 
-
+        <Footer/>
     </div>
 }

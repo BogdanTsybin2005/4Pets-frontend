@@ -1,15 +1,16 @@
+import './style.css';
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import { NavLink } from "react-router";
-import './style.css';
 import { useRef } from "react";
 import {useLanguageContext} from '../../context/LanguageContext';
+import { LoginButton } from '../button';
 
 
 
 export default function Header() {
     const header = useRef(null);
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
-    
+
     return (
         <>
             <header className="header" ref={header}>
@@ -25,7 +26,7 @@ export default function Header() {
                         })}
                     </ul>
                     <div className="header-button-block">
-                        <NavLink to={'/login'} className={'header-button'}>{allMyLanguageData[interfaceLanguage].headerLoginButton}</NavLink>
+                        <LoginButton/>
                     </div>
                 </div>
             </header>

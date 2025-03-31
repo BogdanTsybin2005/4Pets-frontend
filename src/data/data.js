@@ -131,7 +131,40 @@ const allMyLanguageData = {
         ],
       },
       contactUs: 'СВЯЗАТЬСЯ С НАМИ',
-      email: 'Электронная почта:'
+      email: 'Электронная почта:',
+      authenticationPage: {
+        loginBitton: 'Войти',
+        signUpButton: 'Зарегистрироваться',
+        authenticationInputs: [
+          {
+            inputID: 1,
+            label: 'Почта',
+            placeholder: 'Введите почту',
+          },
+          {
+            inputID: 2,
+            label: 'Пароль',
+            placeholder: 'Введите пароль'
+          },
+        ],
+        validationCriteria: [
+          {
+            criteriaID: 1,
+            text: 'Защита пароля',
+          },
+          {
+            criteriaID: 2,
+            text: 'Хотя бы 8 элементов',
+          },
+          {
+            criteriaID: 3,
+            text: 'Содержит цифры и символы',
+          },
+        ],
+        or: 'или',
+        optionOfTheProtectionType: ['Слабая', 'Средняя', 'Сильная'],
+        authenticationButtonText: 'Войти',
+      }
     },
     kg: {
       headerLoginButton: 'КИРҮҮ',
@@ -259,7 +292,40 @@ const allMyLanguageData = {
         ],
       },
       contactUs: 'БИЗ МЕНЕН БАЙЛАНЫШУУ',
-      email: 'Электрондук почтасы:'
+      email: 'Электрондук почтасы:',
+      authenticationPage: {
+        loginBitton: 'Кирүү',
+        signUpButton: 'Катталуу',
+        authenticationInputs: [
+          {
+            inputID: 1,
+            label: 'Почта',
+            placeholder: 'Почтаны киргизиңиз',
+          },
+          {
+            inputID: 2,
+            label: 'Сырсөз',
+            placeholder: 'Сырсөздү киргизиңиз'
+          },
+        ],
+        validationCriteria: [
+          {
+            criteriaID: 1,
+            text: 'Сырсөздүн күчү',
+          },
+          {
+            criteriaID: 2,
+            text: 'Жок дегенде 8 символ',
+          },
+          {
+            criteriaID: 3,
+            text: 'Сандар жана белгилер камтылган',
+          },
+        ],
+        or: 'же',
+        optionOfTheProtectionType: ['Алсыз', 'Орто', 'Күчтүү'],
+        authenticationButtonText: 'Кирүү',
+      }
     },
     en: {
       headerLoginButton: 'LOGIN',
@@ -384,7 +450,40 @@ const allMyLanguageData = {
         ],
       },
       contactUs: 'CONTACT US',
-      email: 'Email:'
+      email: 'Email:',
+      authenticationPage: {
+        loginBitton: 'Login',
+        signUpButton: 'Sign up',
+        authenticationInputs: [
+          {
+            inputID: 1,
+            label: 'Mail',
+            placeholder: 'Enter your mail',
+          },
+          {
+            inputID: 2,
+            label: 'Password',
+            placeholder: 'Enter your password'
+          },
+        ],
+        validationCriteria: [
+          {
+            criteriaID: 1,
+            text: 'Password protection',
+          },
+          {
+            criteriaID: 2,
+            text: 'At least 8 elements',
+          },
+          {
+            criteriaID: 3,
+            text: 'Contains numbers and symbols',
+          },
+        ],
+        or: 'or',
+        optionOfTheProtectionType: ['Weak', 'Medium', 'Strong'],
+        authenticationButtonText: 'Login',
+      }
     },
   };
   
