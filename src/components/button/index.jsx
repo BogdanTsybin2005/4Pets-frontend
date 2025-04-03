@@ -14,11 +14,13 @@ export function LoginButton({buttonText, option='primary'}) {
 }
 
 
-export function TheLinkToPageButton({ buttonText, url }) {
+
+export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrimary = false }) {
+    const className = `header-link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
+
     return (
-      <NavLink to={`/${url}`} className={({ isActive }) => `header-link-to-page-button ${isActive ? '__link-active' : ''}`}>
-        {buttonText}
-      </NavLink>
+        <NavLink to={`/${url}`} className={className}>
+            {buttonText}
+        </NavLink>
     );
-  }
-  
+}

@@ -133,7 +133,7 @@ const allMyLanguageData = {
       contactUs: 'СВЯЗАТЬСЯ С НАМИ',
       email: 'Электронная почта:',
       authenticationPage: {
-        loginBitton: 'Войти',
+        loginButton: 'Войти',
         signUpButton: 'Зарегистрироваться',
         authenticationInputs: [
           {
@@ -150,7 +150,7 @@ const allMyLanguageData = {
         validationCriteria: [
           {
             criteriaID: 1,
-            text: 'Защита пароля',
+            text: 'Защита пароля:',
           },
           {
             criteriaID: 2,
@@ -294,7 +294,7 @@ const allMyLanguageData = {
       contactUs: 'БИЗ МЕНЕН БАЙЛАНЫШУУ',
       email: 'Электрондук почтасы:',
       authenticationPage: {
-        loginBitton: 'Кирүү',
+        loginButton: 'Кирүү',
         signUpButton: 'Катталуу',
         authenticationInputs: [
           {
@@ -311,7 +311,7 @@ const allMyLanguageData = {
         validationCriteria: [
           {
             criteriaID: 1,
-            text: 'Сырсөздүн күчү',
+            text: 'Сырсөздүн күчү:',
           },
           {
             criteriaID: 2,
@@ -452,12 +452,12 @@ const allMyLanguageData = {
       contactUs: 'CONTACT US',
       email: 'Email:',
       authenticationPage: {
-        loginBitton: 'Login',
+        loginButton: 'Login',
         signUpButton: 'Sign up',
         authenticationInputs: [
           {
             inputID: 1,
-            label: 'Mail',
+            label: 'Email',
             placeholder: 'Enter your mail',
           },
           {
@@ -469,7 +469,7 @@ const allMyLanguageData = {
         validationCriteria: [
           {
             criteriaID: 1,
-            text: 'Password protection',
+            text: 'Password protection:',
           },
           {
             criteriaID: 2,

@@ -37,3 +37,7 @@
     justify-content: space-between;
     width: 100%;
 }
+.header-link-to-page-button.active {
+    background-color: rgba(213, 0, 127, 1);
+    color: white;
+}
