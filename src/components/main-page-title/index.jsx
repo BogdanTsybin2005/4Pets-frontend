@@ -47,7 +47,7 @@ export default function MainPageTitle({language}) {
     return (
         <>
             <div className='main__bishkek-access'>
-                <p>{allMyLanguageData[interfaceLanguage].bishkekAccess}</p>
+                <p>{allMyLanguageData[interfaceLanguage]?.bishkekAccess}</p>
                 <span>
                     <Main4PetsArrow/>
                 </span>

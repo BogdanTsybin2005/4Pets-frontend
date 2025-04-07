@@ -28,8 +28,13 @@ export default function MainPage() {
             swiperRef.current.navigation.init();
             swiperRef.current.navigation.update();
         }
-      }, []);
-
+    }, []);
+    
+    if (!interfaceLanguage || !allMyLanguageData?.[interfaceLanguage]?.possibilitiesSection) {
+        return <p style={{ textAlign: 'center', marginTop: '100px' }}>Загрузка языка...</p>;
+      }
+      
+    
     return <div className="main__page-body">
         <Header/>
         <div className="main__start-screen">
@@ -50,14 +55,17 @@ export default function MainPage() {
 
         <div className='main__slider-section'>
             <div className='main__slider-block'>
-                <h2 className='main__slider-list-title'>{allMyLanguageData[interfaceLanguage].possibilitiesSection.title}</h2>
+                <h2 className='main__slider-list-title'>
+                    {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.title || 'Загрузка...'}
+                </h2>
+
                 <Swiper
                     modules={[Navigation]}
                     slidesPerView={2.5}
                     navigation={false}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
-                    {allMyLanguageData[interfaceLanguage].possibilitiesSection.allPossibilities.map((item, index) => {
+                    {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.allPossibilities?.map((item, index) => {
                         return (
                             <SwiperSlide key={`slide-${index}`}>
                                 <div className="main__slider-item">

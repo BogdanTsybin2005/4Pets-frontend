@@ -89,20 +89,20 @@ const allMyLanguageData = {
           {
             slideID: 2,
             image: Vector2,
-            title: 'Объявления',
+            title: 'Чатбот',
             subtitle: 'Раздел объявлений также помогает:',
             steps: [
               {
                 stepID: 1,
-                text: 'Найти временную передержку или няню для питомца',
+                text: 'Узнавать информацию о здоровье, питании и уходе за питомцами',
               },
               {
                 stepID: 2,
-                text: 'Сообщить о потерянном или найденном животном',
+                text: 'Быстро находить ответы на часто задаваемые вопросы',
               },
               {
                 stepID: 3,
-                text: 'Найти фонды и приюты, чтобы помочь бездомным животным'
+                text: 'Получать советы по разным видам животных — от кошек и собак до экзотических питомцев.'
               }
             ]
           },
@@ -111,20 +111,24 @@ const allMyLanguageData = {
           {
             slideID: 3,
             image: Vector3,
-            title: 'Объявления:',
-            subtitle: 'Полезные сервисы:',
+            title: 'Интерактивная карта',
+            subtitle: 'Пользоваться интерактивной картой для поиска нужных мест рядом Легко находить:',
             steps: [
               {
                 stepID: 1,
-                text: 'Ветеринарные клиники и зоомагазины',
+                text: 'приюты',
               },
               {
                 stepID: 2,
-                text: 'Груминг-салоны и гостиницы для животных',
+                text: 'зоомагазины',
               },
               {
                 stepID: 3,
-                text: 'Фонды помощи бездомным питомцам'
+                text: 'ветеринарные клиники'
+              },
+              {
+                stepID: 4,
+                text: 'и другие сервисы для питомцев'
               }
             ]
           },
@@ -251,40 +255,44 @@ const allMyLanguageData = {
           {
             slideID: 2,
             image: Vector2,
-            title: 'Жарнамалар',
-            subtitle: 'Жарнамалар бөлүмү да жардам берет:',
+            title: 'Чатбот',
+            subtitle: 'Бул жерден жаныбар ээлери төмөнкүлөрдү билишет:',
             steps: [
               {
                 stepID: 1,
-                text: 'Убактылуу ашыкча экспозицияны же үй жаныбарын багуучуну табыңыз.',
+                text: 'Жаныбарлардын ден соолугу, тамактануусу жана багуусу тууралуу маалымат алышат',
               },
               {
                 stepID: 2,
-                text: 'Жоголгон же табылган жаныбар жөнүндө кабарлоо.',
+                text: 'Көп берилүүчү суроолорго жоопторду тез табышат',
               },
               {
                 stepID: 3,
-                text: 'Жолбун жаныбарларга жардам берүү үчүн каражаттарды жана баш калкалоочу жайларды табыңыз.'
+                text: 'Ар кандай жаныбарлар боюнча кеңештер алышат — мышыктар менен иттерден тартып, экзотикалык жаныбарларга чейин.'
               }
             ]
           },
           {
             slideID: 2,
             image: Vector3,
-            title: 'Жарнамалар:',
-            subtitle: 'Пайдалуу кызматтар:',
+            title: 'Интерактивдүү карта:',
+            subtitle: 'Керектүү жерлерди жакындан табуу үчүн интерактивдүү картаны колдонуңуз Оңой табууга болот:',
             steps: [
               {
                 stepID: 1,
-                text: 'Ветеринардык клиникалар жана үй жаныбарлары дүкөндөрү',
+                text: 'баш калкалоочу жайлар',
               },
               {
                 stepID: 2,
-                text: 'Үй жаныбарлары үчүн салондор жана мейманканалар.',
+                text: 'зоодүкөндөр.',
               },
               {
                 stepID: 3,
-                text: 'Жолбун Үй жаныбарларына жардам берүү фонддору'
+                text: 'ветеринардык клиникалар'
+              },
+              {
+                stepID: 4,
+                text: 'жана башка жаныбарлар үчүн кызматтар'
               }
             ]
           }
@@ -410,40 +418,44 @@ const allMyLanguageData = {
           {
             slideID: 2,
             image: Vector2,
-            title: 'Announcements',
-            subtitle: 'The classifieds section also helps:',
+            title: 'Chatbot',
+            subtitle: 'This is where pet owners can:',
             steps: [
               {
                 stepID: 1,
-                text: 'Find a temporary foster or pet sitter for your pet',
+                text: 'Recognize information about pet health, nutrition and care',
               },
               {
                 stepID: 2,
-                text: 'Report a lost or found animal',
+                text: 'Quickly find answers to frequently asked questions',
               },
               {
                 stepID: 3,
-                text: 'Find foundations and shelters to help homeless animals'
+                text: 'Get advice on different types of animals, from cats and dogs to exotic pets.'
               }
             ]
           },
           {
             slideID: 2,
             image: Vector3,
-            title: 'Useful services:',
-            subtitle: 'The classifieds section also helps:',
+            title: 'Interactive map:',
+            subtitle: 'Use the interactive map to find the right places nearby Easy to find:',
             steps: [
               {
                 stepID: 1,
-                text: 'Veterinary clinics and pet stores',
+                text: 'shelters',
               },
               {
                 stepID: 2,
-                text: 'Grooming salons and pet hotels',
+                text: 'pet stores',
               },
               {
                 stepID: 3,
-                text: 'Funds to help homeless pets'
+                text: 'veterinary clinics'
+              },
+              {
+                stepID: 4,
+                text: 'and other pet services'
               }
             ]
           },

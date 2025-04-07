@@ -1,12 +1,28 @@
 import { createContext, useContext, useState } from "react";
-import allMyLanguageData from "../../src/data/data";
+import allMyLanguageData from '../data/data';
 
 
 
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const [interfaceLanguage, setInterfaceLanguage] = useState('ru');
+  let stored = localStorage.getItem('language');
+
+  if (!stored || !['ru', 'en', 'kg'].includes(stored)) {
+    stored = 'ru';
+    localStorage.setItem('language', stored);
+  }
+
+  if (stored.startsWith('"') && stored.endsWith('"')) {
+    try {
+      stored = JSON.parse(stored); 
+      localStorage.setItem('language', stored); 
+    } catch {
+      stored = 'ru';
+    }
+  }
+
+  const [interfaceLanguage, setInterfaceLanguage] = useState(stored || 'ru');
 
   return (
     <LanguageContext.Provider value={{ interfaceLanguage, setInterfaceLanguage, allMyLanguageData }}>
@@ -16,4 +32,7 @@ export function LanguageProvider({ children }) {
 }
 
 
-export const useLanguageContext = () => useContext(LanguageContext);
+
+export function useLanguageContext() {
+  return useContext(LanguageContext);
+}
