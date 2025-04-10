@@ -10,6 +10,9 @@ import 'swiper/css/scrollbar';
 import MainPageTitle from '../../components/main-page-title';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
+import SparkIcon from '../../svg_pictures/spark-icon';
+import QuotationMarkIcon from '../../svg_pictures/quote-mark-icon';
+
 
 
 
@@ -19,21 +22,28 @@ export default function MainPage() {
     const prevSliderButton = useRef(null);
     const nextSliderButton = useRef(null);
     const swiperRef = useRef(null);
-    
-    useEffect(() => {
-        if (swiperRef.current && swiperRef.current.params && prevSliderButton.current && nextSliderButton.current) {
-            swiperRef.current.params.navigation.prevEl = prevSliderButton.current;
-            swiperRef.current.params.navigation.nextEl = nextSliderButton.current;
-            swiperRef.current.navigation.destroy();
-            swiperRef.current.navigation.init();
-            swiperRef.current.navigation.update();
+
+    const slider4PetsNextButton = useRef(null);
+    const slider4PetsPrevButton = useRef(null);
+    const slider4PetsRef = useRef(null);
+
+
+    const handleSlidersButtonsAndSlider = (prevButton, nextButton, currentSwiperRef) => {
+        if (currentSwiperRef.current && currentSwiperRef.current.params && prevButton.current && nextButton.current) {
+            currentSwiperRef.current.params.navigation.prevEl = prevButton.current;
+            currentSwiperRef.current.params.navigation.nextEl = nextButton.current;
+            currentSwiperRef.current.navigation.destroy();
+            currentSwiperRef.current.navigation.init();
+            currentSwiperRef.current.navigation.update();
         }
-    }, []);
+    }
+
+    useEffect(() => {
+        handleSlidersButtonsAndSlider(prevSliderButton, nextSliderButton, swiperRef);
+        handleSlidersButtonsAndSlider(slider4PetsPrevButton, slider4PetsNextButton, slider4PetsRef);
+    }, []);  
+
     
-    if (!interfaceLanguage || !allMyLanguageData?.[interfaceLanguage]?.possibilitiesSection) {
-        return <p style={{ textAlign: 'center', marginTop: '100px' }}>Загрузка языка...</p>;
-      }
-      
     
     return <div className="main__page-body">
         <Header/>
@@ -97,21 +107,52 @@ export default function MainPage() {
         <Section option={2}/>
         
 
-        <br />
-        <br />
-        <br />
-        
-        <br />
-        <br />
-        <br />
-        
-        <br />
-        <br />
-        <br />
+        <div className="main__4pets-team-slider">
+            <Swiper
+                effect='fade'
+                modules={[Navigation]}
+                centeredSlides={true}
+                onSwiper={(swiper) => (slider4PetsRef.current = swiper)}
+            >   
+                {allMyLanguageData[interfaceLanguage]?.FIP16_4pets.map((item) => {
+                    return (
+                        <SwiperSlide>
+                            <div className="main__4pets-team-slide">
+                                <div className="main__4pets-slide-content">
+                                    <div className="main__4pets-slide-image-block">
+                                        <img src={item.picture} alt="img" />
+                                        <div className="main__4pets-spark-block">
+                                            <div>
+                                                <SparkIcon width={97} height={97}/>    
+                                                <SparkIcon width={97} height={97}/> 
+                                            </div>
+                                            <div>
+                                                <SparkIcon width={97} height={97}/>   
+                                            </div>
+                                        </div>
+                                        <QuotationMarkIcon/>
+                                    </div>
+                                    <div className="main__4pets-slide-text-block">
+                                        <h2 className="main__4pets-slide-student-name">{item.fullName}</h2>
+                                        <p className="main__4petst-slide-text">{item.description}</p>
+                                        <div className='main__4pets-slide-buttons-block'>
+                                            <div className='main__slide-buttons'>
+                                                <div className="swiper-button-next" ref={nextSliderButton}>{'>'}</div>
+                                                <div className="swiper-button-prev" ref={prevSliderButton}>{'<'}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    )
+                })}
+                
+            </Swiper>
+        </div>
 
 
         <Section option={3}/>
-
 
         
 

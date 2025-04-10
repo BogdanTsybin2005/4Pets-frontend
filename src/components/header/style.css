@@ -23,3 +23,7 @@
     color: #1A1A1A;
     font-weight: 700;
 }
+.header-button-block {
+    display: flex;
+    gap: 10px;
+}

@@ -5,13 +5,11 @@ import { useRef } from "react";
 import { useLanguageContext } from '../../context/LanguageContext';
 import { LoginButton } from '../button';
 import { LanguageSelect } from '../button';
-import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 export default function Header() {
     const header = useRef(null);
     const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();
-    const [language, setLanguage] = useLocalStorage('language', interfaceLanguage);
 
     return (
         <header className="header" ref={header}>
@@ -34,7 +32,6 @@ export default function Header() {
                         language={interfaceLanguage}
                         setLanguage={setInterfaceLanguage}
                     />
-
                 </div>
             </div>
         </header>
