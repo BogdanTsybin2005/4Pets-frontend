@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import MainPageTitle from '../../components/main-page-title';
 import Header from '../../components/header';
-import Footer from '../../components/footer';
+import Footer from '../../components/footer'
 import SparkIcon from '../../svg_pictures/spark-icon';
 import QuotationMarkIcon from '../../svg_pictures/quote-mark-icon';
 
@@ -75,9 +75,9 @@ export default function MainPage() {
                     navigation={false}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
-                    {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.allPossibilities?.map((item, index) => {
+                    {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.allPossibilities?.map((item) => {                        
                         return (
-                            <SwiperSlide key={`slide-${index}`}>
+                            <SwiperSlide key={`slide-${item.slideID}`}>
                                 <div className="main__slider-item">
                                     <div className="main__circle-block-for-icon">{item.image && <item.image />}</div>
                                     <h2 className="main__slider-title">{item.title}</h2>
@@ -85,7 +85,7 @@ export default function MainPage() {
                                     <h2 className="main__slider-subtitle">{item.subtitle}</h2>
                                         <ol className="main__slider-item-list">
                                             {item.steps.map((step, stepIndex) => (
-                                            <li key={`step-${index}-${stepIndex}`}>{step.stepID}. {step.text}</li>
+                                                <li key={`step-${item.slideID}-${stepIndex}`}>{step.stepID}. {step.text}</li>
                                             ))}
                                         </ol>
                                     </div>
@@ -116,7 +116,7 @@ export default function MainPage() {
             >   
                 {allMyLanguageData[interfaceLanguage]?.FIP16_4pets.map((item) => {
                     return (
-                        <SwiperSlide>
+                        <SwiperSlide key={item.id}>
                             <div className="main__4pets-team-slide">
                                 <div className="main__4pets-slide-content">
                                     <div className="main__4pets-slide-image-block">

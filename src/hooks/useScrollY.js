@@ -1,14 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
 
 
 
 export default function useScrollY() {
-    const [windowScrollY, setWindowScrollY] = useState(0);
-    useEffect(() => {
-        const handleScrollY = () => setWindowScrollY(window.scrollY);
-        handleScrollY();
-        window.addEventListener('scroll', handleScrollY);
-        return () => window.removeEventListener('scroll', handleScrollY);
-    }, []);
-    return windowScrollY; 
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return scrollY;
 }

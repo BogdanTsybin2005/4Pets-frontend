@@ -8,7 +8,9 @@ import Signup from './pages/signup'
 import Map from './pages/map'
 import ChatBot from './pages/chatbot'
 import Subscription from './pages/subcription'
-import ProfilePage from './pages/profile-registration-page'
+import ProfileRegistrationPage from './pages/profile-registration-page'
+import UserProfile from './pages/user-profile'
+import SuccessfulRegistrationPage from './pages/successful-registration-page'
 
 
 import { Routes, Route } from 'react-router'
@@ -29,7 +31,9 @@ function App() {
           <Route path='/chat-bot' element={<ChatBot/>}/>
           <Route path='/map' element={<Map/>}/>
           <Route path='/subscription' element={<Subscription/>}/>
-          <Route path='/registration' element={<ProfilePage/>}/>
+          <Route path='/registration' element={<ProfileRegistrationPage/>}/>
+          <Route path='/user-profile' element={<UserProfile/>}/>
+          <Route path='/success' element={<SuccessfulRegistrationPage/>}/>
         </Routes>
       </Main>
     </div>

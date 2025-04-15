@@ -193,7 +193,7 @@ body, html {
     width: 111px;
     height: 111px;
     border-radius: 50%;
-    background: #200B63;
+    background: rgba(213, 0, 127, .7);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,7 +204,7 @@ body, html {
 }
 
 .main__slider-item:hover .main__circle-block-for-icon {
-    background: #D5007F;
+    background: rgba(213, 0, 127, .7);
 }
 
 .main__slide-buttons {

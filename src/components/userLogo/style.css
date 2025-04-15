@@ -1,0 +1,15 @@
+.user-logo-block {
+    border-radius: 50%;
+    border: 4px solid #D5007F33;
+    background: #D5007F33;
+    position: relative;
+}
+.user-logo-block img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}

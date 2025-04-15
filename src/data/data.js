@@ -202,7 +202,7 @@ const allMyLanguageData = {
         {
           id: 4,
           fullName: 'Ташибеков Айтегин',
-          description: 'креативный и внимательный участник команды, который всегда поддерживает нас и делится новыми идеями.',
+          description: 'креативный и внимательный участник команды, который всегда поддерживает нас и делится новыми идеями. Он легко находит нестандартные решения, заботится о деталях и вдохновляет остальных своим энтузиазмом.',
           picture: Aitegin,
         },  
         {
@@ -242,6 +242,80 @@ const allMyLanguageData = {
           picture: Apaya,
         },  
       ],
+      registrationPage: {
+        registrationProfileTitle: 'Регистрация профиля',
+        registrationProfileSubtitle: 'Зарегистируй себя и своего питомца',
+        form: [
+          {
+            id: 1,
+            label: 'Имя пользователя',
+            placeholder: 'Введите имя пользователя',
+            type: 'text',
+            asterisk: '*',
+          },
+          {
+            id: 2,
+            label: 'Город',
+            placeholder: 'Введите город',
+            type: 'select',
+            asterisk: '*',
+            options: [
+              { optionID: 1, cityName: "Айдаркен", selected: false },
+              { optionID: 2, cityName: "Базар-Коргон", selected: false },
+              { optionID: 3, cityName: "Балыкчы", selected: false },
+              { optionID: 4, cityName: "Баткен", selected: false },
+              { optionID: 5, cityName: "Бишкек", selected: true },
+              { optionID: 6, cityName: "Джалал-Абад", selected: false },
+              { optionID: 7, cityName: "Кадамжай", selected: false },
+              { optionID: 8, cityName: "Каинды", selected: false },
+              { optionID: 9, cityName: "Кант", selected: false },
+              { optionID: 10, cityName: "Кара-Балта", selected: false },
+              { optionID: 11, cityName: "Каракол", selected: false },
+              { optionID: 12, cityName: "Кара-Куль", selected: false },
+              { optionID: 13, cityName: "Кара-Суу", selected: false },
+              { optionID: 14, cityName: "Кемин", selected: false },
+              { optionID: 15, cityName: "Кербен", selected: false },
+              { optionID: 16, cityName: "Кок-Джангак", selected: false },
+              { optionID: 17, cityName: "Кочкор-Ата", selected: false },
+              { optionID: 18, cityName: "Кызыл-Кия", selected: false },
+              { optionID: 19, cityName: "Майлуу-Суу", selected: false },
+              { optionID: 20, cityName: "Нарын", selected: false },
+              { optionID: 21, cityName: "Ноокат", selected: false },
+              { optionID: 22, cityName: "Орловка", selected: false },
+              { optionID: 23, cityName: "Ош", selected: false },
+              { optionID: 24, cityName: "Раззаков", selected: false },
+              { optionID: 25, cityName: "Сулюкта", selected: false },
+              { optionID: 26, cityName: "Талас", selected: false },
+              { optionID: 27, cityName: "Таш-Кумыр", selected: false },
+              { optionID: 28, cityName: "Токмак", selected: false },
+              { optionID: 29, cityName: "Токтогул", selected: false },
+              { optionID: 30, cityName: "Узген", selected: false },
+              { optionID: 31, cityName: "Чолпон-Ата", selected: false },
+              { optionID: 32, cityName: "Шамалды-Сай", selected: false },
+              { optionID: 33, cityName: "Шопоков", selected: false }
+            ]                                 
+          },
+          {
+            id: 3,
+            label: 'Контакты',
+            placeholder: 'Введите ващ номер телефона',
+            type: 'tel',
+            asterisk: '*',
+          }
+        ],
+        buttonForRegistrationText: 'Продолжить',
+      },
+      userProfilePage: {
+        buttonForRegistrationText: 'Продолжить',
+        insertLogoTextForButton: 'Вставить изображение',
+        changeLogoTextForButton: 'Изменить изображение',
+        linkTextButton: 'Назад',
+      },
+      successfulRegistrationPage: {
+        title: 'Аккаунт успешно зарегистрирован!',
+        subtitle: 'Добро пожаловать на 4Pets!',
+        buttonText: 'Начать',
+      }
     },
 
 
@@ -349,7 +423,7 @@ const allMyLanguageData = {
             ]
           },
           {
-            slideID: 2,
+            slideID: 3,
             image: Vector3,
             title: 'Интерактивдүү карта:',
             subtitle: 'Керектүү жерлерди жакындан табуу үчүн интерактивдүү картаны колдонуңуз Оңой табууга болот:',
@@ -410,7 +484,6 @@ const allMyLanguageData = {
         optionOfTheProtectionType: ['Алсыз', 'Орто', 'Күчтүү'],
         authenticationButtonText: 'Кирүү',
       },
-
       FIP16_4pets: [
         {
           id: 1,
@@ -433,7 +506,7 @@ const allMyLanguageData = {
         {
           id: 4,
           fullName: 'Ташибеков Айтегин',
-          description: 'ар дайым бизди колдоп, жаңы идеялар менен бөлүшкөн чыгармачыл жана Кунт коюп команданын мүчөсү.',
+          description: 'ар дайым бизди колдоп, жаңы идеялар менен бөлүшкөн чыгармачыл жана Кунт коюп команданын мүчөсү. Ал адаттан тыш чечимдерди оңой табат, деталдарга кам көрөт жана калгандарын өзүнүн энтузиазмы менен шыктандырат.',
           picture: Aitegin,
         },  
         {
@@ -473,6 +546,80 @@ const allMyLanguageData = {
           picture: Apaya,
         },  
       ],
+      registrationPage: {
+        registrationProfileTitle: 'Профилди каттоо',
+        registrationProfileSubtitle: 'Өзүңүздү жана үй жаныбарыңызды каттаңыз',
+        form: [
+          {
+            id: 1,
+            label: 'Колдонуучунун аты',
+            placeholder: 'Колдонуучунун атын киргизиңиз',
+            type: 'text',
+            asterisk: '*',
+          },
+          {
+            id: 2,
+            label: 'Шаар',
+            placeholder: 'Шаарды киргизиңиз',
+            type: 'select',
+            asterisk: '*',
+            options: [
+              { optionID: 1, cityName: "Айдаркен", selected: false },
+              { optionID: 2, cityName: "Базар-Коргон", selected: false },
+              { optionID: 3, cityName: "Балыкчы", selected: false },
+              { optionID: 4, cityName: "Баткен", selected: false },
+              { optionID: 5, cityName: "Бишкек", selected: true },
+              { optionID: 6, cityName: "Жалал-Абад", selected: false },
+              { optionID: 7, cityName: "Кадамжай", selected: false },
+              { optionID: 8, cityName: "Кайыңды", selected: false },
+              { optionID: 9, cityName: "Кант", selected: false },
+              { optionID: 10, cityName: "Кара-Балта", selected: false },
+              { optionID: 11, cityName: "Каракол", selected: false },
+              { optionID: 12, cityName: "Кара-Көл", selected: false },
+              { optionID: 13, cityName: "Кара-Суу", selected: false },
+              { optionID: 14, cityName: "Кемин", selected: false },
+              { optionID: 15, cityName: "Кербен", selected: false },
+              { optionID: 16, cityName: "Көк-Жаңгак", selected: false },
+              { optionID: 17, cityName: "Кочкор-Ата", selected: false },
+              { optionID: 18, cityName: "Кызыл-Кыя", selected: false },
+              { optionID: 19, cityName: "Майлуу-Суу", selected: false },
+              { optionID: 20, cityName: "Нарын", selected: false },
+              { optionID: 21, cityName: "Ноокат", selected: false },
+              { optionID: 22, cityName: "Орловка", selected: false },
+              { optionID: 23, cityName: "Ош", selected: false },
+              { optionID: 24, cityName: "Раззаков", selected: false },
+              { optionID: 25, cityName: "Сүлүктү", selected: false },
+              { optionID: 26, cityName: "Талас", selected: false },
+              { optionID: 27, cityName: "Таш-Көмүр", selected: false },
+              { optionID: 28, cityName: "Токмок", selected: false },
+              { optionID: 29, cityName: "Токтогул", selected: false },
+              { optionID: 30, cityName: "Өзгөн", selected: false },
+              { optionID: 31, cityName: "Чолпон-Ата", selected: false },
+              { optionID: 32, cityName: "Шамалды-Сай", selected: false },
+              { optionID: 33, cityName: "Шопоков", selected: false }
+            ]                       
+          },
+          {
+            id: 3,
+            label: 'Байланыш',
+            placeholder: 'Телефон номериңизди киргизиңиз',
+            type: 'tel',
+            asterisk: '*',
+          }
+        ],
+        buttonForRegistrationText: 'Улантуу',
+      },
+      userProfilePage: {
+        buttonForRegistrationText: 'Улантуу',
+        insertLogoTextForButton: 'Сүрөттү кыстаруу',
+        changeLogoTextForButton: 'Сүрөттү өзгөртүү',
+        linkTextButton: 'Арткы',
+      },
+      successfulRegistrationPage: {
+        title: 'Каттоо эсеби ийгиликтүү катталды!',
+        subtitle: '4Petsке кош келиңиз!',
+        buttonText: 'Баштоо',
+      }
     },
 
 
@@ -638,7 +785,6 @@ const allMyLanguageData = {
         optionOfTheProtectionType: ['Weak', 'Medium', 'Strong'],
         authenticationButtonText: 'Login',
       },
-
       FIP16_4pets: [
         {
           id: 1,
@@ -661,7 +807,7 @@ const allMyLanguageData = {
         {
           id: 4,
           fullName: 'Tashibekov Aitegin',
-          description: 'is creative and attentive team member who always supports us and shares new ideas.',
+          description: 'is a creative and attentive team member who always supports us and shares new ideas. He easily finds out-of-the-box solutions, takes care of details and inspires others with his enthusiasm.',
           picture: Aitegin,
         },  
         {
@@ -701,6 +847,80 @@ const allMyLanguageData = {
           picture: Apaya,
         },  
       ],
+      registrationPage: {
+        registrationProfileTitle: 'Profile registration',
+        registrationProfileSubtitle: 'Register yourself and your pet.',
+        form: [
+          {
+            id: 1,
+            label: 'User Name',
+            placeholder: 'Enter your user name',
+            type: 'text',
+            asterisk: '*',
+          },
+          {
+            id: 2,
+            label: 'City',
+            placeholder: 'Enter city',
+            type: 'select',
+            asterisk: '*',
+            options: [
+              { optionID: 1, cityName: "Aydarken", selected: false },
+              { optionID: 2, cityName: "Bazar-Korgon", selected: false },
+              { optionID: 3, cityName: "Balykchy", selected: false },
+              { optionID: 4, cityName: "Batken", selected: false },
+              { optionID: 5, cityName: "Bishkek", selected: true },
+              { optionID: 6, cityName: "Jalal-Abad", selected: false },
+              { optionID: 7, cityName: "Kadamdzhai", selected: false },
+              { optionID: 8, cityName: "Kainy", selected: false },
+              { optionID: 9, cityName: "Kant", selected: false },
+              { optionID: 10, cityName: "Kara-Balta", selected: false },
+              { optionID: 11, cityName: "Karakol", selected: false },
+              { optionID: 12, cityName: "Kara-Kul", selected: false },
+              { optionID: 13, cityName: "Kara-Suu", selected: false },
+              { optionID: 14, cityName: "Kemin", selected: false },
+              { optionID: 15, cityName: "Kerben", selected: false },
+              { optionID: 16, cityName: "Kok-Jangak", selected: false },
+              { optionID: 17, cityName: "Kochkor-Ata", selected: false },
+              { optionID: 18, cityName: "Kyzyl-Kiya", selected: false },
+              { optionID: 19, cityName: "Mailuu-Suu", selected: false },
+              { optionID: 20, cityName: "Naryn", selected: false },
+              { optionID: 21, cityName: "Nookat", selected: false },
+              { optionID: 22, cityName: "Orlovka", selected: false },
+              { optionID: 23, cityName: "Osh", selected: false },
+              { optionID: 24, cityName: "Razzakov", selected: false },
+              { optionID: 25, cityName: "Sulyukta", selected: false },
+              { optionID: 26, cityName: "Talas", selected: false },
+              { optionID: 27, cityName: "Tash-Kumyr", selected: false },
+              { optionID: 28, cityName: "Tokmok", selected: false },
+              { optionID: 29, cityName: "Toktogul", selected: false },
+              { optionID: 30, cityName: "Uzgen", selected: false },
+              { optionID: 31, cityName: "Cholpon-Ata", selected: false },
+              { optionID: 32, cityName: "Shamaldy-Sai", selected: false },
+              { optionID: 33, cityName: "Shopokov", selected: false }
+            ]                      
+          },
+          {
+            id: 3,
+            label: 'Contacts',
+            placeholder: 'Enter your phone number',
+            type: 'tel',
+            asterisk: '*',
+          }
+        ],
+        buttonForRegistrationText: 'Continue',
+      },
+      userProfilePage: {
+        buttonForRegistrationText: 'Continue',
+        insertLogoTextForButton: 'Insert image',
+        changeLogoTextForButton: 'Change image',
+        linkTextButton: 'Back',
+      },
+      successfulRegistrationPage: {
+        title: 'Account successfully registered!',
+        subtitle: 'Welcome to 4Pets!',
+        buttonText: 'Start',
+      }
     },
   };
   

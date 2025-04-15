@@ -1,0 +1,41 @@
+.user-profile {
+    height: 100vh;
+    padding: 50px 70px;
+    box-sizing: border-box;
+}
+.user-profile-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    position: relative;
+}
+.user-profile-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.user-profile-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 100px;
+    box-sizing: border-box;
+}
+.user-profile-body > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+.user-profile-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}

@@ -62,7 +62,7 @@ export default function AuthLayout({ currentForm }) {
 
                     <TheLinkToPageButton
                         buttonText={currentForm === 'login' ? langData.loginButton : langData.signUpButton}
-                        url={currentForm}
+                        url={currentForm  === 'signup' ? 'registration' : 'login'}
                         isPrimary
                     />
 

@@ -13,7 +13,7 @@
     border: 2px solid rgba(32, 11, 99, 1);
     background: rgba(32, 11, 99, 1);
 }
-.header-link-to-page-button {
+.link-to-page-button {
     border-radius: 8px;
     padding: 10px 20px;
     border: 1px solid black;
@@ -25,11 +25,11 @@
     text-align: center;
     color: rgba(156, 154, 165, 1);
 }
-.header-link-to-page-button:hover {
+.link-to-page-button:hover {
     background: rgba(213, 0, 127, 1);
     color: white;
 }
-.header-link-to-page-button:hover a {
+.link-to-page-button:hover a {
     color: white;
 }
 .login__buttons-block {
@@ -37,7 +37,7 @@
     justify-content: space-between;
     width: 100%;
 }
-.header-link-to-page-button.active {
+.link-to-page-button.active {
     background-color: rgba(213, 0, 127, 1);
     color: white;
 }
@@ -55,4 +55,27 @@
 
 .language-select option {
     color: black;
+}
+.__button-active {
+    background-color: rgba(213, 0, 127, 1);
+    color: white;
+}
+.user-profile-button {
+    background: transparent;
+    padding: 10px 20px;
+    border: 1px solid #465FF166;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.link-button {
+    color: #D5007F;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
