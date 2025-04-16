@@ -15,11 +15,11 @@ export default function SuccessfulRegistrationPage() {
                 <Main4PetsLogo width={150} height={79}/>
                 <TheSuccessfulRegistrationIcon/>
                 <div>
-                    <h2 className='registration__title'>{allMyLanguageData[interfaceLanguage].successfulRegistrationPage.title}</h2>
-                    <h2 className='registration_subtitle'>{allMyLanguageData[interfaceLanguage].successfulRegistrationPage.subtitle}</h2>
+                    <h2 className='registration__title'>{allMyLanguageData[interfaceLanguage]?.successfulRegistrationPage.title}</h2>
+                    <h2 className='registration_subtitle'>{allMyLanguageData[interfaceLanguage]?.successfulRegistrationPage.subtitle}</h2>
                 </div>
                 <TheLinkToPageButton 
-                    buttonText={allMyLanguageData[interfaceLanguage].successfulRegistrationPage.buttonText} 
+                    buttonText={allMyLanguageData[interfaceLanguage]?.successfulRegistrationPage.buttonText} 
                     isActive={true}
                     // url={"/"}    
                 />

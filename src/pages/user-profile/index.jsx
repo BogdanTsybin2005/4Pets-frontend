@@ -1,42 +1,45 @@
 import './style.css';
-import { UserProfileButton } from '../../components/button';
-import { TheLinkToPageButton } from '../../components/button';
+import { UserProfileButton, TheLinkToPageButton, LinkButton } from '../../components/button';
 import { useLanguageContext } from '../../context/LanguageContext';
 import InsertPictureLogoIcon from '../../svg_pictures/insert-picture-logo';
 import ChangePictureLogoIcon from '../../svg_pictures/change-picture-logo';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
-import { LinkButton } from '../../components/button';
-
 
 
 
 export default function UserProfile() {
-    const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
-
-    console.log(allMyLanguageData[interfaceLanguage].userProfilePage)
+    const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+    const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
 
     return (
         <div className="user-profile">
             <div className='user-profile-content'>
                 <div className='user-profile-header'>
-                    <LinkButton url={'registration'} linkText={allMyLanguageData[interfaceLanguage].userProfilePage.linkTextButton}/>
+                    <LinkButton url={'registration'} linkText={lang.linkTextButton} />
                 </div>
+
                 <div className='user-profile-body'>
                     <div>
-                        <IntroPartOfProfilePage/>
-
-                        <UserLogo/>
+                        <IntroPartOfProfilePage />
+                        <UserLogo />
                         <div className='user-profile-buttons'>
-                            <UserProfileButton onCLick={() => console.log('Вставить изображение')}><InsertPictureLogoIcon/>{allMyLanguageData[interfaceLanguage].userProfilePage.insertLogoTextForButton}</UserProfileButton>
-                            <UserProfileButton onCLick={() => console.log('Изменить изображаение')}><ChangePictureLogoIcon/>{allMyLanguageData[interfaceLanguage].userProfilePage.changeLogoTextForButton}</UserProfileButton>
+                            <UserProfileButton onClick={() => console.log('Insert image')}>
+                                <InsertPictureLogoIcon /> 
+                                {lang.insertLogoTextForButton}
+                            </UserProfileButton>
+                            <UserProfileButton onClick={() => console.log('Change image')}>
+                                <ChangePictureLogoIcon /> 
+                                {lang.changeLogoTextForButton}
+                            </UserProfileButton>
                         </div>
                     </div>
 
                     <TheLinkToPageButton 
-                        buttonText={allMyLanguageData[interfaceLanguage]?.userProfilePage.buttonForRegistrationText} 
+                        buttonText={lang.buttonForRegistrationText} 
+                        isPrimary={true}
                         isActive={true}
-                        url={'success'}
+                        url={'success'} 
                     />
                 </div>
             </div>

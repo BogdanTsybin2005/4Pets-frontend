@@ -7,18 +7,72 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import MainPageTitle from '../../components/main-page-title';
 import Header from '../../components/header';
 import Footer from '../../components/footer'
 import SparkIcon from '../../svg_pictures/spark-icon';
 import QuotationMarkIcon from '../../svg_pictures/quote-mark-icon';
 
+import Main4PetsArrow from '../../svg_pictures/4pets-arrow-to-main-title';
 
+
+
+
+
+function MainPageTitle({language}) {
+    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+    const titleResult = {
+        'ru': (
+            <h1>
+                <div>
+                    <div className='_4Petst--purple-text'>
+                        4Pets
+                    </div> – онлайн- 
+                    <span><SparkIcon width={55} height={57}/></span>
+                </div> 
+                    пространство для общения, заботы и помощи <div className='_4Petst--purple-text'>питомцам</div>
+            </h1>
+        ), 
+        'kg': (
+            <h1>
+                <div>
+                    <div className='_4Petst--purple-text'>
+                        4Pets
+                    </div> – онлайн- 
+                    <span><SparkIcon width={55} height={57}/></span>
+                </div> 
+                    <div className='_4Petst--purple-text'>үй жаныбарларына</div> кам көрүү, жардам берүү жана байланыш үчүн мейкиндик
+            </h1>
+        ),
+        'en': (
+            <h1>
+                <div>
+                    <div className='_4Petst--purple-text'>
+                        4Pets
+                    </div> is an online
+                    <span><SparkIcon width={55} height={57}/></span>
+                </div> 
+                space for socializing, caring for and helping <div className='_4Petst--purple-text'>pets</div>
+            </h1>
+        ), 
+    }
+    
+    return (
+        <>
+            <div className='main__bishkek-access'>
+                <p>{allMyLanguageData[interfaceLanguage]?.bishkekAccess}</p>
+                <span>
+                    <Main4PetsArrow/>
+                </span>
+            </div>
+            {titleResult[language]}
+        </>
+    )
+}
 
 
 export default function MainPage() {
     const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
-
+    
     const prevSliderButton = useRef(null);
     const nextSliderButton = useRef(null);
     const swiperRef = useRef(null);
@@ -77,7 +131,7 @@ export default function MainPage() {
                 >
                     {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.allPossibilities?.map((item) => {                        
                         return (
-                            <SwiperSlide key={`slide-${item.slideID}`}>
+                            <SwiperSlide key={item.slideID}>
                                 <div className="main__slider-item">
                                     <div className="main__circle-block-for-icon">{item.image && <item.image />}</div>
                                     <h2 className="main__slider-title">{item.title}</h2>
@@ -153,7 +207,6 @@ export default function MainPage() {
 
 
         <Section option={3}/>
-
         
 
         <Footer/>

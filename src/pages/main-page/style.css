@@ -1,8 +1,7 @@
 body, html {
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
-  }
+}
 
 .main__page-body {
     min-height: 100vh;
@@ -57,7 +56,6 @@ body, html {
 
 
 .main__start-image {
-    background: red;
     width: 418px;
     height: 642px;
     position: relative;
@@ -72,7 +70,47 @@ body, html {
 }
 
 
+.main__bishkek-access {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    position: relative;
+    margin-left: 125px;
+}
+.main__bishkek-access p {
+    font-size: 35px;
+    font-weight: 700;
+    color: #200B63;
+    opacity: .6;
+}
+.main__bishkek-access span {
+    position: absolute;
+    transform: rotate(-15deg) translateY(15%) translateX(-110%);
+    left: 0;
+}
 
+
+h1 {
+    max-width: 900px;
+    font-size: 70px;
+    font-weight: 600;
+    text-wrap: balance;
+}
+h1 > div:first-child {
+    font-size: 70px;
+    position: relative;
+    font-weight: 600;
+}
+h1 > div span {
+    display: inline-block;
+    transform: translate(10px, 7px);
+}
+._4Petst--purple-text {
+    display: inline-block;
+    font-size: 70px;
+    color: #D5007F;
+    font-weight: 600;
+}
 
 
 
@@ -87,6 +125,7 @@ body, html {
     align-items: center;
     flex-direction: column;
     gap: 70px;
+    overflow-x: hidden;
 }
 
 .main__slider-block {
@@ -194,6 +233,8 @@ body, html {
     height: 111px;
     border-radius: 50%;
     background: rgba(213, 0, 127, .7);
+    border: 5px solid rgba(213, 0, 127, .7);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -273,6 +314,7 @@ body, html {
 
 .main__4pets-team-slider {
     padding: 100px 0 150px 0;
+    overflow-x: hidden;
 }
 .main__4pets-team-slider .swiper-slide {
     max-width: 100%;

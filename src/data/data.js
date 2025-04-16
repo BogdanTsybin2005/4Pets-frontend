@@ -725,7 +725,7 @@ const allMyLanguageData = {
             ]
           },
           {
-            slideID: 2,
+            slideID: 3,
             image: Vector3,
             title: 'Interactive map:',
             subtitle: 'Use the interactive map to find the right places nearby Easy to find:',

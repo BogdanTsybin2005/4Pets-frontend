@@ -1,23 +1,21 @@
 import './style.css';
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import { NavLink } from "react-router";
-import { useRef } from "react";
 import { useLanguageContext } from '../../context/LanguageContext';
 import { LoginButton } from '../button';
-import { LanguageSelect } from '../button';
+import LanguageSelect from '../button';
+import useScrollY from '../../hooks/useScrollY';
 
 
 
 export default function Header() {
-    const header = useRef(null);
-    const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();
-    
+    const scrollY = useScrollY();
+    const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();    
 
     return (
-        <header className="header" ref={header}>
-            <div className="header-container">
+        <header className='header'>
+            <div className={`header-container ${scrollY >= 500 ? 'header-scrolled' : ''}`}>
                 <Main4PetsLogo width={105} height={55} />
-
                 <ul className="header-likst-block">
                     {allMyLanguageData[interfaceLanguage]?.header?.map((item) => (
                         <li key={item.linkID}>
@@ -27,7 +25,6 @@ export default function Header() {
                         </li>
                     ))}
                 </ul>
-
                 <div className="header-button-block">
                     <LoginButton />
                     <LanguageSelect

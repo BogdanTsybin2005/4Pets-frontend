@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './style.css';
 import { useLanguageContext } from '../../context/LanguageContext';
+import './style.css';
 
 
 
@@ -36,27 +36,24 @@ const CustomSelect = ({ options, selected, onChange }) => {
                 </span>
                 <span className="custom-select__arrow">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M5 8L10 13L15 8" stroke="#26203B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M5 8L10 13L15 8" stroke="#26203B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </span>
             </div>
 
-
-
-            {isOpen && (
-                <ul className="custom-select__options">
-                    {options.map((option) => (
-                        <li
-                            key={option.optionID}
-                            className="custom-select__option"
-                            onClick={() => handleOptionClick(option)}
-                        >
-                            {option.cityName}
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <ul className={`custom-select__options ${isOpen ? 'show' : ''}`}>
+                {options.map((option) => (
+                <li
+                    key={option.optionID}
+                    className="custom-select__option"
+                    onClick={() => handleOptionClick(option)}
+                >
+                    {option.cityName}
+                </li>
+                ))}
+            </ul>
         </div>
+
     );
 };
 

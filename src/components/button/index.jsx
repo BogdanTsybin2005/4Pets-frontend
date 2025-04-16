@@ -1,8 +1,8 @@
 import { NavLink } from "react-router"
 import { useLanguageContext } from "../../context/LanguageContext"
-import { useEffect } from "react";
-import './style.css';
+import { useState, useRef, useEffect } from "react";
 import LinkArrowIcon from "../../svg_pictures/link-arrow-icon";
+import './style.css';
 
 
 
@@ -32,8 +32,8 @@ export function LoginButton({buttonText, option='primary'}) {
 
 
 export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrimary = false }) {
-    const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''} ${url === 'registration' ? '__button-active' : ''}`;
-
+    const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
+    
     return (
         <NavLink to={`/${url}`} className={className}>
             {buttonText}
@@ -43,34 +43,70 @@ export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrima
 
 
 
-export function LanguageSelect({ language, setLanguage }) {
-    const languages = [
-      { code: 'ru', label: 'Русский' },
-      { code: 'en', label: 'English' },
-      { code: 'kg', label: 'Кыргызча' },
-    ];
-  
-    const handleChange = (e) => {
-      const selectedLang = e.target.value;
-      setLanguage(selectedLang);
-      localStorage.setItem('language', selectedLang);
-    };
-  
-    useEffect(() => {
-      const savedLang = localStorage.getItem('language');
-      if (savedLang && savedLang !== language) {
-        setLanguage(savedLang);
+
+const LanguageSelect = ({ language, setLanguage }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(language);
+  const selectRef = useRef(null);
+
+  const languages = [
+    { code: 'ru', label: 'Русский' },
+    { code: 'en', label: 'English' },
+    { code: 'kg', label: 'Кыргызча' },
+  ];
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem('language');
+    if (savedLang && savedLang !== language) {
+      setLanguage(savedLang);
+      setSelected(savedLang);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsOpen(false);
       }
-    }, []);
-  
-    return (
-      <select className="language-select" value={language} onChange={handleChange}>
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSelect = (lang) => {
+    setSelected(lang.code);
+    setLanguage(lang.code);
+    localStorage.setItem('language', lang.code);
+    setIsOpen(false);
+  };
+
+  const selectedLabel = languages.find(l => l.code === selected)?.label || 'Выбери язык';
+
+  return (
+    <div className="custom-language-select" ref={selectRef}>
+      <div className="custom-language-selected" onClick={() => setIsOpen(!isOpen)}>
+        <span>{selectedLabel}</span>
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+          <path d="M5 8L10 13L15 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+
+      {/* ВСЕГДА рендерим ul */}
+      <ul className={`custom-language-options ${isOpen ? 'show' : ''}`}>
         {languages.map((lang) => (
-          <option key={lang.code} value={lang.code}>
+          <li
+            key={lang.code}
+            className="custom-language-option"
+            onClick={() => handleSelect(lang)}
+          >
             {lang.label}
-          </option>
+          </li>
         ))}
-      </select>
-    );
-  }
+      </ul>
+    </div>
+  );
+};
+
+export default LanguageSelect;
+
   

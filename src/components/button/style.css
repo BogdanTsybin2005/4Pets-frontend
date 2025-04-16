@@ -32,6 +32,12 @@
 .link-to-page-button:hover a {
     color: white;
 }
+.link-to-page-button.primary {
+    background-color: rgba(213, 0, 127, 1);
+    color: white;
+    border: none;
+}
+
 .login__buttons-block {
     display: flex;
     justify-content: space-between;
@@ -41,41 +47,65 @@
     background-color: rgba(213, 0, 127, 1);
     color: white;
 }
-.language-select {
-    padding: 10px 16px;
+.custom-language-select {
+    position: relative;
+    font-family: 'Advent Pro', sans-serif;
+}
+  
+.custom-language-selected {
     border: 2px solid white;
     border-radius: 32px;
     background: transparent;
     color: white;
     font-size: 14px;
+    padding: 10px 16px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: 0.3s ease;
-    outline: none;
+    gap: 15px;
+}
+  
+.custom-language-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 150px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  padding: 5px 0;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.language-select option {
-    color: black;
+.custom-language-options.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
-.__button-active {
-    background-color: rgba(213, 0, 127, 1);
-    color: white;
+
+  
+.custom-language-select.open .custom-language-options {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
-.user-profile-button {
-    background: transparent;
-    padding: 10px 20px;
-    border: 1px solid #465FF166;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+
+.custom-language-option {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #1a1a1a;
     cursor: pointer;
 }
-
-.link-button {
-    color: #D5007F;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  
+.custom-language-option:hover {
+    background-color: #ecf0ff;
 }
