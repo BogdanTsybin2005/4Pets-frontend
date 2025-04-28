@@ -1,0 +1,91 @@
+h1 {
+  max-width: 900px;
+  font-size: 70px;
+  font-weight: 600;
+  text-wrap: balance;
+  color: rgba(32, 11, 99, 1);
+
+  > div:first-child {
+    font-size: 70px;
+    position: relative;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  > div span {
+    display: inline-block;
+  }
+}
+
+._4Petst--purple-text {
+  display: inline-block;
+  font-size: 70px;
+  color: #D5007F;
+  font-weight: 600;
+}
+
+.main__bishkek-access {
+  display: flex;
+  align-items: center; 
+  gap: 10px;
+
+  p {
+    font-size: 35px;
+    font-weight: 700;
+    color: #200B63;
+    opacity: .6;
+    margin: 0;
+  }
+
+  span {
+    transform: none; 
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+
+@media (max-width: 1400px) {
+  h1 {
+    font-size: 60px;
+
+    > div:first-child {
+      font-size: 60px;
+    }
+  }
+
+  ._4Petst--purple-text {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 40px;
+
+    > div:first-child {
+      font-size: 40px;
+    }
+  }
+
+  ._4Petst--purple-text {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+
+    > div:first-child {
+      font-size: 30px;
+    }
+  }
+
+  ._4Petst--purple-text {
+    font-size: 30px;
+  }
+}

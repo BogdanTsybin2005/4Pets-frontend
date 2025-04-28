@@ -1,0 +1,165 @@
+.main__4pets-team-slider {
+  padding: 35px 0 85px 0;
+
+  .swiper {
+    padding: 65px 0;
+  }
+
+  .swiper-slide {
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main__4pets-team-slide {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main__4pets-slide-content {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    max-width: 1110px;
+    // background: red;
+    // padding: 60px;
+  }
+
+  .main__4pets-slide-image-block {
+    width: 100%;
+    padding-bottom: 50%;
+    position: relative;
+    flex: 1;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 36px;
+    }
+  }
+
+  .main__4petst-slide-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+
+    div {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(213, 0, 127, 1);
+      border-radius: 50%;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      content: '';
+    }
+  }
+
+  .main__4pets-slide-text-block {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 15px;
+    flex: 1;
+    position: relative;
+  }
+
+  .main__4pets-spark-block {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: -30px;
+    left: -2px;
+    transform: translateX(-25%);
+
+    > div:first-child {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    > div:last-child {
+      transform: translateX(-40%);
+    }
+  }
+
+  .main__4pets-slide-student-name {
+    color: rgba(32, 11, 99, 1);
+    font-size: 64px;
+    max-width: 500px;
+    font-weight: 700;
+  }
+
+  .main__4petst-slide-text {
+    background: rgba(32, 11, 99, 1);
+    color: white;
+    border-radius: 30px;
+    padding: 50px 40px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .quotation-mark-icon {
+    position: absolute;
+    z-index: 100;
+    right: 15px;
+    top: 15px;
+
+    div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .main__4pets-slide-buttons-block {
+    margin-left: 35px;
+  }
+}
+
+
+.main__slide-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 60px;
+    height: 60px;
+    background: rgba(213, 0, 127, 1);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    &::after {
+      display: none;
+    }
+  }
+}

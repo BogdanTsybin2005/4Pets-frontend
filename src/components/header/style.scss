@@ -1,0 +1,116 @@
+.header {
+    box-sizing: border-box;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100000000000000;
+  
+    &-container {
+      max-width: 90%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition-duration: .4s;
+      box-sizing: border-box;
+      border-radius: 30px;
+    }
+  
+    &-likst-block {
+      display: flex;
+      gap: 50px;
+      align-items: center;
+  
+      li:last-child button {
+        color: #1A1A1A;
+        transition-duration: .3s;
+        font-size: 13px;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+      }
+    }
+  
+    &-link-item {
+      color: #1A1A1A;
+      transition-duration: .3s;
+      font-size: 13px;
+    }
+  
+    &-button-block {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+  
+    &-scrolled {
+      background: #7b0671bc;
+      padding: 10px 15px;
+      border-radius: 42px;
+      backdrop-filter: blur(10px);
+  
+      .header-link-item {
+        color: white;
+      }
+  
+      .header-likst-block li:last-child button {
+        color: white;
+      }
+    }
+  
+    &-burger {
+      background: transparent;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      box-sizing: border-box;
+  
+      span {
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background: white;
+  
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: white;
+        }
+  
+        &::before {
+          top: 8px;
+        }
+  
+        &::after {
+          bottom: 8px;
+        }
+      }
+    }
+  
+    @media (max-width: 1000px) {
+      &-likst-block {
+        display: none;
+      }
+  
+      &-container {
+        border-radius: 20px;
+        padding: 10px;
+        max-width: 100%;
+      }
+  
+      & {
+        padding: 10px 15px;
+      }
+    }
+  }
+  

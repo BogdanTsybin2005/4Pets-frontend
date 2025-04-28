@@ -2,7 +2,7 @@ import { useLanguageContext } from '../../context/LanguageContext';
 import { TheLinkToPageButton } from '../../components/button';
 import Main4PetsLogo from '../../svg_pictures/4pets-logo';
 import TheSuccessfulRegistrationIcon from '../../svg_pictures/frame-for-the-successful-registration';
-import './style.css';
+import './style.scss';
 
 
 

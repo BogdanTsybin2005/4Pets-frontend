@@ -1,8 +1,10 @@
 import * as React from "react"
+import useWindowWidth from "../hooks/useWindowWidth";
 
 
 
 function Main4PetsArrow() {
+  const width = useWindowWidth;
   return (
     <svg
       width={63}

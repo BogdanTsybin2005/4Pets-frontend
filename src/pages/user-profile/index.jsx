@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import { UserProfileButton, TheLinkToPageButton, LinkButton } from '../../components/button';
 import { useLanguageContext } from '../../context/LanguageContext';
 import InsertPictureLogoIcon from '../../svg_pictures/insert-picture-logo';

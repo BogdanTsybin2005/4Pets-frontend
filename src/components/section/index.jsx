@@ -1,22 +1,33 @@
-import './style.css';
+import './style.scss';
 import Large4PetsSectionIcon from '../../svg_pictures/4pets-large-section-icon';
-import myImg from '../../svg_pictures/icons/photo_2025-03-30_00-02-52.jpg';
+import dog2Picture from '../../svg_pictures/pictures/dog-2.png';
 import { LoginButton } from '../button';
 import { useLanguageContext } from '../../context/LanguageContext';
+import dogPawIcon from '../../svg_pictures/pictures/Ellipse-dog-paw.png';
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 
 
 function GenerateDecorCircles() {
     return <div className="main__section-decor">
         {Array.from({ length: 6 }, (_, i) => i + 1).map((item) => {
-            return <div key={item} className="main__section-decor-item"></div>
+            return <div key={item} className="main__section-decor-item">
+                <img src={dogPawIcon} alt="img" />
+            </div>
         })}
     </div>
 }
 
 export default function Section({option = 1}) {
+    const width = useWindowWidth();
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();    
     const sectionTextMessage = allMyLanguageData[interfaceLanguage]?.heroText;
+    const customLarge4PetsSectionIconWidth = width >= 1000 ? 586 : 286;
+    const customLarge4PetsSectionIconHeight = width >= 1000 ? 530 : 230;
+    
+    
+
+
     let result = {
         '1': (
             <div className='main__section-1'>
@@ -29,7 +40,10 @@ export default function Section({option = 1}) {
             <div className='main__section-2'>
                 <div className="main__section-2-container">
                     <div className='main__section-4pets-paw-icon'>
-                        <Large4PetsSectionIcon/>
+                        <Large4PetsSectionIcon 
+                            width={customLarge4PetsSectionIconWidth} 
+                            height={customLarge4PetsSectionIconHeight}
+                        />
                     </div>
                     <div className="maon__section-structire-block">
                         <h2 className='main__section-list-title'>
@@ -55,7 +69,7 @@ export default function Section({option = 1}) {
                 <div className="main__section-image-block">
                     <div>
                         <div className="main__section-image-container">
-                            <img src={myImg} alt="img" />
+                            <img src={dog2Picture} alt="img" />
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguageContext } from '../../context/LanguageContext';
-import './style.css';
-
+import './style.scss';
 
 
 const CustomSelect = ({ options, selected, onChange }) => {

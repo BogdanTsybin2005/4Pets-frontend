@@ -1,5 +1,4 @@
-import './style.css'
-
+import './style.scss';
 
 
 export function Input({label, placeholder, type='text', inputFunction}) {

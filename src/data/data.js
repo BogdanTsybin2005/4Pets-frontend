@@ -13,6 +13,8 @@ import Malika from '../../src/svg_pictures/pictures/Malika.jpg';
 import Nurayim from '../../src/svg_pictures/pictures/Nuraiym.jpg';
 import Apaya from '../../src/svg_pictures/pictures/Apaya.jpg';
 
+import { FreeSubscriptionIcon, BasicSubscriptionIcon, ProSubscriptionIcon } from "../svg_pictures/subscription-icons";
+
 
 
 const allMyLanguageData = {
@@ -42,7 +44,6 @@ const allMyLanguageData = {
         {
           linkID: 5,
           text: 'КОНТАКТЫ',
-          url: '/contacts',
         }
       ],
       bishkekAccess: 'ДОСТУПНО В БИШКЕКЕ',
@@ -155,11 +156,13 @@ const allMyLanguageData = {
             inputID: 1,
             label: 'Почта',
             placeholder: 'Введите почту',
+            type: 'text'
           },
           {
             inputID: 2,
             label: 'Пароль',
-            placeholder: 'Введите пароль'
+            placeholder: 'Введите пароль',
+            type: 'password'
           },
         ],
         validationCriteria: [
@@ -226,7 +229,7 @@ const allMyLanguageData = {
         {
           id: 8,
           fullName: 'Алканова Малика',
-          description: 'дизайнер, которая работает над визуальной идентичностью приложения. Ее креативность делает наш проект современным и привлекательным, поддерживая его цели и миссию.',
+          description: 'Познакомьтесь с Маликой, нашим дизайнером, которая работает над визуальной идентичностью приложения. Ее креативность делает наш проект современным и привлекательным, поддерживая его цели и миссию.',
           picture: Malika,
         },  
         {
@@ -315,11 +318,105 @@ const allMyLanguageData = {
         title: 'Аккаунт успешно зарегистрирован!',
         subtitle: 'Добро пожаловать на 4Pets!',
         buttonText: 'Начать',
+      },
+      subscriptionSection: {
+        mainTitle: 'Наши платежные планы',
+        mainSubtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit dolor posuere vel venenatis eu sit massa volutpat.',
+        everyMonth: 'ежемесячные',
+        subscriptionCards: [
+          {
+            id: 1,
+            type: 'Индивидуальная',
+            subscriptionType: 'Бесплатная',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit. ',
+            priceInSoms: 0,
+            icon: FreeSubscriptionIcon,
+            whatIsIncluded: 'Что входит в комплект',
+            list: [
+              {
+                id: 1,
+                clause: 'Все аналитические функции',
+              },
+              {
+                id: 2,
+                clause: 'До 250 000 отслеживаемых посещений'
+              },
+              {
+                id: 3,
+                clause: 'Нормальная поддержка'
+              },
+              {
+                id: 4,
+                clause: 'До 3 членов команды'
+              }
+            ],
+            startButton: 'Начать',
+            isPopular: false,
+            popularText: ''
+          },
+          {
+            id: 2,
+            type: 'Индивидуальная',
+            subscriptionType: 'Базовая',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit.',
+            priceInSoms: 500,
+            icon: BasicSubscriptionIcon,
+            whatIsIncluded: 'Что входит в комплект',
+            list: [
+              {
+                id: 1,
+                clause: 'Все аналитические функции',
+              },
+              {
+                id: 2,
+                clause: 'До 1 000 000 отслеживаемых посещений'
+              },
+              {
+                id: 3,
+                clause: 'Премиальная поддержка'
+              },
+              {
+                id: 4,
+                clause: 'До 10 членов команды'
+              }
+            ],
+            startButton: 'Начать',
+            isPopular: true,
+            popularText: 'Популярно'
+          },
+          {
+            id: 3,
+            type: 'Предпринимательская',
+            subscriptionType: 'Про',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit. ',
+            priceInSoms: 1000,
+            icon: ProSubscriptionIcon,
+            whatIsIncluded: 'Что входит в комплект',
+            list: [
+              {
+                id: 1,
+                clause: 'Все аналитические функции',
+              },
+              {
+                id: 2,
+                clause: 'До 5 000 000 отслеживаемых посещений'
+              },
+              {
+                id: 3,
+                clause: 'Выделенная поддержка'
+              },
+              {
+                id: 4,
+                clause: 'До 50 членов команды'
+              }
+            ],
+            startButton: 'Начать',
+            isPopular: false,
+            popularText: ''
+          }
+        ],
       }
     },
-
-
-
     kg: {
       headerLoginButton: 'КИРҮҮ',
       header: [
@@ -346,7 +443,6 @@ const allMyLanguageData = {
         {
           linkID: 5,
           text: 'БАЙЛАНЫШУУ',
-          url: '/contacts',
         }
       ],
       bishkekAccess: 'БИШКЕКТЕ ЖЕТКИЛИКТҮҮ',
@@ -459,11 +555,13 @@ const allMyLanguageData = {
             inputID: 1,
             label: 'Почта',
             placeholder: 'Почтаны киргизиңиз',
+            type: 'text',
           },
           {
             inputID: 2,
             label: 'Сырсөз',
-            placeholder: 'Сырсөздү киргизиңиз'
+            placeholder: 'Сырсөздү киргизиңиз',
+            type: 'password'
           },
         ],
         validationCriteria: [
@@ -530,7 +628,7 @@ const allMyLanguageData = {
         {
           id: 8,
           fullName: 'Алканова Малика',
-          description: 'колдонмонун визуалдык иденттүүлүгүнүн үстүндө иштеп жаткан дизайнер. Анын чыгармачылыгы биздин долбоорду заманбап жана жагымдуу кылат, анын максаттарын жана миссиясын колдойт.',
+          description: 'Колдонмонун визуалдык идентификациясы боюнча иштеп жаткан биздин дизайнер Малика менен таанышыңыз. Анын чыгармачылыгы биздин долбоорду заманбап жана жагымдуу кылат, анын максаттарын жана миссиясын колдойт.',
           picture: Malika,
         },  
         {
@@ -619,11 +717,105 @@ const allMyLanguageData = {
         title: 'Каттоо эсеби ийгиликтүү катталды!',
         subtitle: '4Petsке кош келиңиз!',
         buttonText: 'Баштоо',
+      },
+      subscriptionSection: {
+        mainTitle: 'Биздин төлөм пландары',
+        mainSubtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit dolor posuere vel venenatis eu sit massa volutpat.',
+        everyMonth: 'айлык',
+        subscriptionCards: [
+          {
+            id: 1,
+            type: 'Ылайыкташтырылган',
+            subscriptionType: 'Акысыз',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit. ',
+            priceInSoms: 0,
+            icon: FreeSubscriptionIcon,
+            whatIsIncluded: 'Эмне камтылган',
+            list: [
+              {
+                id: 1,
+                clause: 'Бардык аналитикалык функциялар',
+              },
+              {
+                id: 2,
+                clause: '250,000 ге чейин байкоого болот'
+              },
+              {
+                id: 3,
+                clause: 'Нормалдуу колдоо'
+              },
+              {
+                id: 4,
+                clause: 'Команданын 3 мүчөсүнө чейин'
+              }
+            ],
+            startButton: 'Баштоо',
+            isPopular: false,
+            popularText: ''
+          },
+          {
+            id: 2,
+            type: 'Ылайыкташтырылган',
+            subscriptionType: 'Негизги',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit.',
+            priceInSoms: 500,
+            icon: BasicSubscriptionIcon,
+            whatIsIncluded: 'Эмне камтылган',
+            list: [
+              {
+                id: 1,
+                clause: 'Бардык аналитикалык функциялар',
+              },
+              {
+                id: 2,
+                clause: '1,000,000 ге чейин байкоого болот'
+              },
+              {
+                id: 3,
+                clause: 'Премиум колдоо'
+              },
+              {
+                id: 4,
+                clause: 'Команданын 10 мүчөсүнө чейин'
+              }
+            ],
+            startButton: 'Баштоо',
+            isPopular: true,
+            popularText: 'Таанымал'
+          },
+          {
+            id: 3,
+            type: 'Ишкердик',
+            subscriptionType: 'Про',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit. ',
+            priceInSoms: 1000,
+            icon: ProSubscriptionIcon,
+            whatIsIncluded: 'Эмне камтылган',
+            list: [
+              {
+                id: 1,
+                clause: 'Бардык аналитикалык функциялар',
+              },
+              {
+                id: 2,
+                clause: '5,000,000 ге чейин байкоого болот'
+              },
+              {
+                id: 3,
+                clause: 'Атайын колдоо'
+              },
+              {
+                id: 4,
+                clause: 'Команданын 50 мүчөсүнө чейин'
+              }
+            ],
+            startButton: 'Баштоо',
+            isPopular: false,
+            popularText: ''
+          }
+        ],
       }
     },
-
-
-
     en: {
       headerLoginButton: 'LOGIN',
       header: [
@@ -650,7 +842,6 @@ const allMyLanguageData = {
         {
           linkID: 5,
           text: 'CONTACTS',
-          url: '/contacts',
         }
       ],
       bishkekAccess: 'AVAILABLE IN BISHKEK',
@@ -760,11 +951,13 @@ const allMyLanguageData = {
             inputID: 1,
             label: 'Email',
             placeholder: 'Enter your mail',
+            type: 'text',
           },
           {
             inputID: 2,
             label: 'Password',
-            placeholder: 'Enter your password'
+            placeholder: 'Enter your password',
+            type: 'password'
           },
         ],
         validationCriteria: [
@@ -831,7 +1024,7 @@ const allMyLanguageData = {
         {
           id: 8,
           fullName: 'Alkanova Malika',
-          description: 'designer who works on the visual identity of the app. Her creativity makes our project modern and attractive, supporting its goals and mission.',
+          description: 'Meet Malika, our designer who works on the visual identity of the app. Her creativity makes our project modern and attractive, supporting its goals and mission.',
           picture: Malika,
         },  
         {
@@ -920,6 +1113,103 @@ const allMyLanguageData = {
         title: 'Account successfully registered!',
         subtitle: 'Welcome to 4Pets!',
         buttonText: 'Start',
+      },
+      subscriptionSection: {
+        mainTitle: 'Our payment plans',
+        mainSubtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit dolor posuere vel venenatis eu sit massa volutpat.',
+        everyMonth: 'monthly',
+        subscriptionCards: [
+          {
+            id: 1,
+            type: 'Individual',
+            subscriptionType: 'Free',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit. ',
+            priceInSoms: 0,
+            icon: FreeSubscriptionIcon,
+            whatIsIncluded: "What's included",
+            list: [
+              {
+                id: 1,
+                clause: 'All analytics features',
+              },
+              {
+                id: 2,
+                clause: 'Up to 250,000 tracked visits'
+              },
+              {
+                id: 3,
+                clause: 'Normal support'
+              },
+              {
+                id: 4,
+                clause: 'Up to 3 team members'
+              }
+            ],
+            startButton: 'Start',
+            isPopular: false,
+            popularText: ''
+          },
+          {
+            id: 2,
+            type: 'Индивидуальная',
+            subscriptionType: 'Базовая',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit.',
+            priceInSoms: 500,
+            icon: BasicSubscriptionIcon,
+            whatIsIncluded: "What's included",
+            list: [
+              {
+                id: 1,
+                clause: 'All analytics features',
+              },
+              {
+                id: 2,
+                clause: 'Up to 1,000,000 tracked visits'
+              },
+              {
+                id: 3,
+                clause: 'Premium support'
+              },
+              {
+                id: 4,
+                clause: 'Up to 10 team members'
+              }
+            ],
+            startButton: 'Start',
+            isPopular: true,
+            popularText: 'Popular'
+          },
+          {
+            id: 3,
+            type: 'Entrepreneurial',
+            subscriptionType: 'Pro',
+            text: 'Lorem ipsum dolor sit amet doloroli sitiol conse ctetur adipiscing elit. ',
+            priceInSoms: 1000,
+            icon: ProSubscriptionIcon,
+            whatIsIncluded: "What's included",
+            list: [
+              {
+                id: 1,
+                clause: 'All analytics features',
+              },
+              {
+                id: 2,
+                clause: 'Up to 5,000,000 tracked visits'
+              },
+              {
+                id: 3,
+                clause: 'Dedicated support'
+              },
+              {
+                id: 4,
+                clause: 'Up to 50 team members'
+              }
+            ],
+            startButton: 'Start',
+            isPopular: false,
+            popularText: ''
+          }
+        ],
       }
     },
   };

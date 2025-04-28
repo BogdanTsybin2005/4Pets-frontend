@@ -2,11 +2,11 @@ import * as React from "react"
 
 
 
-function Large4PetsSectionIcon() {
+function Large4PetsSectionIcon({width=586, height=530}) {
   return (
     <svg
-      width={586}
-      height={530}
+      width={width}
+      height={height}
       viewBox="0 0 586 530"
       fill="none"
     >

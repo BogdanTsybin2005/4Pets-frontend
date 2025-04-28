@@ -17,7 +17,7 @@ export default function useScrollY() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrollY]);
 
   return scrollY;
 }

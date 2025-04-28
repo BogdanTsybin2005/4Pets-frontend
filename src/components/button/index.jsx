@@ -2,7 +2,9 @@ import { NavLink } from "react-router"
 import { useLanguageContext } from "../../context/LanguageContext"
 import { useState, useRef, useEffect } from "react";
 import LinkArrowIcon from "../../svg_pictures/link-arrow-icon";
-import './style.css';
+import useWindowWidth from "../../hooks/useWindowWidth";
+import loginIcon from '../../svg_pictures/icons/login-icon.png';
+import './style.scss';
 
 
 
@@ -10,8 +12,8 @@ export function UserProfileButton({children, onCLick}) {
   return <button className="user-profile-button" onClick={() => onCLick()}>{children}</button>
 }
 
-export function LinkButton({linkText, url}) {
-  return <NavLink to={`/${url}`} className={'link-button'}>
+export function LinkButton({linkText, url, isFixed=false}) {
+  return <NavLink to={`/${url}`} className={`link-button ${isFixed ? 'fixed' : ''}`}>
     <LinkArrowIcon/>
     <span>
       {linkText}
@@ -20,16 +22,15 @@ export function LinkButton({linkText, url}) {
 }
 
 export function LoginButton({buttonText, option='primary'}) {
+    const width = useWindowWidth();
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
 
     return (
         <NavLink to={'/login'} className={`header-button ${option}`}>
-            {buttonText || allMyLanguageData[interfaceLanguage]?.headerLoginButton}
+            {width >= 1000 ? buttonText || allMyLanguageData[interfaceLanguage]?.headerLoginButton : <img width={20} src={loginIcon} alt="img"/>}
         </NavLink>
     )
 }
-
-
 
 export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrimary = false }) {
     const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
@@ -41,18 +42,17 @@ export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrima
     );
 }
 
-
-
-
-const LanguageSelect = ({ language, setLanguage }) => {
+export const LanguageSelect = ({ language, setLanguage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(language);
   const selectRef = useRef(null);
+  const width = useWindowWidth();
+
 
   const languages = [
-    { code: 'ru', label: 'Русский' },
-    { code: 'en', label: 'English' },
-    { code: 'kg', label: 'Кыргызча' },
+    { code: 'ru', label: 'RU' },
+    { code: 'en', label: 'EN' },
+    { code: 'kg', label: 'KG' },
   ];
 
   useEffect(() => {
@@ -90,8 +90,7 @@ const LanguageSelect = ({ language, setLanguage }) => {
           <path d="M5 8L10 13L15 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-
-      {/* ВСЕГДА рендерим ul */}
+      
       <ul className={`custom-language-options ${isOpen ? 'show' : ''}`}>
         {languages.map((lang) => (
           <li
@@ -107,6 +106,7 @@ const LanguageSelect = ({ language, setLanguage }) => {
   );
 };
 
-export default LanguageSelect;
 
-  
+export function SubscriptionCardButton({buttonText}) {
+  return <button className="subscription-card-button">{buttonText}</button>
+}

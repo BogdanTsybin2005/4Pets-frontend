@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import { useLanguageContext } from '../../context/LanguageContext';
 
