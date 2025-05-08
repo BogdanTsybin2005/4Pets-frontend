@@ -5,14 +5,15 @@
 .footer-container {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
+    gap: 30px;
 }
 .footer__4pets-icon-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1 1 300px;
+    flex: 1 1 350px;
 }
 .footer-contacts-information-block {
     flex: 1.5;
@@ -54,5 +55,35 @@
     p {
       font-size: 20px;
       font-weight: 600;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .footer__4pets-icon-block {
+        transform: scale(.75);
+    }
+}
+@media (max-width: 768px) {
+    .footer__instagram-links-block {
+        gap: 15px;
+        a {
+            font-size: 14px;
+        }
+    }
+    .footer__contacts-info {
+        gap: 10px;
+        p {
+            font-size: 14px;
+        }
+    }
+    .footer__4pets-icon-block {
+        transform: scale(.6);
+    }
+}
+@media (max-width: 450px) {
+    .footer-contacts-information-block {
+        flex-direction: column;
+        align-items: center;
     }
 }

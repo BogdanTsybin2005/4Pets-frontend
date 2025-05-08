@@ -21,6 +21,8 @@
         padding: 10px 20px;
         border: 1px solid rgba(236, 240, 255, 1);
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
         background: rgba(236, 240, 255, 1);
         font-size: 12px;
         transition-duration: 0.3s;

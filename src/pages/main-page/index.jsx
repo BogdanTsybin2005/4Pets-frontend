@@ -12,7 +12,6 @@ import { useLanguageContext } from '../../context/LanguageContext';
 import MainPageTitle from '../../components/mainPageTitle';
 import dof1Picture from '../../svg_pictures/pictures/dog-1.png';
 import TeamSlider from '../../components/4petsTeamSlider';
-import useWindowWidth from '../../hooks/useWindowWidth';
 
 
 
@@ -49,7 +48,7 @@ export default function MainPage() {
         <div className="main__page-body">
             <Header
                 scrollToFooter={() => {
-                footerRef.current?.scrollIntoView({ behavior: 'smooth' });
+                    footerRef.current?.scrollIntoView({ behavior: 'smooth' });
                 }}
             />
 
@@ -72,38 +71,38 @@ export default function MainPage() {
                     <h2 className="main__slider-list-title">
                         {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.title || 'Загрузка...'}
                     </h2>
-
                     <Swiper
                         modules={[Navigation]}
                         slidesPerView="auto"
                         navigation={{
                             prevEl: slider1PrevBtn.current,
-                            nextEl: slider1NextBtn.current
+                            nextEl: slider1NextBtn.current,
                         }}
                         onSwiper={(swiper) => (slider1Ref.current = swiper)}
                     >
                         {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.allPossibilities?.map(
-                            (item) => (
-                                <SwiperSlide key={item.slideID}>
-                                    <div className="main__slider-item">
-                                        <div className="main__circle-block-for-icon">
-                                            {item.image && <item.image />}
-                                        </div>
-                                        <h2 className="main__slider-title">{item.title}</h2>
-                                        <div>
-                                            <h2 className="main__slider-subtitle">{item.subtitle}</h2>
-                                            <ol className="main__slider-item-list">
-                                                {item.steps.map((step, index) => (
-                                                    <li key={`step-${item.slideID}-${index}`}>
-                                                        {step.stepID}. {step.text}
-                                                    </li>
-                                                ))}
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                            )
+                        (item) => (
+                            <SwiperSlide key={item.slideID} className="main__swiper-slide">
+                            <div className="main__slider-item">
+                                <div className="main__circle-block-for-icon">
+                                {item.image && <item.image />}
+                                </div>
+                                <h2 className="main__slider-title">{item.title}</h2>
+                                <div>
+                                <h2 className="main__slider-subtitle">{item.subtitle}</h2>
+                                <ol className="main__slider-item-list">
+                                    {item.steps.map((step) => (
+                                    <li key={`step-${item.slideID}-${step.stepID}`}>
+                                        {step.stepID}. {step.text}
+                                    </li>
+                                    ))}
+                                </ol>
+                                </div>
+                            </div>
+                            </SwiperSlide>
+                        )
                         )}
+                        <SwiperSlide className="main__swiper-slide last-slide" />
                     </Swiper>
                 </div>
 

@@ -475,7 +475,7 @@ const allMyLanguageData = {
         buttonText: 'Баштоо',
       },
       possibilitiesSection: {
-        title: 'Мүмкүнчүлүктөр',
+        title: 'МҮМКҮНЧҮЛҮКТӨР',
         allPossibilities: [
           {
             slideID: 1,

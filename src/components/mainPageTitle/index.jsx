@@ -5,6 +5,7 @@ import Main4PetsArrow from '../../svg_pictures/4pets-arrow-to-main-title';
 import useWindowWidth from '../../hooks/useWindowWidth';
 
 
+
 export default function MainPageTitle({language}) {
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
     const width = useWindowWidth();
@@ -51,10 +52,10 @@ export default function MainPageTitle({language}) {
     return (
         <>
             <div className='main__bishkek-access'>
-                <p>{allMyLanguageData[interfaceLanguage]?.bishkekAccess}</p>
                 <span>
                     <Main4PetsArrow/>
                 </span>
+                <p>{allMyLanguageData[interfaceLanguage]?.bishkekAccess}</p>
             </div>
             {titleResult[language]}
         </>

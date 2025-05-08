@@ -1,5 +1,7 @@
 .registration__body {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
     width: 100%;
     display: flex;
     flex-direction: column;

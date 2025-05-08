@@ -4,29 +4,26 @@ import dog2Picture from '../../svg_pictures/pictures/dog-2.png';
 import { LoginButton } from '../button';
 import { useLanguageContext } from '../../context/LanguageContext';
 import dogPawIcon from '../../svg_pictures/pictures/Ellipse-dog-paw.png';
-import useWindowWidth from '../../hooks/useWindowWidth';
 
 
 
 function GenerateDecorCircles() {
     return <div className="main__section-decor">
         {Array.from({ length: 6 }, (_, i) => i + 1).map((item) => {
-            return <div key={item} className="main__section-decor-item">
-                <img src={dogPawIcon} alt="img" />
-            </div>
+            return (
+                <div className='main__section-block-for-circle' key={item}>
+                    <div className="main__section-decor-item">
+                        <img src={dogPawIcon} alt="img" />
+                    </div>
+                </div>
+            )
         })}
     </div>
 }
 
 export default function Section({option = 1}) {
-    const width = useWindowWidth();
     const {allMyLanguageData, interfaceLanguage} = useLanguageContext();    
     const sectionTextMessage = allMyLanguageData[interfaceLanguage]?.heroText;
-    const customLarge4PetsSectionIconWidth = width >= 1000 ? 586 : 286;
-    const customLarge4PetsSectionIconHeight = width >= 1000 ? 530 : 230;
-    
-    
-
 
     let result = {
         '1': (
@@ -41,8 +38,8 @@ export default function Section({option = 1}) {
                 <div className="main__section-2-container">
                     <div className='main__section-4pets-paw-icon'>
                         <Large4PetsSectionIcon 
-                            width={customLarge4PetsSectionIconWidth} 
-                            height={customLarge4PetsSectionIconHeight}
+                            width={586} 
+                            height={530}
                         />
                     </div>
                     <div className="maon__section-structire-block">
@@ -59,7 +56,10 @@ export default function Section({option = 1}) {
                                 )
                             })}
                         </ul>
-                        <LoginButton option='secondary' buttonText={allMyLanguageData[interfaceLanguage]?.howItWorks.buttonText}/>
+                        <LoginButton 
+                            option='secondary'
+                            buttonText={allMyLanguageData[interfaceLanguage]?.howItWorks.buttonText}
+                        />
                     </div>
                 </div>
             </div>

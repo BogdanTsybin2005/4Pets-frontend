@@ -1,5 +1,7 @@
 .user-profile {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
     padding: 50px 70px;
     box-sizing: border-box;
   
