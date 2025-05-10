@@ -187,7 +187,7 @@ const allMyLanguageData = {
         {
           id: 1,
           fullName: 'Цыбин Богдан',
-          description: 'талантливый программист, он всегда наполнен свежими идеями для нашего проекта, а также он отвечает за разработку нашего приложения.',
+          description: 'талантливый программист, он всегда наполнен свежими идеями для нашего проекта, а также он отвечает за разработку нашего сайта.',
           picture: Bogdan,
         },  
         {
@@ -586,7 +586,7 @@ const allMyLanguageData = {
         {
           id: 1,
           fullName: 'Цыбин Богдан',
-          description: 'таланттуу программист, ал ар дайым биздин долбоор үчүн жаңы идеяларга толгон, ошондой эле биздин колдонмону иштеп чыгуу үчүн жооптуу.',
+          description: 'таланттуу программист, ал ар дайым биздин долбоор үчүн жаңы идеяларга толгон, ошондой эле биздин веб-сайтты иштеп чыгуу үчүн жооптуу.',
           picture: Bogdan,
         },  
         {
@@ -982,7 +982,7 @@ const allMyLanguageData = {
         {
           id: 1,
           fullName: 'Tsybin Bogdan',
-          description: 'is a talented programmer, he is always full of fresh ideas for our project, and he is also responsible for the development of our app.',
+          description: 'is a talented programmer, he is always full of fresh ideas for our project, and he is also responsible for the development of our website.',
           picture: Bogdan,
         },  
         {

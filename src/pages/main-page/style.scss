@@ -6,6 +6,7 @@ body, html {
   
   .main__page-body {
     min-height: 100vh;
+    position: relative;
   }
   
   .main__start-screen {
@@ -357,8 +358,6 @@ body, html {
       border-radius: 40px;
     }
   }
-  
-
   .swiper-slide {
     flex: 1 1 auto;
   
@@ -375,8 +374,6 @@ body, html {
       padding-bottom: 0;
     }
   }
-
-
 }
 @media (max-width: 650px) {
   .main__slider-list-title {
@@ -390,6 +387,9 @@ body, html {
   }
   .main__start-image {
     height: 250px !important;
+  }
+  .main-aside-decor {
+    width: 50%;
   }
 }
 

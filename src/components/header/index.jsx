@@ -8,7 +8,7 @@ import useScrollY from '../../hooks/useScrollY';
 
 
 
-export default function Header({ scrollToFooter }) {
+export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActive }) {
     const scrollY = useScrollY();
     const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();
 
@@ -38,8 +38,8 @@ export default function Header({ scrollToFooter }) {
                         language={interfaceLanguage}
                         setLanguage={setInterfaceLanguage}
                     />
+                    <button className={`header-burger ${isBurderActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurderActive => !isBurderActive)}><span></span></button>
                 </div>
-                <button className="header-burger"><span></span></button>
             </div>
         </header>
     );

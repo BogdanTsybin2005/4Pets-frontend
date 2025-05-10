@@ -1,6 +1,6 @@
 import './style.scss';
 import Section from '../../components/section';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/navigation';
@@ -12,6 +12,8 @@ import { useLanguageContext } from '../../context/LanguageContext';
 import MainPageTitle from '../../components/mainPageTitle';
 import dof1Picture from '../../svg_pictures/pictures/dog-1.png';
 import TeamSlider from '../../components/4petsTeamSlider';
+import BurgerMenu from '../../components/burgerMenu';
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 
 
@@ -21,6 +23,8 @@ export default function MainPage() {
     const slider1Ref = useRef(null);
     const slider1PrevBtn = useRef(null);
     const slider1NextBtn = useRef(null);
+    const [isBurderActive, setIsBurgerActive] = useState(false);
+    const customWindowWidth = useWindowWidth();
 
     const handleNavigation = (swiperRef, prevBtnRef, nextBtnRef) => {
         if (
@@ -41,16 +45,36 @@ export default function MainPage() {
         handleNavigation(slider1Ref, slider1PrevBtn, slider1NextBtn);
     }, []);
 
-    
-    
 
+    const toggleBurger = () => {
+        setIsBurgerActive((prev) => {
+            const newState = !prev;
+            document.body.style.overflow = newState ? 'hidden' : 'auto';
+            return newState;
+        });
+    };
+    useEffect(() => {
+        if (customWindowWidth >= 1000 && isBurderActive) {
+            setIsBurgerActive(false);
+            document.body.style.overflow = 'auto';
+        }
+    }, [customWindowWidth]);    
+    
     return (
         <div className="main__page-body">
+            <BurgerMenu
+                isBurderActive={isBurderActive}
+                setIsBurgerActive={setIsBurgerActive}
+            />
+
             <Header
                 scrollToFooter={() => {
                     footerRef.current?.scrollIntoView({ behavior: 'smooth' });
                 }}
+                isBurderActive={isBurderActive}
+                setIsBurgerActive={toggleBurger}
             />
+
 
             <div className="main__start-screen">
                 <div className="main__start-context">
@@ -81,26 +105,26 @@ export default function MainPage() {
                         onSwiper={(swiper) => (slider1Ref.current = swiper)}
                     >
                         {allMyLanguageData[interfaceLanguage]?.possibilitiesSection?.allPossibilities?.map(
-                        (item) => (
-                            <SwiperSlide key={item.slideID} className="main__swiper-slide">
-                            <div className="main__slider-item">
-                                <div className="main__circle-block-for-icon">
-                                {item.image && <item.image />}
+                            (item) => (
+                                <SwiperSlide key={item.slideID} className="main__swiper-slide">
+                                <div className="main__slider-item">
+                                    <div className="main__circle-block-for-icon">
+                                    {item.image && <item.image />}
+                                    </div>
+                                    <h2 className="main__slider-title">{item.title}</h2>
+                                    <div>
+                                    <h2 className="main__slider-subtitle">{item.subtitle}</h2>
+                                    <ol className="main__slider-item-list">
+                                        {item.steps.map((step) => (
+                                        <li key={`step-${item.slideID}-${step.stepID}`}>
+                                            {step.stepID}. {step.text}
+                                        </li>
+                                        ))}
+                                    </ol>
+                                    </div>
                                 </div>
-                                <h2 className="main__slider-title">{item.title}</h2>
-                                <div>
-                                <h2 className="main__slider-subtitle">{item.subtitle}</h2>
-                                <ol className="main__slider-item-list">
-                                    {item.steps.map((step) => (
-                                    <li key={`step-${item.slideID}-${step.stepID}`}>
-                                        {step.stepID}. {step.text}
-                                    </li>
-                                    ))}
-                                </ol>
-                                </div>
-                            </div>
-                            </SwiperSlide>
-                        )
+                                </SwiperSlide>
+                            )
                         )}
                         <SwiperSlide className="main__swiper-slide last-slide" />
                     </Swiper>
