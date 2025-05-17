@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router'
 
 
 import { LanguageProvider } from './context/LanguageContext.jsx'
-import { AuthorizationContext } from './context/LuthorizationContext.jsx'
+import { AuthorizationContext } from './context/AuthorizationContext.jsx'
 
 
 

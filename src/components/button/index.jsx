@@ -32,22 +32,21 @@ export function LoginButton({buttonText, option='primary'}) {
     )
 }
 
-export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrimary = false }) {
+export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrimary = false, onClick }) {
     const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
     
     return (
-        <NavLink to={`/${url}`} className={className}>
+        <NavLink to={`/${url}`} className={className} onClick={onClick}>
             {buttonText}
         </NavLink>
     );
 }
 
-export const LanguageSelect = ({ language, setLanguage }) => {
+export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(language);
   const selectRef = useRef(null);
   const width = useWindowWidth();
-
 
   const languages = [
     { code: 'ru', label: 'RU' },
@@ -83,14 +82,20 @@ export const LanguageSelect = ({ language, setLanguage }) => {
   const selectedLabel = languages.find(l => l.code === selected)?.label || 'Выбери язык';
 
   return (
-    <div className="custom-language-select" ref={selectRef}>
-      <div className="custom-language-selected" onClick={() => setIsOpen(!isOpen)}>
+    <div
+      className={`custom-language-select ${useDarkStyle ? 'dark-mode' : ''}`}
+      ref={selectRef}
+    >
+      <div
+        className="custom-language-selected"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <span>{selectedLabel}</span>
         <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
           <path d="M5 8L10 13L15 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      
+
       <ul className={`custom-language-options ${isOpen ? 'show' : ''}`}>
         {languages.map((lang) => (
           <li
@@ -109,4 +114,14 @@ export const LanguageSelect = ({ language, setLanguage }) => {
 
 export function SubscriptionCardButton({buttonText}) {
   return <button className="subscription-card-button">{buttonText}</button>
+}
+
+
+
+export function AuthSubmitButton({ currentForm, langData }) {
+  return (
+    <button type="submit" className="auth-submit-button">
+      {currentForm === 'signup' ? langData.signUpButton : langData.loginButton}
+    </button>
+  );
 }

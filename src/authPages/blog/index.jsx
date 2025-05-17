@@ -1,13 +1,13 @@
-import Header from "../../components/header"
+import Header from "../../authComponents/header"
 import Footer from "../../components/footer"
 
 
 
-export default function Info() {
+export default function Blog() {
     return (
         <>
             <Header/>
-            <h1>INFO</h1>
+            <h1>BLOG</h1>
             <Footer/>
         </>
     )

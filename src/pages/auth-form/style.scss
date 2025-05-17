@@ -121,6 +121,41 @@
   align-items: center;
 }
 
+.valid {
+  color: #2e7d32; // Зелёный цвет
+  font-weight: 500;
+
+  svg, path {
+    stroke: #2e7d32 !important;
+  }
+}
+
+.invalid {
+  color: #d32f2f; // Красный цвет
+  font-weight: 400;
+
+  svg, path {
+    stroke: #d32f2f !important;
+  }
+}
+
+// 💪 Цвета для текста \"сильный пароль\", \"средний\" и \"слабый\"
+.password-strong {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.password-medium {
+  color: #fbc02d;
+  font-weight: bold;
+}
+
+.password-weak {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+
 @media (max-width: 1250px) {
   .auth__start-page {
     gap: 0;

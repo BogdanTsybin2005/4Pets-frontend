@@ -21,7 +21,7 @@ export default function SuccessfulRegistrationPage() {
                 <TheLinkToPageButton 
                     buttonText={allMyLanguageData[interfaceLanguage]?.successfulRegistrationPage.buttonText} 
                     isActive={true}
-                    // url={"/"}    
+                    url={""}    
                 />
             </div>
 

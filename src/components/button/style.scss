@@ -131,6 +131,42 @@
     left: 3%;
 }
 
+.auth-submit-button {
+    font-family: "Advent Pro", sans-serif;   
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #D5007F;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+        background-color: #b40064;
+    }
+}
+.custom-language-select.dark-mode {
+  .custom-language-selected {
+    border: 2px solid rgb(32, 11, 99);
+    color: rgb(32, 11, 99);
+
+    svg path {
+      stroke: rgb(32, 11, 99);
+    }
+  }
+
+  .custom-language-option {
+    color: rgb(32, 11, 99);
+
+    &:hover {
+      background-color: #f3f3ff;
+    }
+  }
+}
+
+
+
 @media (max-width: 1000px) {
     .header-button {
         padding: 10px 12px;

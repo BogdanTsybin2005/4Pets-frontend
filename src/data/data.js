@@ -168,7 +168,7 @@ const allMyLanguageData = {
         validationCriteria: [
           {
             criteriaID: 1,
-            text: 'Защита пароля:',
+            text: 'Защита пароля',
           },
           {
             criteriaID: 2,
@@ -301,7 +301,7 @@ const allMyLanguageData = {
           {
             id: 3,
             label: 'Контакты',
-            placeholder: 'Введите ващ номер телефона',
+            placeholder: 'Введите ваш номер телефона',
             type: 'tel',
             asterisk: '*',
           }
@@ -567,7 +567,7 @@ const allMyLanguageData = {
         validationCriteria: [
           {
             criteriaID: 1,
-            text: 'Сырсөздүн күчү:',
+            text: 'Сырсөздүн күчү',
           },
           {
             criteriaID: 2,
@@ -963,7 +963,7 @@ const allMyLanguageData = {
         validationCriteria: [
           {
             criteriaID: 1,
-            text: 'Password protection:',
+            text: 'Password protection',
           },
           {
             criteriaID: 2,

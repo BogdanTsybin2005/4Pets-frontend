@@ -5,12 +5,15 @@ import InsertPictureLogoIcon from '../../svg_pictures/insert-picture-logo';
 import ChangePictureLogoIcon from '../../svg_pictures/change-picture-logo';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
+import useAuthorizationContext from '../../context/AuthorizationContext';
 
 
 
 export default function UserProfile() {
     const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
     const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
+
+    const {setUserAuthorizationResult} = useAuthorizationContext();
 
     return (
         <div className="user-profile">
@@ -40,6 +43,7 @@ export default function UserProfile() {
                         isPrimary={true}
                         isActive={true}
                         url={'success'} 
+                        onClick={() => setUserAuthorizationResult(true)}
                     />
                 </div>
             </div>

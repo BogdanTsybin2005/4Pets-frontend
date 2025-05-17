@@ -1,0 +1,200 @@
+.subscription-cards {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1241px;
+    margin: 40px auto 0 auto;
+    gap: 25px;
+    padding: 0 20px;
+  
+    .subscription-card {
+      flex: 1 1 394px;
+      background: white;
+      border-radius: 24px;
+      padding: 40px 30px;
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition-duration: 0.3s;
+  
+      * {
+        transition-duration: 0.3s;
+      }
+  
+      &-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+  
+      &-icon {
+        background: #ecebff;
+        border-radius: 16px;
+        width: 72px;
+        height: 72px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      &-text-block {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      &-type {
+        color: #6f6c90;
+        font-size: 18px;
+      }
+  
+      &-subscription-type {
+        font-size: 24px;
+        color: #170f49;
+        font-weight: 700;
+      }
+  
+      &-main-text {
+        color: #6f6c90;
+        margin: 20px 0;
+        font-size: 18px;
+      }
+  
+      &-price-block {
+        display: flex;
+        gap: 15px;
+        align-items: end;
+        justify-self: start;
+      }
+  
+      &-price {
+        display: flex;
+        gap: 10px;
+        color: #170f49;
+        align-items: end;
+  
+        * {
+          font-weight: 700;
+        }
+  
+        > span {
+          span:first-child {
+            font-size: 54px;
+            margin-right: 10px;
+          }
+  
+          span:nth-child(2) {
+            font-size: 32px;
+            margin-right: 5px;
+          }
+  
+          span:last-child {
+            font-size: 16px;
+          }
+        }
+      }
+  
+      &-monthly-interval {
+        font-size: 20px;
+        color: #6f6c90;
+        font-weight: 100;
+      }
+  
+      &-list-title {
+        margin: 20px 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #170f49;
+      }
+  
+      &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 40px;
+        flex: 1 1 auto;
+  
+        li {
+          display: flex;
+          gap: 25px;
+          padding: 0 10px;
+  
+          > span:first-child {
+            position: relative;
+  
+            span {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+  
+              &:first-child {
+                z-index: 1;
+                transition-duration: .3s;
+              }
+              &:last-child {
+                z-index: 2;
+                opacity: 0;
+                transition-duration: .3s;
+              }
+            }
+          }
+  
+          > span:last-child {
+            color: #170f49;
+            font-size: 18px;
+          }
+        }
+      }
+  
+      .subscription-population-card {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        border-radius: 9px;
+        padding: 15px 20px;
+        background-color: #ecebff;
+        font-size: 10px;
+      }
+  
+      &:hover {
+        background: #d5007f;
+
+        .subscription-population-card {
+          background: #FFFFFF33;
+          color: white;
+        }
+        .subscription-card-type, 
+        .subscription-card-subscription-type,
+        .subscription-card-main-text,
+        .subscription-card-price,
+        .subscription-card-list-title {
+          color: white;
+        }
+        .subscription-card-button {
+          background: white;
+          color: #D5007F;
+        }
+        .subscription-card-list {
+          li {
+            > span {
+              &:first-child {
+                span {
+                  &:last-child {
+                    opacity: 1;
+                  }
+                }
+              }
+              
+              &:last-child {
+                color: white;
+              }
+            }
+          }
+        }
+        .subscription-card-monthly-interval {
+          color: #D9DBE9;
+        }
+      }
+    }
+  }
+  
