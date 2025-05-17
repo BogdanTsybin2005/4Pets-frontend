@@ -6,7 +6,7 @@
     left: 0;
     width: 100%;
     z-index: 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
-  
+    
     &-container {
       max-width: 90%;
       margin: 0 auto;
@@ -30,6 +30,7 @@
         background: transparent;
         border: 0;
         cursor: pointer;
+        font-family: "Advent Pro", sans-serif;   
       }
     }
   
