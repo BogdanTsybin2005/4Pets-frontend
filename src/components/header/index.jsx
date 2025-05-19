@@ -5,6 +5,7 @@ import { useLanguageContext } from '../../context/LanguageContext';
 import { LoginButton } from '../button';
 import { LanguageSelect } from '../button';
 import useScrollY from '../../hooks/useScrollY';
+import { useEffect } from 'react';
 
 
 
@@ -13,34 +14,41 @@ export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActi
     const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();
 
     return (
-        <header className='header'>
-            <div className={`header-container ${scrollY >= 500 ? 'header-scrolled' : ''}`}>
-                <Link to={'/'}>
-                    <Main4PetsLogo width={105} height={55} />
-                </Link>
-                <ul className="header-likst-block">
-                    {allMyLanguageData[interfaceLanguage]?.header.slice(0, allMyLanguageData[interfaceLanguage]?.header.length - 1).map((item) => (
-                        <li key={item.linkID}>
-                            <NavLink className='header-link-item' to={'/login'}>
-                                {item.text}
-                            </NavLink>
-                        </li>
-                    ))}
-                    <li>
-                        <button onClick={scrollToFooter}>
-                            {allMyLanguageData[interfaceLanguage]?.header[4].text}
-                        </button>
+        <header className="header">
+        <div className={`header-container ${scrollY >= 500 ? 'header-scrolled' : ''}`}>
+            <Link to={'/'}>
+            <Main4PetsLogo width={105} height={55} />
+            </Link>
+            <ul className="header-likst-block">
+                {allMyLanguageData[interfaceLanguage]?.header
+                    .slice(0, -1)
+                    .map((item) => (
+                    <li key={item.linkID}>
+                        <NavLink className="header-link-item" to="/login">
+                        {item.text}
+                        </NavLink>
                     </li>
-                </ul>
-                <div className="header-button-block">
-                    <LoginButton />
-                    <LanguageSelect
-                        language={interfaceLanguage}
-                        setLanguage={setInterfaceLanguage}
-                    />
-                    <button className={`header-burger ${isBurderActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurderActive => !isBurderActive)}><span></span></button>
-                </div>
+                ))}
+                <li>
+                    <button onClick={scrollToFooter}>
+                    {allMyLanguageData[interfaceLanguage]?.header[4].text}
+                    </button>
+                </li>
+            </ul>
+            <div className="header-button-block">
+                <LoginButton />
+                <LanguageSelect
+                    language={interfaceLanguage}
+                    setLanguage={setInterfaceLanguage}
+                />
+                <button
+                    className={`header-burger ${isBurderActive ? '_active' : ''}`}
+                    onClick={() => setIsBurgerActive((prev) => !prev)}
+                >
+                    <span></span>
+                </button>
             </div>
+        </div>
         </header>
     );
 }

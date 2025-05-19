@@ -1,52 +1,65 @@
 import './style.scss';
+import { useEffect } from 'react';
 import { UserProfileButton, TheLinkToPageButton, LinkButton } from '../../components/button';
 import { useLanguageContext } from '../../context/LanguageContext';
 import InsertPictureLogoIcon from '../../svg_pictures/insert-picture-logo';
 import ChangePictureLogoIcon from '../../svg_pictures/change-picture-logo';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
-import useAuthorizationContext from '../../context/AuthorizationContext';
+import { useRegistrationContext } from '../../context/RegistrationContext';
+import { useNavigate } from 'react-router';
 
 
 
 export default function UserProfile() {
-    const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
-    const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
+  const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+  const navigate = useNavigate();
+  const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
 
-    const {setUserAuthorizationResult} = useAuthorizationContext();
+  const { registrationData, setRegistrationData } = useRegistrationContext();
 
-    return (
-        <div className="user-profile">
-            <div className='user-profile-content'>
-                <div className='user-profile-header'>
-                    <LinkButton url={'registration'} linkText={lang.linkTextButton} />
-                </div>
+  const handleImageUpload = (url) => {
+    setRegistrationData((prev) => ({ ...prev, avatar: url }));
+  };
 
-                <div className='user-profile-body'>
-                    <div>
-                        <IntroPartOfProfilePage />
-                        <UserLogo />
-                        <div className='user-profile-buttons'>
-                            <UserProfileButton onClick={() => console.log('Insert image')}>
-                                <InsertPictureLogoIcon /> 
-                                {lang.insertLogoTextForButton}
-                            </UserProfileButton>
-                            <UserProfileButton onClick={() => console.log('Change image')}>
-                                <ChangePictureLogoIcon /> 
-                                {lang.changeLogoTextForButton}
-                            </UserProfileButton>
-                        </div>
-                    </div>
+  useEffect(() => {
+    if (!registrationData.email || !registrationData.password || !registrationData.username) {
+      navigate('/signup');
+    }
+  }, [registrationData]);
 
-                    <TheLinkToPageButton 
-                        buttonText={lang.buttonForRegistrationText} 
-                        isPrimary={true}
-                        isActive={true}
-                        url={'success'} 
-                        onClick={() => setUserAuthorizationResult(true)}
-                    />
-                </div>
-            </div>
+  const handleNext = () => {
+    navigate('/success');
+  };
+
+
+  return (
+    <div className="user-profile">
+      <div className="user-profile-content">
+        <div className="user-profile-header">
+          <LinkButton url="registration" linkText={lang.linkTextButton} />
         </div>
-    );
+        <div className="user-profile-body">
+          <IntroPartOfProfilePage />
+          <UserLogo src={registrationData.avatar} />
+          <div className="user-profile-buttons">
+            <UserProfileButton onClick={() => handleImageUpload('https://via.placeholder.com/150')}>
+              <InsertPictureLogoIcon />
+              {lang.insertLogoTextForButton}
+            </UserProfileButton>
+            <UserProfileButton onClick={() => handleImageUpload('https://via.placeholder.com/200')}>
+              <ChangePictureLogoIcon />
+              {lang.changeLogoTextForButton}
+            </UserProfileButton>
+          </div>
+          <TheLinkToPageButton
+            buttonText={lang.buttonForRegistrationText}
+            isPrimary
+            isActive
+            onClick={handleNext}
+          />
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -6,18 +6,18 @@ export default function useScrollY() {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    const scrollContainer = document.scrollingElement || document.documentElement;
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const scrollTop = scrollContainer.scrollTop;
+      setScrollY(scrollTop);
     };
 
-    window.addEventListener('scroll', handleScroll);
-
+    document.addEventListener('scroll', handleScroll);
     handleScroll();
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrollY]);
+    return () => document.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return scrollY;
 }

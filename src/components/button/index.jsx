@@ -32,15 +32,29 @@ export function LoginButton({buttonText, option='primary'}) {
     )
 }
 
-export function TheLinkToPageButton({ buttonText, url, isActive = false, isPrimary = false, onClick }) {
-    const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
-    
+export function TheLinkToPageButton({ buttonText, url = '', isActive = false, isPrimary = false, onClick, type = 'button' }) {
+  const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
+
+  if (type === 'submit') {
     return (
-        <NavLink to={`/${url}`} className={className} onClick={onClick}>
-            {buttonText}
-        </NavLink>
+      <button
+        type="submit"
+        className={className}
+        disabled={!isActive}
+        onClick={onClick}
+      >
+        {buttonText}
+      </button>
     );
+  }
+
+  return (
+    <NavLink to={`/${url}`} className={className} onClick={onClick}>
+      {buttonText}
+    </NavLink>
+  );
 }
+
 
 export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) => {
   const [isOpen, setIsOpen] = useState(false);

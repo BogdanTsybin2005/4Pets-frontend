@@ -8,16 +8,19 @@ import { BrowserRouter } from 'react-router'
 import { LanguageProvider } from './context/LanguageContext.jsx'
 import { AuthorizationContext } from './context/AuthorizationContext.jsx'
 
+import { RegistrationProvider } from './context/RegistrationContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <AuthorizationContext>
-        <LanguageProvider>
-          <App />
-        </LanguageProvider>
-      </AuthorizationContext>
+      <RegistrationProvider>
+        <AuthorizationContext>
+          <LanguageProvider>
+            <App />
+          </LanguageProvider>
+        </AuthorizationContext>
+      </RegistrationProvider>
     </BrowserRouter>
   </StrictMode>,
 )
