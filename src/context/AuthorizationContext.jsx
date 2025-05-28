@@ -1,32 +1,21 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 
 
 const AuthorizationProvider = createContext();
 
 export function AuthorizationContext({ children }) {
-  const [token, setTokenState] = useState(() => {
-    const localToken = localStorage.getItem("token");
-    return localToken && localToken.includes(".") ? localToken : "";
-  });
-
+  const [token, setToken] = useLocalStorage("token", "");
   const [userAuthorizationResult, setUserAuthorizationResult] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const setToken = (value) => {
-    if (value && value.includes(".")) {
-      localStorage.setItem("token", value);
-      setTokenState(value);
-    } else {
-      localStorage.removeItem("token");
-      setTokenState("");
-    }
-  };
+  const isValidToken = (val) =>
+    typeof val === "string" && val.trim().includes(".");
 
   const checkAuth = async (tokenToCheck) => {
-    if (!tokenToCheck || typeof tokenToCheck !== "string" || !tokenToCheck.includes(".")) {
-      console.warn("❌ Невалидный токен");
+    if (!isValidToken(tokenToCheck)) {
       setUserAuthorizationResult(false);
       setIsLoading(false);
       return;
@@ -38,16 +27,12 @@ export function AuthorizationContext({ children }) {
       });
 
       const user = res.data?.data;
-
       if (user?.id || user?.email) {
-        console.log("✅ Успешная авторизация:", user);
         setUserAuthorizationResult(true);
       } else {
-        console.warn("⛔️ Пользователь не найден");
         setUserAuthorizationResult(false);
       }
     } catch (error) {
-      console.error("❌ Ошибка при /auth/me:", error.message);
       setToken("");
       setUserAuthorizationResult(false);
     } finally {
@@ -55,21 +40,17 @@ export function AuthorizationContext({ children }) {
     }
   };
 
-
   useEffect(() => {
-    if (token && token.includes(".")) {
-      console.log("🔍 Токен найден в state/localStorage:", token);
+    if (isValidToken(token)) {
       checkAuth(token);
     } else {
-      console.warn("⛔️ Токен отсутствует при инициализации");
       setUserAuthorizationResult(false);
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    if (token && token.includes(".")) {
-      console.log("🔄 Токен обновлён:", token);
+    if (isValidToken(token)) {
       checkAuth(token);
     }
   }, [token]);
@@ -82,6 +63,7 @@ export function AuthorizationContext({ children }) {
         userAuthorizationResult,
         setUserAuthorizationResult,
         isLoading,
+        checkAuth,
       }}
     >
       {children}

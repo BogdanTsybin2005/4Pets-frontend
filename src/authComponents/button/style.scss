@@ -1,0 +1,21 @@
+.logout-button {
+    font-family: "Advent Pro", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #D5007F;
+    border: 2px solid #D5007F;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    &:hover {
+        background-color: #D5007F;
+        color: white;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}

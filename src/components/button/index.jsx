@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import LinkArrowIcon from "../../svg_pictures/link-arrow-icon";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import loginIcon from '../../svg_pictures/icons/login-icon.png';
+import useLocalStorage from "../../hooks/useLocalStorage";
 import './style.scss';
 
 
@@ -59,8 +60,8 @@ export function TheLinkToPageButton({ buttonText, url = '', isActive = false, is
 export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(language);
+  const [storedLang, setStoredLang] = useLocalStorage('language', language);
   const selectRef = useRef(null);
-  const width = useWindowWidth();
 
   const languages = [
     { code: 'ru', label: 'RU' },
@@ -69,10 +70,9 @@ export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) 
   ];
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('language');
-    if (savedLang && savedLang !== language) {
-      setLanguage(savedLang);
-      setSelected(savedLang);
+    if (storedLang !== language) {
+      setLanguage(storedLang);
+      setSelected(storedLang);
     }
   }, []);
 
@@ -89,7 +89,7 @@ export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) 
   const handleSelect = (lang) => {
     setSelected(lang.code);
     setLanguage(lang.code);
-    localStorage.setItem('language', lang.code);
+    setStoredLang(lang.code);
     setIsOpen(false);
   };
 
@@ -124,6 +124,7 @@ export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) 
     </div>
   );
 };
+
 
 
 export function SubscriptionCardButton({buttonText}) {

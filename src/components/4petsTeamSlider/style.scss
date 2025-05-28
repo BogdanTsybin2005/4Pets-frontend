@@ -36,7 +36,7 @@
     padding-bottom: 50%;
     position: relative;
     flex: 1;
-
+    
     img {
       position: absolute;
       top: 0;
@@ -45,6 +45,7 @@
       height: 100%;
       object-fit: cover;
       border-radius: 36px;
+      outline: 2px solid #FFFCE7;
     }
   }
 

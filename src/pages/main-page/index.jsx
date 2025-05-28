@@ -59,6 +59,18 @@ export default function MainPage() {
             document.body.style.overflow = 'auto';
         }
     }, [customWindowWidth]);    
+
+
+    useEffect(() => {
+        if (isBurderActive) {
+            document.documentElement.classList.add('no-scroll');
+            document.body.classList.add('no-scroll');
+        } else {
+            document.documentElement.classList.remove('no-scroll');
+            document.body.classList.remove('no-scroll');
+        }
+    }, [isBurderActive]);
+
     
     return (
         <div className="main__page-body">
@@ -68,11 +80,10 @@ export default function MainPage() {
             />
 
             <Header
-                scrollToFooter={() => {
-                    footerRef.current?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })}
                 isBurderActive={isBurderActive}
-                setIsBurgerActive={toggleBurger}
+                setIsBurgerActive={setIsBurgerActive} 
+                toggleBurger={toggleBurger}
             />
 
 

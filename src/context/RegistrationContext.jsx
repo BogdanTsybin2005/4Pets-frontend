@@ -19,7 +19,6 @@ export const RegistrationProvider = ({ children }) => {
 
   useEffect(() => {
     if (!registrationData || typeof registrationData !== "object") {
-      console.warn("⚠️ registrationData некорректен. Сброс...");
       setRegistrationData(defaultState);
     }
   }, [registrationData]);

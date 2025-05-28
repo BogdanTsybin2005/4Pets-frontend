@@ -8,6 +8,8 @@ import { useRegistrationContext } from '../../context/RegistrationContext';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import useAuthorizationContext from '../../context/AuthorizationContext';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 
@@ -17,6 +19,9 @@ export default function ProfileRegistrationPage() {
   const formFields = allMyLanguageData[interfaceLanguage]?.registrationPage.form;
   const navigate = useNavigate();
   const { registrationData, setRegistrationData } = useRegistrationContext();
+  const { setToken, setUserAuthorizationResult } = useAuthorizationContext();
+
+  const [storedToken, setStoredToken] = useLocalStorage("token", "");
 
   const [touched, setTouched] = useState({ username: false, contact: false });
   const [errors, setErrors] = useState({ username: '', contact: '' });
@@ -27,7 +32,7 @@ export default function ProfileRegistrationPage() {
       case 'username':
         return value.trim().length >= 6 ? '' : 'Минимум 6 символов';
       case 'contact':
-        return /^\+?[0-9\s\-]{7,}$/.test(value) ? '' : 'Введите корректный номер';
+        return /^\+?[0-9\s\-]{7,}$/.test(value) ? '': 'Введите корректный номер';
       default:
         return '';
     }
@@ -74,7 +79,8 @@ export default function ProfileRegistrationPage() {
         return;
       }
 
-      localStorage.setItem("token", token);
+      setToken(token);
+      setStoredToken(token); // сохраняем в localStorage через хук
 
       const check = await axios.get("http://localhost:5000/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
@@ -83,8 +89,8 @@ export default function ProfileRegistrationPage() {
       const user = check.data?.data;
 
       if (user?.id || user?.email) {
-        localStorage.setItem("isUserAuthorized", true);
-        navigate('/');
+        setUserAuthorizationResult(true);
+        navigate("/", { replace: true });
       } else {
         alert("⛔️ Авторизация не подтверждена");
       }
@@ -94,7 +100,6 @@ export default function ProfileRegistrationPage() {
       alert(msg);
     }
   };
-
 
   return (
     <>

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 import { useRegistrationContext } from '../../context/RegistrationContext';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 
@@ -18,6 +18,7 @@ export default function SuccessfulRegistrationPage() {
   const { setUserAuthorizationResult, setToken } = useAuthorizationContext();
   const { registrationData, resetRegistrationData } = useRegistrationContext();
   const navigate = useNavigate();
+  const [storedToken, setStoredToken] = useLocalStorage("token", "");
 
   const [loading, setLoading] = useState(false);
 
@@ -40,10 +41,8 @@ export default function SuccessfulRegistrationPage() {
       const token = res.data?.data?.access_token;
 
       if (token && token.includes('.')) {
-        console.log("💥 токен до сохранения", token);
         setToken(token);
-        
-        console.log("📦 token из localStorage", localStorage.getItem('token'));
+        setStoredToken(token);
 
         const check = await axios.get("http://localhost:5000/auth/me", {
           headers: { Authorization: `Bearer ${token}` },

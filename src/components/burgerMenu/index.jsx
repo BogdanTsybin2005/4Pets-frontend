@@ -12,7 +12,10 @@ export default function BurgerMenu({ isBurderActive, setIsBurgerActive }) {
             <ul className="burger-menu-list">
                 {allMyLanguageData[interfaceLanguage]?.header.map((item) => (
                     <li key={item.linkID}>
-                        <Link className='burger-menu-link-item' to={item.url} onClick={() => setIsBurgerActive(false)}>
+                        <Link className='burger-menu-link-item' to={item.url} onClick={() => {
+                            setIsBurgerActive(false);
+                            document.body.style.overflow = 'auto'; 
+                        }}>
                             {item.text}
                         </Link>
                     </li>

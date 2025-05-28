@@ -1,13 +1,17 @@
 .subscription-cards {
     display: flex;
     flex-wrap: wrap;
-    max-width: 1241px;
+    max-width: 80%;
     margin: 40px auto 0 auto;
     gap: 25px;
     padding: 0 20px;
+
+    * {
+      box-sizing: border-box;
+    }
   
     .subscription-card {
-      flex: 1 1 394px;
+      flex: 1 1 394px !important;
       background: white;
       border-radius: 24px;
       padding: 40px 30px;

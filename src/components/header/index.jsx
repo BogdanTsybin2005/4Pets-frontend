@@ -5,11 +5,10 @@ import { useLanguageContext } from '../../context/LanguageContext';
 import { LoginButton } from '../button';
 import { LanguageSelect } from '../button';
 import useScrollY from '../../hooks/useScrollY';
-import { useEffect } from 'react';
 
 
 
-export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActive }) {
+export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActive, toggleBurger }) {
     const scrollY = useScrollY();
     const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();
 
@@ -25,7 +24,7 @@ export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActi
                     .map((item) => (
                     <li key={item.linkID}>
                         <NavLink className="header-link-item" to="/login">
-                        {item.text}
+                            {item.text}
                         </NavLink>
                     </li>
                 ))}
@@ -43,7 +42,7 @@ export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActi
                 />
                 <button
                     className={`header-burger ${isBurderActive ? '_active' : ''}`}
-                    onClick={() => setIsBurgerActive((prev) => !prev)}
+                    onClick={toggleBurger}
                 >
                     <span></span>
                 </button>

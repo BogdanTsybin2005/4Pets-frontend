@@ -3,7 +3,7 @@ import { LanguageSelect } from "../../components/button";
 import Main4PetsLogo from '../../svg_pictures/4pets-logo';
 import { useLanguageContext } from '../../context/LanguageContext';
 import { NavLink, Link } from 'react-router';
-
+import { LogoutButton } from '../button';
 
 
 
@@ -35,6 +35,7 @@ export default function Header({scrollToFooter, isBurderActive, setIsBurgerActiv
                     </li>
                 </ul>
                 <div className="header-button-block">
+                    <LogoutButton/>
                     <LanguageSelect 
                         language={interfaceLanguage} 
                         setLanguage={setInterfaceLanguage}

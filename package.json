@@ -11,11 +11,14 @@
   },
   "dependencies": {
     "@2gis/mapgl": "^1.60.0",
+    "axios": "^1.9.0",
+    "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.4.0",
     "react-select": "^5.10.1",
     "react-svg": "^16.3.0",
+    "react-virtuoso": "^4.12.7",
     "swiper": "^11.2.6"
   },
   "devDependencies": {

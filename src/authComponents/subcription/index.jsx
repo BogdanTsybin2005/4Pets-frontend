@@ -1,7 +1,6 @@
 import './style.scss';
 import { useLanguageContext } from '../../context/LanguageContext';
-import SubscriptionCard from '../../components/subscriptionCard';
-
+import SubscriptionCard from '../subscriptionCard';
 
 
 export default function Subscription() {
