@@ -422,6 +422,11 @@ const allMyLanguageData = {
         emptyDataText: 'Сообщений пока нет',
         loadingHistory: 'Загпузка истории...',
         thinkingChatBotMessage: 'Бот думает...'
+      },
+      map: {
+        allCategories: 'Все',
+        veterinaryClinics: 'Ветклиники',
+        petStores: 'Зоомагазины'
       }
     },
     kg: {
@@ -828,6 +833,11 @@ const allMyLanguageData = {
         emptyDataText: 'Азырынча билдирүүлөр жок',
         loadingHistory: 'Тарыхты жүктөө...',
         thinkingChatBotMessage: 'Бот ойлонот...'
+      },
+      map: {
+        allCategories: 'баары',
+        veterinaryClinics: 'ветклиника',
+        petStores: 'жаныбарлар дүкөндөрү'
       }
     },
     en: {
@@ -1231,6 +1241,11 @@ const allMyLanguageData = {
         emptyDataText: 'No messages yet',
         loadingHistory: 'Loading History...',
         thinkingChatBotMessage: 'The bot is thinking...'
+      },
+      map: {
+        allCategories: 'All',
+        veterinaryClinics: 'Veterinary clinics',
+        petStores: 'PetStores'
       }
     },
   };

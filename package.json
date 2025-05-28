@@ -13,6 +13,7 @@
     "@2gis/mapgl": "^1.60.0",
     "axios": "^1.9.0",
     "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.4.0",
