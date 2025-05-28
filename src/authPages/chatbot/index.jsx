@@ -1,11 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import Header from "../../authComponents/header";
 import "./style.scss";
 import axios from "axios";
+import Header from "../../authComponents/header";
+import { useEffect, useRef, useState } from "react";
 import SendMessageToChatBotIcon from "../../svg_pictures/send-message-to-chatbot-icon";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 
+
+function formatDate(date) {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, "0");
+    const minutes = String(d.getMinutes()).padStart(2, "0");
+    return `${day}.${month}.${year} - ${hours}:${minutes}`;
+}
 
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
@@ -14,6 +25,8 @@ export default function ChatBot() {
     const [isLoading, setIsLoading] = useState(true);
     const messagesEndRef = useRef(null);
     const [token] = useLocalStorage("token", "");
+    const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+    const chatBotContent = allMyLanguageData[interfaceLanguage]?.chat_bot_page;
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -25,16 +38,23 @@ export default function ChatBot() {
                 const res = await axios.get("http://localhost:5000/gpt/history", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-
                 const history = res.data || [];
-
                 const formatted = history
                     .map((msg) => [
-                        { id: msg.id * 2, role: "user", text: msg.prompt },
-                        { id: msg.id * 2 + 1, role: "bot", text: msg.response },
+                        {
+                            id: msg.id * 2,
+                            role: "user",
+                            text: msg.prompt,
+                            timestamp: msg.created_at || new Date().toISOString(),
+                        },
+                        {
+                            id: msg.id * 2 + 1,
+                            role: "bot",
+                            text: msg.response,
+                            timestamp: msg.created_at || new Date().toISOString(),
+                        },
                     ])
                     .flat();
-
                 setMessages(formatted);
             } catch (err) {
                 console.error("Ошибка загрузки истории:", err);
@@ -52,17 +72,21 @@ export default function ChatBot() {
         const trimmed = input.trim();
         if (!trimmed || !token) return;
 
+        const timestamp = new Date().toISOString();
+
         const userMessage = {
             id: Date.now(),
             role: "user",
             text: trimmed,
+            timestamp,
         };
 
         const thinkingMessage = {
             id: Date.now() + 1,
             role: "bot",
-            text: "🤖 Бот думает...",
+            text: `🤖 ${chatBotContent.thinkingChatBotMessage}`,
             isThinking: true,
+            timestamp,
         };
 
         setMessages((prev) => [...prev, userMessage, thinkingMessage]);
@@ -88,6 +112,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: botText,
+                    timestamp: new Date().toISOString(),
                 },
             ]);
         } catch (error) {
@@ -98,6 +123,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: `❌ ${errorMessage}`,
+                    timestamp: new Date().toISOString(),
                 },
             ]);
         } finally {
@@ -115,17 +141,18 @@ export default function ChatBot() {
             <div className="chat-bot__container">
                 {isLoading ? (
                     <div className="chat-bot__no-messages-wrapper">
-                        <div className="chat-bot__empty-message">Загрузка истории...</div>
+                        <div className="chat-bot__empty-message">{chatBotContent.loadingHistory}</div>
                     </div>
                 ) : messages.length === 0 ? (
                     <div className="chat-bot__no-messages-wrapper">
-                        <div className="chat-bot__empty-message">Сообщений пока нет</div>
+                        <div className="chat-bot__empty-message">{chatBotContent.emptyDataText}</div>
                     </div>
                 ) : (
                     <ul className="chat-bot__list">
                         {messages.map((msg) => (
                             <li key={msg.id} className={msg.role}>
-                                {msg.text}
+                                <div>{msg.text}</div>
+                                <small className="chat-bot__timestamp">{formatDate(msg.timestamp)}</small>
                             </li>
                         ))}
                         <div ref={messagesEndRef} />
@@ -137,7 +164,7 @@ export default function ChatBot() {
                 <div className="chat-bot__input-block">
                     <input
                         type="text"
-                        placeholder="Напиши сообщение..."
+                        placeholder={chatBotContent.inputPlaceHolder}
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}

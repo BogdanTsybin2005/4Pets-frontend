@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import useAuthorizationContext from "../../context/AuthorizationContext";
 import useLocalStorage from "../../hooks/useLocalStorage"; 
+import { useLanguageContext } from '../../context/LanguageContext';
 
 
 
@@ -10,6 +11,7 @@ export function LogoutButton() {
     const { setUserAuthorizationResult } = useAuthorizationContext();
     const navigate = useNavigate();
     const [token, setToken] = useLocalStorage("token", "");
+    const {interfaceLanguage, allMyLanguageData} = useLanguageContext();    
 
     const handleLogout = async () => {
         try {
@@ -33,7 +35,7 @@ export function LogoutButton() {
 
     return (
         <button className="logout-button" onClick={handleLogout}>
-            Выйти
+            {allMyLanguageData[interfaceLanguage]?.headerLogoutButton}
         </button>
     );
 }

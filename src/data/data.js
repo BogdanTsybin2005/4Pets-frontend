@@ -20,6 +20,7 @@ import { FreeSubscriptionIcon, BasicSubscriptionIcon, ProSubscriptionIcon } from
 const allMyLanguageData = {
     ru: {
       headerLoginButton: 'ВОЙТИ',
+      headerLogoutButton: 'ВЫЙТИ',
       header: [
         {
           linkID: 1,
@@ -415,10 +416,17 @@ const allMyLanguageData = {
             popularText: ''
           }
         ],
+      },
+      chat_bot_page: {
+        inputPlaceHolder: 'Спросите что-нибудь...',
+        emptyDataText: 'Сообщений пока нет',
+        loadingHistory: 'Загпузка истории...',
+        thinkingChatBotMessage: 'Бот думает...'
       }
     },
     kg: {
       headerLoginButton: 'КИРҮҮ',
+      headerLogoutButton: 'ЧЫГУУ',
       header: [
         {
           linkID: 1,
@@ -814,10 +822,17 @@ const allMyLanguageData = {
             popularText: ''
           }
         ],
+      },
+      chat_bot_page: {
+        inputPlaceHolder: 'Бир нерсе сураңыз...',
+        emptyDataText: 'Азырынча билдирүүлөр жок',
+        loadingHistory: 'Тарыхты жүктөө...',
+        thinkingChatBotMessage: 'Бот ойлонот...'
       }
     },
     en: {
       headerLoginButton: 'LOGIN',
+      headerLogoutButton: 'LOGOUT',
       header: [
         {
           linkID: 1,
@@ -1210,6 +1225,12 @@ const allMyLanguageData = {
             popularText: ''
           }
         ],
+      },
+      chat_bot_page: {
+        inputPlaceHolder: 'Ask anything...',
+        emptyDataText: 'No messages yet',
+        loadingHistory: 'Loading History...',
+        thinkingChatBotMessage: 'The bot is thinking...'
       }
     },
   };

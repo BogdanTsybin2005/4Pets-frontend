@@ -137,3 +137,19 @@ body,
     }
   }
 }
+.chat-bot__list li {
+  position: relative;
+  padding-bottom: 20px;
+
+  small.chat-bot__timestamp {
+    font-size: 11px;
+    margin-top: 10px;
+    display: block;
+    text-align: right;
+    opacity: .75;
+  }
+
+  &.bot small {
+    text-align: left;
+  }
+}
