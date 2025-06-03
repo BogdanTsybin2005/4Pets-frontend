@@ -1245,7 +1245,7 @@ const allMyLanguageData = {
       map: {
         allCategories: 'All',
         veterinaryClinics: 'Veterinary clinics',
-        petStores: 'PetStores'
+        petStores: 'Pet stores'
       }
     },
   };
