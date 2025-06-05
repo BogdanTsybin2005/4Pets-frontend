@@ -33,13 +33,28 @@ export function LoginButton({buttonText, option='primary'}) {
     )
 }
 
-export function TheLinkToPageButton({ buttonText, url = '', isActive = false, isPrimary = false, onClick, type = 'button' }) {
-  const className = `link-to-page-button ${isActive ? 'active' : ''} ${isPrimary ? 'primary' : ''}`;
+export function TheLinkToPageButton({buttonText, url = '', isActive = false, isPrimary = false, onClick, type = 'button'}) {
+  const className = `link-to-page-button ${isActive ? 'active' : ''} ${
+    isPrimary ? 'primary' : ''
+  }`;
 
   if (type === 'submit') {
     return (
       <button
         type="submit"
+        className={className}
+        disabled={!isActive}
+        onClick={onClick}
+      >
+        {buttonText}
+      </button>
+    );
+  }
+
+  if (!url) {
+    return (
+      <button
+        type="button"
         className={className}
         disabled={!isActive}
         onClick={onClick}

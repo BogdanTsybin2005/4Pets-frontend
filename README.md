@@ -13,7 +13,7 @@ The application demonstrates practical frontend development skills using modern 
 - **Context API** – language switching and global context management
 - **Custom Hooks** – encapsulated logic with `useLocalStorage`, `useScrollY`, `useWindowWidth`
 - **Responsive Design** – supports all screen sizes
-- **Multilingual Interface** – English and Russian support
+- **Multilingual Interface** – English, Russian and Kyrgyz support
 - **SVG Icons** – animated and interactive icons
 - **Vite** – ultra-fast development and build tool
 
@@ -26,8 +26,7 @@ The application demonstrates practical frontend development skills using modern 
 - Chatbot interface with typing animation
 - Blog with user stories and testimonials
 - Interactive map with markers
-- Language switcher (RU / EN)
-- Dark/light theme toggle
+- Language switcher (RU / EN / KG)
 - Clean, maintainable architecture
 
 ---
@@ -96,20 +95,9 @@ The application demonstrates practical frontend development skills using modern 
 
 ---
 
-# 1. Clone the repository
-git clone https://github.com/BogdanTsybin2005/4Pets-frontend.git
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
-npm run dev
-
----
-
 ## 📫 Contact
 
 If you have any questions or want to collaborate, feel free to reach out:
 
 - **Telegram**: [@bogdan_sest_1025](https://t.me/bogdan_sest_1025)
-- **Email**: [tsybinb@gmail.com](mailto:tsybinb@gmail.com)
+- **Email**: [tsybinb@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=tsybinb@gmail.com)

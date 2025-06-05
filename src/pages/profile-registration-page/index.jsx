@@ -7,9 +7,6 @@ import { useLanguageContext } from '../../context/LanguageContext';
 import { useRegistrationContext } from '../../context/RegistrationContext';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
-import useAuthorizationContext from '../../context/AuthorizationContext';
-import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 
@@ -19,9 +16,6 @@ export default function ProfileRegistrationPage() {
   const formFields = allMyLanguageData[interfaceLanguage]?.registrationPage.form;
   const navigate = useNavigate();
   const { registrationData, setRegistrationData } = useRegistrationContext();
-  const { setToken, setUserAuthorizationResult } = useAuthorizationContext();
-
-  const [storedToken, setStoredToken] = useLocalStorage("token", "");
 
   const [touched, setTouched] = useState({ username: false, contact: false });
   const [errors, setErrors] = useState({ username: '', contact: '' });
@@ -58,47 +52,13 @@ export default function ProfileRegistrationPage() {
     setTouched((prev) => ({ ...prev, [key]: true }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setTouched({ username: true, contact: true });
 
     if (!isFormValid) return;
 
-    try {
-      await axios.post('http://localhost:5000/auth/register', registrationData);
-
-      const res = await axios.post('http://localhost:5000/auth/login', {
-        email: registrationData.email,
-        password: registrationData.password,
-      });
-
-      const token = res.data?.data?.access_token;
-
-      if (!token || !token.includes(".")) {
-        alert("⛔️ Не удалось получить токен. Проверь backend.");
-        return;
-      }
-
-      setToken(token);
-      setStoredToken(token); // сохраняем в localStorage через хук
-
-      const check = await axios.get("http://localhost:5000/auth/me", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      const user = check.data?.data;
-
-      if (user?.id || user?.email) {
-        setUserAuthorizationResult(true);
-        navigate("/", { replace: true });
-      } else {
-        alert("⛔️ Авторизация не подтверждена");
-      }
-
-    } catch (err) {
-      const msg = err.response?.data?.message || 'Ошибка сервера';
-      alert(msg);
-    }
+    navigate('/user-profile');
   };
 
   return (

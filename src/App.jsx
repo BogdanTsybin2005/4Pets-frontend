@@ -1,3 +1,6 @@
+import './App.css'
+import { Routes, Route } from 'react-router'
+
 import Main from './components/main'
 
 import MainPage from './pages/main-page'
@@ -11,10 +14,6 @@ import ProfileRegistrationPage from './pages/profile-registration-page'
 import UserProfile from './pages/user-profile'
 import SuccessfulRegistrationPage from './pages/successful-registration-page'
 
-
-import { Routes, Route } from 'react-router'
-import './App.css'
-
 import MainAuthPage from './authPages/main'
 import useAuthorizationContext from './context/AuthorizationContext'
 
@@ -22,7 +21,9 @@ import useAuthorizationContext from './context/AuthorizationContext'
 
 function App() {
   const { userAuthorizationResult, isLoading } = useAuthorizationContext();
-  if (isLoading) return <div className="loading-screen">Загрузка...</div>;
+  if (isLoading) return <div className="loading-screen">
+    <h1 className="loading-screen__title">Загрузка...</h1>
+  </div>;
   return (
     <div className='wrapper'>
       <Main>
@@ -43,4 +44,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
 import './style.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { UserProfileButton, TheLinkToPageButton, LinkButton } from '../../components/button';
 import { useLanguageContext } from '../../context/LanguageContext';
 import InsertPictureLogoIcon from '../../svg_pictures/insert-picture-logo';
@@ -8,6 +8,7 @@ import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
 import { useRegistrationContext } from '../../context/RegistrationContext';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 
 
@@ -17,6 +18,7 @@ export default function UserProfile() {
   const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
 
   const { registrationData, setRegistrationData } = useRegistrationContext();
+  const [loading, setLoading] = useState(false);
 
   const handleImageUpload = (url) => {
     setRegistrationData((prev) => ({ ...prev, avatar: url }));
@@ -28,8 +30,18 @@ export default function UserProfile() {
     }
   }, [registrationData]);
 
-  const handleNext = () => {
-    navigate('/success');
+  const handleNext = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      await axios.post('http://localhost:5000/auth/register', registrationData);
+      navigate('/success');
+    } catch (err) {
+      const msg = err.response?.data?.message || 'Ошибка сервера';
+      alert(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
 
@@ -53,9 +65,9 @@ export default function UserProfile() {
             </UserProfileButton>
           </div>
           <TheLinkToPageButton
-            buttonText={lang.buttonForRegistrationText}
+            buttonText={loading ? '⏳ Подождите...' : lang.buttonForRegistrationText}
             isPrimary
-            isActive
+            isActive={!loading}
             onClick={handleNext}
           />
         </div>
