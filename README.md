@@ -1,12 +1,115 @@
-# React + Vite
+# 🐾 4PETS — Pet Interaction Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a full-featured client-side web application for 4PETS — a platform that helps users interact with pet-related content, including profile setup, chatbot communication, blog stories, registration forms, and an interactive map.
 
-Currently, two official plugins are available:
+The application demonstrates practical frontend development skills using modern tools, scalable architecture, adaptive layout, and multilingual support.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Technologies Used
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React + JSX** – component-based architecture
+- **SCSS** – modular styling with nesting
+- **Context API** – language switching and global context management
+- **Custom Hooks** – encapsulated logic with `useLocalStorage`, `useScrollY`, `useWindowWidth`
+- **Responsive Design** – supports all screen sizes
+- **Multilingual Interface** – English and Russian support
+- **SVG Icons** – animated and interactive icons
+- **Vite** – ultra-fast development and build tool
+
+---
+
+## 🎯 Project Features
+
+- Multi-step registration with avatar upload
+- User profile page with editable data
+- Chatbot interface with typing animation
+- Blog with user stories and testimonials
+- Interactive map with markers
+- Language switcher (RU / EN)
+- Dark/light theme toggle
+- Clean, maintainable architecture
+
+---
+
+## 📁 Project Structure
+
+```bash
+📁 4PETS
+├── public/
+├── src/
+│   ├── assets/static/
+│   ├── authComponents/
+│   │   ├── button/
+│   │   ├── header/
+│   │   ├── subscription/
+│   │   └── subscriptionCard/
+│   ├── authPages/
+│   │   ├── blog/
+│   │   ├── chatbot/
+│   │   ├── info/
+│   │   ├── main/
+│   │   └── map/
+│   ├── components/
+│   │   ├── 4petsTeamSlider/
+│   │   ├── burgerMenu/
+│   │   ├── button/
+│   │   ├── customSelect/
+│   │   ├── footer/
+│   │   ├── header/
+│   │   ├── input/
+│   │   ├── main/
+│   │   ├── mainPageTitle/
+│   │   ├── section/
+│   │   ├── userLogo/
+│   │   └── intorPartOfProfilePage/
+│   ├── context/
+│   │   ├── AuthorizationContext.jsx
+│   │   ├── LanguageContext.jsx
+│   │   └── RegistrationContext.jsx
+│   ├── data/
+│   ├── hooks/
+│   │   ├── useLocalStorage.js
+│   │   ├── useScrollY.js
+│   │   └── useWindowWidth.js
+│   ├── pages/
+│   │   ├── auth-form/
+│   │   ├── login/
+│   │   ├── main-page/
+│   │   ├── profile-registration-page/
+│   │   ├── signup/
+│   │   ├── successful-registration-page/
+│   │   └── user-profile/
+│   ├── svg_pictures/
+│   │   ├── icons/
+│   │   ├── pictures/
+│   │   └── possibilities/
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── vite.config.js
+├── README.md
+```
+
+---
+
+# 1. Clone the repository
+git clone https://github.com/BogdanTsybin2005/4Pets-frontend.git
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
+
+---
+
+## 📫 Contact
+
+If you have any questions or want to collaborate, feel free to reach out:
+
+- **Telegram**: [@bogdan_sest_1025](https://t.me/bogdan_sest_1025)
+- **Email**: [tsybinb@gmail.com](mailto:tsybinb@gmail.com)
