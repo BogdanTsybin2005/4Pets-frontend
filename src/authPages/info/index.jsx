@@ -1,26 +1,39 @@
 import './style.scss';
 import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
+import ProfileSection from './components/ProfileSection';
+import FAQCard from './components/FAQCard';
+import TestimonialCard from './components/TestimonialCard';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 export default function Info() {
+  const token = useSelector(state => state.authorization.token);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!token) return;
+      try {
+        const res = await axios.get('http://localhost:5000/auth/me', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data?.data);
+      } catch (err) {
+        console.error('Failed to load user', err);
+      }
+    };
+    fetchUser();
+  }, [token]);
+
+  if (!user) return <div>Загрузка...</div>;
+
   return (
     <>
       <Header />
       <main className="info-page updated-ui">
-        <section className="info-header">
-          <div className="info-header__banner new-graphics" />
-          <div className="info-header__profile new-layout">
-            <div className="info-header__avatar-wrapper">
-              <div className="info-header__avatar colorful-border" />
-            </div>
-            <div className="info-header__details">
-              <div className="info-header__name gradient-text">Анна Лапина</div>
-              <div className="info-header__role role-highlight">Ветеринар, зоопсихолог</div>
-              <button className="info-header__subscribe animated-button">📩 Написать / Подписаться</button>
-            </div>
-          </div>
-        </section>
-
+        <ProfileSection user={user} />
         <div className="info-main modern-flex">
           <section className="info-main__left">
             <FAQCard
@@ -69,33 +82,5 @@ export default function Info() {
       </main>
       <Footer />
     </>
-  );
-}
-
-function FAQCard({ title, text1, text2 }) {
-  return (
-    <article className="faq-card highlighted">
-      <h4 className="faq-card__title">❓ {title}</h4>
-      <p>{text1}</p>
-      <p>{text2}</p>
-    </article>
-  );
-}
-
-function TestimonialCard({ name, position, content, imgSrc }) {
-  return (
-    <article className="testimonial-card testimonial-glow">
-      <div className="testimonial-card__header">
-        <div className="testimonial-card__avatar" />
-        <div className="testimonial-card__name">{name}</div>
-        <div className="testimonial-card__position role-highlight">{position}</div>
-      </div>
-      <div className="testimonial-card__body">
-        {content.split('\n').map((line, idx) => (
-          <p key={idx}>{line}</p>
-        ))}
-      </div>
-      <img className="testimonial-card__img" src={imgSrc} alt={name} />
-    </article>
   );
 }
