@@ -1,11 +1,12 @@
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector, useDispatch } from 'react-redux';
 import { TheLinkToPageButton } from '../../components/button';
 import Main4PetsLogo from '../../svg_pictures/4pets-logo';
 import TheSuccessfulRegistrationIcon from '../../svg_pictures/frame-for-the-successful-registration';
 import './style.scss';
-import useAuthorizationContext from '../../context/AuthorizationContext';
+import { setToken, setUserAuthorizationResult } from '../../store/authorizationSlice';
 import { useNavigate } from 'react-router';
-import { useRegistrationContext } from '../../context/RegistrationContext';
+import { resetRegistrationData } from '../../store/registrationSlice';
+import allMyLanguageData from '../../data/data';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -13,12 +14,12 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 export default function SuccessfulRegistrationPage() {
-  const { allMyLanguageData, interfaceLanguage } = useLanguageContext();
+  const dispatch = useDispatch();
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const lang = allMyLanguageData[interfaceLanguage]?.successfulRegistrationPage;
-  const { setUserAuthorizationResult, setToken } = useAuthorizationContext();
-  const { registrationData, resetRegistrationData } = useRegistrationContext();
+  const registrationData = useSelector(state => state.registration);
   const navigate = useNavigate();
-  const [storedToken, setStoredToken] = useLocalStorage("token", "");
+  const [, setStoredToken] = useLocalStorage("token", "");
 
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +42,7 @@ export default function SuccessfulRegistrationPage() {
       const token = res.data?.data?.access_token;
 
       if (token && token.includes('.')) {
-        setToken(token);
+        dispatch(setToken(token));
         setStoredToken(token);
 
         const check = await axios.get("http://localhost:5000/auth/me", {
@@ -51,8 +52,8 @@ export default function SuccessfulRegistrationPage() {
         const user = check.data?.data;
 
         if (user?.id || user?.email) {
-          resetRegistrationData();
-          setUserAuthorizationResult(true);
+          dispatch(resetRegistrationData());
+          dispatch(setUserAuthorizationResult(true));
           navigate('/');
         } else {
           alert("⛔️ Авторизация не подтверждена");

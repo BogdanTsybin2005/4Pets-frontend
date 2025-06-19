@@ -1,14 +1,17 @@
 import './style.scss';
 import { LanguageSelect } from "../../components/button";
 import Main4PetsLogo from '../../svg_pictures/4pets-logo';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector, useDispatch } from 'react-redux';
+import {setInterfaceLanguage} from '../../store/languageSlice.js'
+import allMyLanguageData from '../../data/data';
 import { NavLink, Link } from 'react-router';
 import { LogoutButton } from '../button';
 
-
-
+ 
+ 
 export default function Header({scrollToFooter, isBurderActive, setIsBurgerActive}) {
-    const {interfaceLanguage, setInterfaceLanguage, allMyLanguageData} = useLanguageContext();
+    const dispatch = useDispatch();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
         <header className="auth-header">
@@ -35,10 +38,10 @@ export default function Header({scrollToFooter, isBurderActive, setIsBurgerActiv
                     </li>
                 </ul>
                 <div className="header-button-block">
-                    <LogoutButton/>
-                    <LanguageSelect 
-                        language={interfaceLanguage} 
-                        setLanguage={setInterfaceLanguage}
+                <LogoutButton/>
+                <LanguageSelect
+                    language={interfaceLanguage}
+                    setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
                         useDarkStyle
                     />
                     <button className={`header-burger ${isBurderActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurderActive => !isBurderActive)}><span></span></button>

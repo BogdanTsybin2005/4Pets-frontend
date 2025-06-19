@@ -3,19 +3,21 @@ import { useEffect, useState } from 'react';
 import { Input } from '../../components/input';
 import CustomSelect from '../../components/customSelect';
 import { LinkButton, TheLinkToPageButton } from '../../components/button';
-import { useLanguageContext } from '../../context/LanguageContext';
-import { useRegistrationContext } from '../../context/RegistrationContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { setRegistrationData } from '../../store/registrationSlice';
+import allMyLanguageData from '../../data/data';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import { useNavigate } from 'react-router';
 
 
 
 export default function ProfileRegistrationPage() {
-  const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+  const dispatch = useDispatch();
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
   const formFields = allMyLanguageData[interfaceLanguage]?.registrationPage.form;
   const navigate = useNavigate();
-  const { registrationData, setRegistrationData } = useRegistrationContext();
+  const registrationData = useSelector(state => state.registration);
 
   const [touched, setTouched] = useState({ username: false, contact: false });
   const [errors, setErrors] = useState({ username: '', contact: '' });
@@ -26,7 +28,7 @@ export default function ProfileRegistrationPage() {
       case 'username':
         return value.trim().length >= 6 ? '' : 'Минимум 6 символов';
       case 'contact':
-        return /^\+?[0-9\s\-]{7,}$/.test(value) ? '': 'Введите корректный номер';
+         return /^\+?[0-9\s-]{7,}$/.test(value) ? '' : 'Введите корректный номер';
       default:
         return '';
     }
@@ -45,7 +47,7 @@ export default function ProfileRegistrationPage() {
   }, [registrationData]);
 
   const handleChange = (key, value) => {
-    setRegistrationData((prev) => ({ ...prev, [key]: value }));
+    dispatch(setRegistrationData({ [key]: value }));
   };
 
   const handleBlur = (key) => {

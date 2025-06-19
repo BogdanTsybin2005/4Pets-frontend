@@ -2,7 +2,8 @@ import './style.scss';
 import Large4PetsSectionIcon from '../../svg_pictures/4pets-large-section-icon';
 import dog2Picture from '../../svg_pictures/pictures/dog-2.png';
 import { LoginButton } from '../button';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import dogPawIcon from '../../svg_pictures/pictures/Ellipse-dog-paw.png';
 
 
@@ -22,7 +23,7 @@ function GenerateDecorCircles() {
 }
 
 export default function Section({option = 1}) {
-    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();    
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);  
     const sectionTextMessage = allMyLanguageData[interfaceLanguage]?.heroText;
 
     let result = {

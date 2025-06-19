@@ -1,11 +1,12 @@
 import './style.scss';
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 
 
 
 export default function IntroPartOfProfilePage() {
-    const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     return (
         <>  
             <div className='registration__intro-block'>

@@ -1,16 +1,19 @@
 import './style.scss';
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import { NavLink, Link } from "react-router";
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { setInterfaceLanguage } from '../../store/languageSlice.js';
+import allMyLanguageData from '../../data/data';
 import { LoginButton } from '../button';
 import { LanguageSelect } from '../button';
 import useScrollY from '../../hooks/useScrollY';
 
 
 
-export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActive, toggleBurger }) {
+export default function Header({ scrollToFooter, isBurderActive, toggleBurger }) {
     const scrollY = useScrollY();
-    const { allMyLanguageData, interfaceLanguage, setInterfaceLanguage } = useLanguageContext();
+    const dispatch = useDispatch();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
         <header className="header">
@@ -38,7 +41,7 @@ export default function Header({ scrollToFooter, isBurderActive, setIsBurgerActi
                 <LoginButton />
                 <LanguageSelect
                     language={interfaceLanguage}
-                    setLanguage={setInterfaceLanguage}
+                    setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
                 />
                 <button
                     className={`header-burger ${isBurderActive ? '_active' : ''}`}

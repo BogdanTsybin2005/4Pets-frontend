@@ -1,8 +1,9 @@
 import './style.scss';
 import Main4PetsLogo from '../../svg_pictures/4pets-logo';
 import { TheLinkToPageButton } from '../../components/button';
-import { useLanguageContext } from '../../context/LanguageContext';
-import { useRegistrationContext } from '../../context/RegistrationContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { setRegistrationData } from '../../store/registrationSlice';
+import allMyLanguageData from '../../data/data';
 import { Input } from '../../components/input';
 import CheckMarkIcon from '../../svg_pictures/check-mark-icon';
 import ChromeIcon from '../../svg_pictures/ChromeIcon';
@@ -13,73 +14,72 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import useAuthorizationContext from '../../context/AuthorizationContext';
+import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
 import AuthAbstractImage from '../../svg_pictures/pictures/dog-1.png';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 
 export default function AuthLayout({ currentForm }) {
-const { setUserAuthorizationResult, setToken } = useAuthorizationContext();
-const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
-const { registrationData, setRegistrationData } = useRegistrationContext();
-const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
-const [, setStoredToken] = useLocalStorage('token', '');
-const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
+  const registrationData = useSelector(state => state.registration);
+  const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
+  const [, setStoredToken] = useLocalStorage('token', '');
+  const navigate = useNavigate();
 
 
 
-const {
-  register,
-  handleSubmit,
-  formState: { errors, touchedFields, isValid },
-} = useForm({
-  mode: 'onBlur',
-  defaultValues: {
-    email: registrationData.email,
-    password: registrationData.password,
-  },
-});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields, isValid },
+  } = useForm({
+    mode: 'onBlur',
+    defaultValues: {
+      email: registrationData.email,
+      password: registrationData.password,
+    },
+  });
 
-const loginMutation = useMutation({
-  mutationFn: ({ email, password }) =>
-    axios.post('http://localhost:5000/auth/login', { email, password }),
-  onSuccess: async (res) => {
-    const token = res.data?.data?.access_token;
-    if (token && token.includes('.')) {
-      setToken(token);
-      setStoredToken(token);
+  const loginMutation = useMutation({
+    mutationFn: ({ email, password }) =>
+      axios.post('http://localhost:5000/auth/login', { email, password }),
+    onSuccess: async (res) => {
+      const token = res.data?.data?.access_token;
+      if (token && token.includes('.')) {
+        dispatch(setToken(token));
+        setStoredToken(token);
 
-      const check = await axios.get('http://localhost:5000/auth/me', {
-        headers: { Authorization: `Bearer ${token}` },
-        });
-      const user = check.data?.data;
-      if (user?.id || user?.email) {
-        setUserAuthorizationResult(true);
-        navigate('/', { replace: true });
-        } else {
-        alert('⛔️ Авторизация не подтверждена');
-        }
-    } else {
-      alert('⛔️ Токен не получен');
-    }
-  },
-  onError: (err) => {
-    alert(err.response?.data?.message || 'Ошибка авторизации');
-  },
-});
-
-const onSubmit = useCallback(
-  (data) => {
-    setRegistrationData((prev) => ({ ...prev, ...data }));
-    if (currentForm === 'login') {
-      loginMutation.mutate(data);
+        const check = await axios.get('http://localhost:5000/auth/me', {
+          headers: { Authorization: `Bearer ${token}` },
+          });
+        const user = check.data?.data;
+        if (user?.id || user?.email) {
+          dispatch(setUserAuthorizationResult(true));
+          navigate('/', { replace: true });
+          } else {
+          alert('⛔️ Авторизация не подтверждена');
+          }
       } else {
-        navigate('/registration');
+        alert('⛔️ Токен не получен');
       }
-  },
-  [currentForm, loginMutation, navigate, setRegistrationData]
-);
+    },
+    onError: (err) => {
+      alert(err.response?.data?.message || 'Ошибка авторизации');
+    },
+  });
+
+  const onSubmit = useCallback((data) => {
+      dispatch(setRegistrationData(data));
+      if (currentForm === 'login') {
+        loginMutation.mutate(data);
+        } else {
+          navigate('/registration');
+        }
+    },
+    [currentForm, loginMutation, navigate, dispatch]
+  );
 
   return (
     <div className="auth__start-page">

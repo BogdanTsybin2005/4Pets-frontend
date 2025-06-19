@@ -1,13 +1,14 @@
 import './style.scss';
-import { useLanguageContext } from '../../context/LanguageContext';
 import SparkIcon from '../../svg_pictures/spark-icon';
 import Main4PetsArrow from '../../svg_pictures/4pets-arrow-to-main-title';
 import useWindowWidth from '../../hooks/useWindowWidth';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 
 
 
 export default function MainPageTitle({language}) {
-    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     const width = useWindowWidth();
     const customSparkIconWidth = width >= 1000 ? 55 : 22;
     const customSparkIconHeight = width >= 1000 ? 57 : 24;

@@ -8,7 +8,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import MainPageTitle from '../../components/mainPageTitle';
 import dof1Picture from '../../svg_pictures/pictures/dog-1.png';
 import TeamSlider from '../../components/4petsTeamSlider';
@@ -18,7 +19,7 @@ import useWindowWidth from '../../hooks/useWindowWidth';
 
 
 export default function MainPage() {
-    const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     const footerRef = useRef();
     const slider1Ref = useRef(null);
     const slider1PrevBtn = useRef(null);
@@ -82,7 +83,6 @@ export default function MainPage() {
             <Header
                 scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })}
                 isBurderActive={isBurderActive}
-                setIsBurgerActive={setIsBurgerActive} 
                 toggleBurger={toggleBurger}
             />
 

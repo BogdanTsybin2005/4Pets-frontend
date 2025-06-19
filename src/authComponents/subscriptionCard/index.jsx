@@ -1,12 +1,13 @@
 import './style.scss';
 import { SubscriptionCardButton } from '../../components/button';
 import { DefaultClauseIcon, ActiveClauseIcon } from "../../svg_pictures/clauses-icons";
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 
 
 
 export default function SubscriptionCard({cardData}) {
-    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
         <div className="subscription-card" key={cardData.id}>

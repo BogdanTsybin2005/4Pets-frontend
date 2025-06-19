@@ -1,17 +1,18 @@
 import './style.scss';
 import { useNavigate } from "react-router";
 import axios from "axios";
-import useAuthorizationContext from "../../context/AuthorizationContext";
-import useLocalStorage from "../../hooks/useLocalStorage"; 
-import { useLanguageContext } from '../../context/LanguageContext';
-
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
+import useLocalStorage from "../../hooks/useLocalStorage";
+import allMyLanguageData from '../../data/data';
+ 
+ 
+ 
 export function LogoutButton() {
-    const { setUserAuthorizationResult } = useAuthorizationContext();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [token, setToken] = useLocalStorage("token", "");
-    const {interfaceLanguage, allMyLanguageData} = useLanguageContext();    
+    const [token, setTokenLocal] = useLocalStorage("token", "");
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     const handleLogout = async () => {
         try {
@@ -27,8 +28,9 @@ export function LogoutButton() {
         } catch (err) {
             console.warn("❌ Ошибка при выходе:", err);
         } finally {
-            setToken("");
-            setUserAuthorizationResult(false);
+            setTokenLocal("");
+            dispatch(setToken(""));
+            dispatch(setUserAuthorizationResult(false));
             navigate("/");
         }
     };

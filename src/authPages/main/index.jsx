@@ -6,13 +6,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../store/authorizationSlice';
 
 
 
 export default function MainAuthPage() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useLocalStorage('token', '');
+  const [token, setTokenLocal] = useLocalStorage('token', '');
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -23,7 +26,7 @@ export default function MainAuthPage() {
       }
 
       try {
-        const res = await axios.get('http://localhost:5000/auth/me', {
+        await axios.get('http://localhost:5000/auth/me', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,7 +34,8 @@ export default function MainAuthPage() {
         setLoading(false);
       } catch (error) {
         console.error('❌ Ошибка при получении профиля:', error);
-        setToken('');
+        setTokenLocal('');
+        dispatch(setToken(''));
         navigate('/login');
       }
     };

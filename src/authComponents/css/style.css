@@ -1,0 +1,214 @@
+.subscription-cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 80%;
+  margin: 40px auto 0 auto;
+  gap: 25px;
+  padding: 0 20px;
+}
+.subscription-cards * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.subscription-cards .subscription-card {
+  -webkit-box-flex: 1 !important;
+      -ms-flex: 1 1 394px !important;
+          flex: 1 1 394px !important;
+  background: white;
+  border-radius: 24px;
+  padding: 40px 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+.subscription-cards .subscription-card * {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+.subscription-cards .subscription-card-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 15px;
+}
+.subscription-cards .subscription-card-icon {
+  background: #ecebff;
+  border-radius: 16px;
+  width: 72px;
+  height: 72px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.subscription-cards .subscription-card-text-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.subscription-cards .subscription-card-type {
+  color: #6f6c90;
+  font-size: 18px;
+}
+.subscription-cards .subscription-card-subscription-type {
+  font-size: 24px;
+  color: #170f49;
+  font-weight: 700;
+}
+.subscription-cards .subscription-card-main-text {
+  color: #6f6c90;
+  margin: 20px 0;
+  font-size: 18px;
+}
+.subscription-cards .subscription-card-price-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  justify-self: start;
+}
+.subscription-cards .subscription-card-price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  color: #170f49;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+.subscription-cards .subscription-card-price * {
+  font-weight: 700;
+}
+.subscription-cards .subscription-card-price > span span:first-child {
+  font-size: 54px;
+  margin-right: 10px;
+}
+.subscription-cards .subscription-card-price > span span:nth-child(2) {
+  font-size: 32px;
+  margin-right: 5px;
+}
+.subscription-cards .subscription-card-price > span span:last-child {
+  font-size: 16px;
+}
+.subscription-cards .subscription-card-monthly-interval {
+  font-size: 20px;
+  color: #6f6c90;
+  font-weight: 100;
+}
+.subscription-cards .subscription-card-list-title {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #170f49;
+}
+.subscription-cards .subscription-card-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+.subscription-cards .subscription-card-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 25px;
+  padding: 0 10px;
+}
+.subscription-cards .subscription-card-list li > span:first-child {
+  position: relative;
+}
+.subscription-cards .subscription-card-list li > span:first-child span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.subscription-cards .subscription-card-list li > span:first-child span:first-child {
+  z-index: 1;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+.subscription-cards .subscription-card-list li > span:first-child span:last-child {
+  z-index: 2;
+  opacity: 0;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+.subscription-cards .subscription-card-list li > span:last-child {
+  color: #170f49;
+  font-size: 18px;
+}
+.subscription-cards .subscription-card .subscription-population-card {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  border-radius: 9px;
+  padding: 15px 20px;
+  background-color: #ecebff;
+  font-size: 10px;
+}
+.subscription-cards .subscription-card:hover {
+  background: #d5007f;
+}
+.subscription-cards .subscription-card:hover .subscription-population-card {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.subscription-cards .subscription-card:hover .subscription-card-type,
+.subscription-cards .subscription-card:hover .subscription-card-subscription-type,
+.subscription-cards .subscription-card:hover .subscription-card-main-text,
+.subscription-cards .subscription-card:hover .subscription-card-price,
+.subscription-cards .subscription-card:hover .subscription-card-list-title {
+  color: white;
+}
+.subscription-cards .subscription-card:hover .subscription-card-button {
+  background: white;
+  color: #D5007F;
+}
+.subscription-cards .subscription-card:hover .subscription-card-list li > span:first-child span:last-child {
+  opacity: 1;
+}
+.subscription-cards .subscription-card:hover .subscription-card-list li > span:last-child {
+  color: white;
+}
+.subscription-cards .subscription-card:hover .subscription-card-monthly-interval {
+  color: #D9DBE9;
+}

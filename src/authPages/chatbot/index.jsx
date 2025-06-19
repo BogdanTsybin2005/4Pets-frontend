@@ -4,7 +4,8 @@ import Header from "../../authComponents/header";
 import { useEffect, useRef, useState } from "react";
 import SendMessageToChatBotIcon from "../../svg_pictures/send-message-to-chatbot-icon";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { useLanguageContext } from "../../context/LanguageContext";
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 
 
 
@@ -25,7 +26,7 @@ export default function ChatBot() {
     const [isLoading, setIsLoading] = useState(true);
     const messagesEndRef = useRef(null);
     const [token] = useLocalStorage("token", "");
-    const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     const chatBotContent = allMyLanguageData[interfaceLanguage]?.chat_bot_page;
 
     useEffect(() => {

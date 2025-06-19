@@ -6,7 +6,8 @@ import axios from 'axios';
 import Header from '../../authComponents/header';
 import map4PetsLabel from '../../svg_pictures/icons/4pets-map-label-1.png';
 import mapData from './mapData';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 
 
 
@@ -14,7 +15,7 @@ export default function Map() {
   const [mapType, setMapType] = useState('all');
   const mapRef = useRef(null);
   const layerGroupRef = useRef(null);
-  const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   
 
   useEffect(() => {

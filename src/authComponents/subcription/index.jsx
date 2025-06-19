@@ -1,11 +1,12 @@
 import './style.scss';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import SubscriptionCard from '../subscriptionCard';
-
-
-export default function Subscription() {
-    const {interfaceLanguage, allMyLanguageData} = useLanguageContext();
-      
+ 
+ 
+ export default function Subscription() {
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
+       
     return (
         <div className='subscription-body'>  
             <div className="subscription-content">

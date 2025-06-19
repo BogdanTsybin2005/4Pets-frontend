@@ -1,10 +1,11 @@
 import { NavLink } from "react-router"
-import { useLanguageContext } from "../../context/LanguageContext"
 import { useState, useRef, useEffect } from "react";
 import LinkArrowIcon from "../../svg_pictures/link-arrow-icon";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import loginIcon from '../../svg_pictures/icons/login-icon.png';
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import './style.scss';
 
 
@@ -24,7 +25,7 @@ export function LinkButton({linkText, url, isFixed=false}) {
 
 export function LoginButton({buttonText, option='primary'}) {
     const width = useWindowWidth();
-    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
         <NavLink to={'/login'} className={`header-button ${option}`}>

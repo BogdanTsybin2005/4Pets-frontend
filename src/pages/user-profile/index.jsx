@@ -1,27 +1,29 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { UserProfileButton, TheLinkToPageButton, LinkButton } from '../../components/button';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector, useDispatch } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import InsertPictureLogoIcon from '../../svg_pictures/insert-picture-logo';
 import ChangePictureLogoIcon from '../../svg_pictures/change-picture-logo';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
-import { useRegistrationContext } from '../../context/RegistrationContext';
+import { setRegistrationData } from '../../store/registrationSlice';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 
 
 export default function UserProfile() {
-  const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+  const dispatch = useDispatch();
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const navigate = useNavigate();
   const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
 
-  const { registrationData, setRegistrationData } = useRegistrationContext();
+  const registrationData = useSelector(state => state.registration);
   const [loading, setLoading] = useState(false);
 
   const handleImageUpload = (url) => {
-    setRegistrationData((prev) => ({ ...prev, avatar: url }));
+    dispatch(setRegistrationData({ avatar: url }));
   };
 
   useEffect(() => {

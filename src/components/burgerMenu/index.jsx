@@ -1,11 +1,12 @@
-import { useLanguageContext } from "../../context/LanguageContext";
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import { Link } from "react-router";
 import './style.scss'
 
 
 
 export default function BurgerMenu({ isBurderActive, setIsBurgerActive }) {
-    const { allMyLanguageData, interfaceLanguage } = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
         <div className={`burger-menu ${isBurderActive ? '_active' : ''}`}>

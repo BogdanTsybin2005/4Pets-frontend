@@ -1,13 +1,14 @@
 import React, { forwardRef } from 'react';
 import Main4PetsLogo from "../../svg_pictures/4pets-logo"
 import InstagramIcon from '../../svg_pictures/instagram-icon';
-import {useLanguageContext} from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import './style.scss';
 
 
 
 const Footer = forwardRef((props, ref) => {
-    const { allMyLanguageData, interfaceLanguage } = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
         <div className="footer" ref={ref}>

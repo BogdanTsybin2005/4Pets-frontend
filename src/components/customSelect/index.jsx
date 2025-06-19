@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLanguageContext } from '../../context/LanguageContext';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
 import './style.scss';
 
 
@@ -7,7 +8,7 @@ const CustomSelect = ({ options, selected, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(selected || null);
     const selectRef = useRef(null);
-    const {allMyLanguageData, interfaceLanguage} = useLanguageContext();
+    const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     
     
 

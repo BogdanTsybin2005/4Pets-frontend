@@ -4,15 +4,15 @@ import { Navigation, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
-
-
-
-import { useLanguageContext } from '../../context/LanguageContext';
 import SparkIcon from '../../svg_pictures/spark-icon';
 import QuotationMarkIcon from '../../svg_pictures/quote-mark-icon';
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
+
+
 
 export default function TeamSlider() {
-  const { allMyLanguageData, interfaceLanguage } = useLanguageContext();
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
   return (
     <div className="main__4pets-team-slider">
