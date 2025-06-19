@@ -8,9 +8,11 @@ import CheckMarkIcon from '../../svg_pictures/check-mark-icon';
 import ChromeIcon from '../../svg_pictures/ChromeIcon';
 import AppleIcon from '../../svg_pictures/AppleIcon';
 import MicrosoftIcon from '../../svg_pictures/MicrosoftIcon';
-import { useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import useAuthorizationContext from '../../context/AuthorizationContext';
 import AuthAbstractImage from '../../svg_pictures/pictures/dog-1.png';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -18,77 +20,66 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 export default function AuthLayout({ currentForm }) {
-  const { setUserAuthorizationResult, setToken } = useAuthorizationContext();
-  const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
-  const { registrationData, setRegistrationData } = useRegistrationContext();
-  const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
-  const [storedToken, setStoredToken] = useLocalStorage("token", "");
-  const navigate = useNavigate();
-  const [touched, setTouched] = useState({});
-  const [errors, setErrors] = useState({});
-  const [formValid, setFormValid] = useState(false);
-  const [loading, setLoading] = useState(false);
+const { setUserAuthorizationResult, setToken } = useAuthorizationContext();
+const { interfaceLanguage, allMyLanguageData } = useLanguageContext();
+const { registrationData, setRegistrationData } = useRegistrationContext();
+const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
+const [, setStoredToken] = useLocalStorage('token', '');
+const navigate = useNavigate();
 
-  const validate = {
-    email: (val) => (!val.includes('@') ? 'Некорректный email' : ''),
-    password: (val) => (val.length < 8 ? 'Минимум 8 символов' : ''),
-  };
 
-  useEffect(() => {
-    const newErrors = {};
-    Object.keys(validate).forEach((key) => {
-      newErrors[key] = validate[key](registrationData[key] || '');
-    });
-    setErrors(newErrors);
-    setFormValid(Object.values(newErrors).every((v) => v === ''));
-  }, [registrationData]);
 
-  const handleChange = (key, val) => {
-    setRegistrationData((prev) => ({ ...prev, [key]: val }));
-  };
+const {
+  register,
+  handleSubmit,
+  formState: { errors, touchedFields, isValid },
+} = useForm({
+  mode: 'onBlur',
+  defaultValues: {
+    email: registrationData.email,
+    password: registrationData.password,
+  },
+});
 
-  const handleAuth = async (e) => {
-    e.preventDefault();
-    if (!formValid) return;
-    setLoading(true);
+const loginMutation = useMutation({
+  mutationFn: ({ email, password }) =>
+    axios.post('http://localhost:5000/auth/login', { email, password }),
+  onSuccess: async (res) => {
+    const token = res.data?.data?.access_token;
+    if (token && token.includes('.')) {
+      setToken(token);
+      setStoredToken(token);
 
-    try {
-      if (currentForm === 'login') {
-        const res = await axios.post('http://localhost:5000/auth/login', {
-          email: registrationData.email,
-          password: registrationData.password,
+      const check = await axios.get('http://localhost:5000/auth/me', {
+        headers: { Authorization: `Bearer ${token}` },
         });
-
-        const token = res.data?.data?.access_token;
-
-        if (token && token.includes('.')) {
-          setToken(token);
-          setStoredToken(token);
-
-          const check = await axios.get("http://localhost:5000/auth/me", {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-
-          const user = check.data?.data;
-
-          if (user?.id || user?.email) {
-            setUserAuthorizationResult(true);
-            navigate("/", { replace: true });
-          } else {
-            alert("⛔️ Авторизация не подтверждена");
-          }
+      const user = check.data?.data;
+      if (user?.id || user?.email) {
+        setUserAuthorizationResult(true);
+        navigate('/', { replace: true });
         } else {
-          alert("⛔️ Токен не получен");
+        alert('⛔️ Авторизация не подтверждена');
         }
+    } else {
+      alert('⛔️ Токен не получен');
+    }
+  },
+  onError: (err) => {
+    alert(err.response?.data?.message || 'Ошибка авторизации');
+  },
+});
+
+const onSubmit = useCallback(
+  (data) => {
+    setRegistrationData((prev) => ({ ...prev, ...data }));
+    if (currentForm === 'login') {
+      loginMutation.mutate(data);
       } else {
         navigate('/registration');
       }
-    } catch (err) {
-      alert(err.response?.data?.message || "Ошибка авторизации");
-    } finally {
-      setLoading(false);
-    }
-  };
+  },
+  [currentForm, loginMutation, navigate, setRegistrationData]
+);
 
   return (
     <div className="auth__start-page">
@@ -99,7 +90,7 @@ export default function AuthLayout({ currentForm }) {
       </div>
 
       <div className="auth__start-page-block">
-        <form className="auth__form-block" onSubmit={handleAuth}>
+        <form className="auth__form-block" onSubmit={handleSubmit(onSubmit)}>
           <Main4PetsLogo width={200} height={106} />
 
           <div className="auth__buttons-block">
@@ -114,20 +105,28 @@ export default function AuthLayout({ currentForm }) {
               isActive={currentForm === 'signup'}
             />
           </div>
-
-          {['email', 'password'].map((key, i) => (
-            <Input
-              key={key}
-              label={langData.authenticationInputs[i].label}
-              placeholder={langData.authenticationInputs[i].placeholder}
-              type={key}
-              value={registrationData[key] || ''}
-              onChange={(e) => handleChange(key, e.target.value)}
-              onBlur={() => setTouched((prev) => ({ ...prev, [key]: true }))}
-              error={touched[key] ? errors[key] : ''}
-              success={touched[key] && !errors[key] ? 'Отлично!' : ''}
-            />
-          ))}
+        <Input
+          label={langData.authenticationInputs[0].label}
+          placeholder={langData.authenticationInputs[0].placeholder}
+          type="email"
+          register={register('email', {
+            required: 'Введите email',
+            validate: (v) => v.includes('@') || 'Некорректный email',
+          })}
+          error={errors.email?.message}
+          success={touchedFields.email && !errors.email ? 'Отлично!' : ''}
+        />
+        <Input
+          label={langData.authenticationInputs[1].label}
+          placeholder={langData.authenticationInputs[1].placeholder}
+          type="password"
+          register={register('password', {
+            required: 'Введите пароль',
+            minLength: { value: 8, message: 'Минимум 8 символов' },
+          })}
+          error={errors.password?.message}
+          success={touchedFields.password && !errors.password ? 'Отлично!' : ''}
+        />
 
           <ul className="auth__list-validation-criterias">
             {langData.validationCriteria.map((item) => (
@@ -139,11 +138,11 @@ export default function AuthLayout({ currentForm }) {
           </ul>
 
           <button
-            type="submit"
-            className="link-to-page-button primary"
-            disabled={!formValid || loading}
+          type="submit"
+          className="link-to-page-button primary"
+          disabled={!isValid || loginMutation.isPending}
           >
-            {loading
+          {loginMutation.isPending
               ? '⏳ Подождите...'
               : currentForm === 'login'
               ? langData.loginButton
