@@ -16,7 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
 import AuthAbstractImage from '../../svg_pictures/pictures/dog-1.png';
-import useLocalStorage from '../../hooks/useLocalStorage';
+// import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 
@@ -25,7 +25,7 @@ export default function AuthLayout({ currentForm }) {
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const registrationData = useSelector(state => state.registration);
   const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
-  const [, setStoredToken] = useLocalStorage('token', '');
+  // const [, setStoredToken] = useLocalStorage('token', '');
   const navigate = useNavigate();
 
 
@@ -49,7 +49,7 @@ export default function AuthLayout({ currentForm }) {
       const token = res.data?.data?.access_token;
       if (token && token.includes('.')) {
         dispatch(setToken(token));
-        setStoredToken(token);
+        // setStoredToken(token);
 
         const check = await axios.get('http://localhost:5000/auth/me', {
           headers: { Authorization: `Bearer ${token}` },

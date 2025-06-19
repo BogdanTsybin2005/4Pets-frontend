@@ -19,8 +19,23 @@ export const checkAuth = createAsyncThunk(
     }
 );
 
+const loadToken = () => {
+    try {
+        const item = localStorage.getItem('token');
+        if (!item) return '';
+        try {
+            return JSON.parse(item);
+        } catch {
+            return item;
+        }
+    } catch {
+        return '';
+    }
+};
+
+
 const initialState = {
-    token: localStorage.getItem('token') || '',
+    token: loadToken(),
     userAuthorizationResult: false,
     isLoading: true,
 };
@@ -33,15 +48,15 @@ const authorizationSlice = createSlice({
             state.token = action.payload;
             if (action.payload) {
                 try {
-                localStorage.setItem('token', action.payload);
+                    localStorage.setItem('token', JSON.stringify(action.payload));
                 } catch (err) {
-                console.error(err);
+                    console.error(err);
                 }
             } else {
                 try {
-                localStorage.removeItem('token');
+                    localStorage.removeItem('token');
                 } catch (err) {
-                console.error(err);
+                    console.error(err);
                 }
             }
         },
