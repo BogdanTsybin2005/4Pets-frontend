@@ -79,6 +79,7 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         display: flex;
         flex-direction: column;
+        margin-bottom: 20px;
 
         .post-header {
         display: flex;
@@ -231,5 +232,16 @@
             }
         }
         }
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .blog-page {
+        flex-direction: column;
+    }
+    .blog-feed, .blog-articles {
+        width: 100%;
     }
 }

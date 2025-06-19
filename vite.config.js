@@ -6,4 +6,7 @@ import { qrcode } from 'vite-plugin-qrcode'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), qrcode()],
+  build: {
+    outDir: '4Pets_frontend'
+  },
 })
