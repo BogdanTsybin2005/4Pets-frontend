@@ -24,7 +24,7 @@ export default function MainPage() {
     const slider1Ref = useRef(null);
     const slider1PrevBtn = useRef(null);
     const slider1NextBtn = useRef(null);
-    const [isBurderActive, setIsBurgerActive] = useState(false);
+    const [isBurgerActive, setIsBurgerActive] = useState(false);
     const customWindowWidth = useWindowWidth();
 
     const handleNavigation = (swiperRef, prevBtnRef, nextBtnRef) => {
@@ -55,7 +55,7 @@ export default function MainPage() {
         });
     };
     useEffect(() => {
-        if (customWindowWidth >= 1000 && isBurderActive) {
+        if (customWindowWidth >= 1000 && isBurgerActive) {
             setIsBurgerActive(false);
             document.body.style.overflow = 'auto';
         }
@@ -63,26 +63,26 @@ export default function MainPage() {
 
 
     useEffect(() => {
-        if (isBurderActive) {
+        if (isBurgerActive) {
             document.documentElement.classList.add('no-scroll');
             document.body.classList.add('no-scroll');
         } else {
             document.documentElement.classList.remove('no-scroll');
             document.body.classList.remove('no-scroll');
         }
-    }, [isBurderActive]);
+    }, [isBurgerActive]);
 
     
     return (
         <div className="main__page-body">
             <BurgerMenu
-                isBurderActive={isBurderActive}
+                isBurgerActive={isBurgerActive}
                 setIsBurgerActive={setIsBurgerActive}
             />
 
             <Header
                 scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                isBurderActive={isBurderActive}
+                isBurgerActive={isBurgerActive}
                 toggleBurger={toggleBurger}
             />
 

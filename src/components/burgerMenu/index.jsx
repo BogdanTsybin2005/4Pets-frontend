@@ -5,11 +5,11 @@ import './style.scss'
 
 
 
-export default function BurgerMenu({ isBurderActive, setIsBurgerActive }) {
+export default function BurgerMenu({ isBurgerActive, setIsBurgerActive }) {
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
     return (
-        <div className={`burger-menu ${isBurderActive ? '_active' : ''}`}>
+        <div className={`burger-menu ${isBurgerActive ? '_active' : ''}`}>
             <ul className="burger-menu-list">
                 {allMyLanguageData[interfaceLanguage]?.header.map((item) => (
                     <li key={item.linkID}>

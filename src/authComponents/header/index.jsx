@@ -9,7 +9,7 @@ import { LogoutButton } from '../button';
 
  
  
-export default function Header({scrollToFooter, isBurderActive, setIsBurgerActive}) {
+export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActive}) {
     const dispatch = useDispatch();
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
 
@@ -44,7 +44,7 @@ export default function Header({scrollToFooter, isBurderActive, setIsBurgerActiv
                     setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
                         useDarkStyle
                     />
-                    <button className={`header-burger ${isBurderActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurderActive => !isBurderActive)}><span></span></button>
+                    <button className={`header-burger ${isBurgerActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurgerActive => !isBurgerActive)}><span></span></button>
                 </div>
             </div>
         </header>

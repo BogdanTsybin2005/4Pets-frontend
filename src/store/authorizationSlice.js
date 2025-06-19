@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
+
 export const checkAuth = createAsyncThunk(
     'authorization/checkAuth',
     async (token, { rejectWithValue }) => {
