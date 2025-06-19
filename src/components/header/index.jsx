@@ -10,7 +10,7 @@ import useScrollY from '../../hooks/useScrollY';
 
 
 
-export default function Header({ scrollToFooter, isBurderActive, toggleBurger }) {
+export default function Header({ scrollToFooter, isBurgerActive, toggleBurger }) {
     const scrollY = useScrollY();
     const dispatch = useDispatch();
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
@@ -44,7 +44,7 @@ export default function Header({ scrollToFooter, isBurderActive, toggleBurger })
                     setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
                 />
                 <button
-                    className={`header-burger ${isBurderActive ? '_active' : ''}`}
+                    className={`header-burger ${isBurgerActive ? '_active' : ''}`}
                     onClick={toggleBurger}
                 >
                     <span></span>
