@@ -20,7 +20,7 @@ export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActiv
                     <Main4PetsLogo width={105} height={55} />
                 </Link>
 
-                <ul className="header-likst-block">
+                <ul className="header-auth-likst-block">
                     {allMyLanguageData[interfaceLanguage]?.header.slice(0, allMyLanguageData[interfaceLanguage]?.header.length - 1).map((item) => (
                         <li key={item.linkID}>
                             <NavLink 
@@ -37,7 +37,7 @@ export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActiv
                         </button>
                     </li>
                 </ul>
-                <div className="header-button-block">
+                <div className="header-auth-button-block">
                 <LogoutButton/>
                 <LanguageSelect
                     language={interfaceLanguage}
