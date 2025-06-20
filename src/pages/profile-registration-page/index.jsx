@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setRegistrationData } from '../../store/registrationSlice';
 import allMyLanguageData from '../../data/data';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 
 

@@ -10,7 +10,7 @@ import ChromeIcon from '../../svg_pictures/ChromeIcon';
 import AppleIcon from '../../svg_pictures/AppleIcon';
 import MicrosoftIcon from '../../svg_pictures/MicrosoftIcon';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
