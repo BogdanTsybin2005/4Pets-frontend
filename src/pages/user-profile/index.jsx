@@ -8,7 +8,7 @@ import ChangePictureLogoIcon from '../../svg_pictures/change-picture-logo';
 import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
 import { setRegistrationData } from '../../store/registrationSlice';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 

@@ -4,7 +4,7 @@ import Header from '../../authComponents/header';
 import Subscription from '../../authComponents/subcription';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../store/authorizationSlice';

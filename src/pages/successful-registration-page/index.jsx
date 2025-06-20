@@ -1,10 +1,10 @@
+import './style.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { TheLinkToPageButton } from '../../components/button';
 import Main4PetsLogo from '../../svg_pictures/4pets-logo';
 import TheSuccessfulRegistrationIcon from '../../svg_pictures/frame-for-the-successful-registration';
-import './style.scss';
 import { setToken, setUserAuthorizationResult } from '../../store/authorizationSlice';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { resetRegistrationData } from '../../store/registrationSlice';
 import allMyLanguageData from '../../data/data';
 import { useEffect, useState } from 'react';

@@ -3,11 +3,12 @@ import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
 import { Virtuoso } from 'react-virtuoso';
 import { lazy, Suspense, useMemo } from 'react';
- 
+
+
 
 const BlogPost = lazy(() => import('./components/BlogPost'));
 const ArticleCard = lazy(() => import('./components/ArticleCard'));
- 
+
 export default function Blog() {
   const posts = useMemo(
     () => [
@@ -71,7 +72,7 @@ export default function Blog() {
     ],
     []
   );
- 
+
   return (
     <>
       <Header />
@@ -106,12 +107,11 @@ export default function Blog() {
               <p><b>@catlady_kg</b>: 3 мин назад<br />Какая прелесть! А для кошек там есть зона? 🐱</p>
               <p><b>@vet_nurlan</b>: 41 мин назад<br />Отличное место! Я всё время рекомендую — очень чисто и животные спокойные 🐾</p>
               <p><b>@maksat_k9</b>: 1 ч назад<br />Круто! Добавил в избранное на карте, спасибо за наводку 🙏</p>
-             </div>
-           </div>
-
-         </div>
-       </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer />
-     </>
-   );
+    </>
+  );
 }
