@@ -28,6 +28,7 @@
         transition-duration: 0.3s;
         text-align: center;
         color: rgba(156, 154, 165, 1);
+        cursor: pointer;
   
     &:hover {
         background: rgba(213, 0, 127, 1);
@@ -36,6 +37,10 @@
       a {
             color: white;
       }
+    }
+
+    &:active {
+        transform: scale(0.97);
     }
   
     &.primary {

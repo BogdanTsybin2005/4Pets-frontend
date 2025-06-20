@@ -1,7 +1,3 @@
-import React from 'react';
-
-
-
 export default function ProfileSection({ user }) {
     const avatarStyle = user?.avatar
         ? { backgroundImage: `url(${user.avatar})` }

@@ -44,7 +44,7 @@ export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActiv
                     setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
                         useDarkStyle
                     />
-                    <button className={`header-burger ${isBurgerActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurgerActive => !isBurgerActive)}><span></span></button>
+                    <button className={`header-auth-burger ${isBurgerActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurgerActive => !isBurgerActive)}><span></span></button>
                 </div>
             </div>
         </header>
