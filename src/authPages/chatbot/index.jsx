@@ -43,20 +43,23 @@ export default function ChatBot() {
                 });
                 const history = res.data || [];
                 const formatted = history
-                    .map((msg) => [
-                        {
-                            id: msg.id * 2,
-                            role: "user",
-                            text: msg.prompt,
-                            timestamp: msg.created_at || new Date().toISOString(),
-                        },
-                        {
-                            id: msg.id * 2 + 1,
-                            role: "bot",
-                            text: msg.response,
-                            timestamp: msg.created_at || new Date().toISOString(),
-                        },
-                    ])
+                    .map((msg) => {
+                        const timestampString = `${msg.timestamp.date} ${msg.timestamp.time}`;
+                        return [
+                            {
+                                id: msg.id * 2,
+                                role: "user",
+                                text: msg.prompt,
+                                timestamp: timestampString,
+                            },
+                            {
+                                id: msg.id * 2 + 1,
+                                role: "bot",
+                                text: msg.response,
+                                timestamp: timestampString,
+                            }
+                        ];
+                    })
                     .flat();
                 setMessages(formatted);
             } catch (err) {
@@ -99,7 +102,10 @@ export default function ChatBot() {
         try {
             const res = await axios.post(
                 "http://localhost:5000/gpt/ask",
-                { message: trimmed },
+                {
+                    message: trimmed,
+                    timestamp: timestamp,
+                },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -115,7 +121,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: botText,
-                    timestamp: new Date().toISOString(),
+                    timestamp: timestamp,
                 },
             ]);
         } catch (error) {
@@ -126,13 +132,14 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: `❌ ${errorMessage}`,
-                    timestamp: new Date().toISOString(),
+                    timestamp: timestamp,
                 },
             ]);
         } finally {
             setIsThinking(false);
         }
     };
+
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") sendMessage();
