@@ -27,7 +27,9 @@ export default function ChatBot() {
     const messagesEndRef = useRef(null);
     const [token] = useLocalStorage("token", "");
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
-    const chatBotContent = allMyLanguageData[interfaceLanguage]?.chat_bot_page;
+        const chatBotContent =
+        allMyLanguageData[interfaceLanguage]?.chat_bot_page ||
+        allMyLanguageData.ru.chat_bot_page;
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

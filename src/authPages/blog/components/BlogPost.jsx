@@ -1,6 +1,8 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+ 
 export default React.memo(function BlogPost({ post }) {
+    const [liked, setLiked] = useState(false);
+
     return (
         <div className="blog-post">
             <div className="post-header">
@@ -22,10 +24,16 @@ export default React.memo(function BlogPost({ post }) {
                 </div>
             </div>
             <div className="post-actions">
-                <button>♡</button>
-                <button>✉️</button>
-                <button>📍</button>
-                <button>•••</button>
+                <button
+                    className={liked ? 'liked' : ''}
+                    onClick={() => setLiked(!liked)}
+                    type="button"
+                >
+                {liked ? '❤️' : '♡'}
+                </button>
+                <button type="button">✉️</button>
+                <button type="button">📍</button>
+                <button type="button">•••</button>
             </div>
         </div>
     );

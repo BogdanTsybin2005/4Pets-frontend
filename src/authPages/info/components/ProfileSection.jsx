@@ -1,8 +1,7 @@
 export default function ProfileSection({ user }) {
-    const avatarStyle = user?.avatar
-        ? { backgroundImage: `url(${user.avatar})` }
-        : {};
-
+    const avatar = user?.avatar;
+    const avatarStyle = avatar ? { backgroundImage: `url(${avatar})` } : {};
+ 
     return (
         <section className="info-header">
             <div className="info-header__banner new-graphics" />
@@ -15,7 +14,6 @@ export default function ProfileSection({ user }) {
                     {user?.city && <div className="info-header__role role-highlight">{user.city}</div>}
                     {user?.email && <div className="info-header__role role-highlight">{user.email}</div>}
                     {user?.contact && <div className="info-header__role role-highlight">{user.contact}</div>}
-                    <button className="info-header__subscribe animated-button">📩 Написать / Подписаться</button>
                 </div>
             </div>
         </section>
