@@ -89,12 +89,11 @@ export default function Blog() {
           <div className="blog-feed">
             <SearchBar value={query} onChange={setQuery} />
             <StoriesBar stories={stories} onAdd={handleAddStory} />
-             <Suspense fallback={<div>Loading...</div>}>
-               <Virtuoso
-                 data={filteredPosts}
-                 itemContent={(index, post) => <BlogPost post={post} />}
-               />
-             </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              {filteredPosts.map(post => (
+                <BlogPost key={post.id} post={post} />
+              ))}
+            </Suspense>
            </div>
            <div className="blog-articles">
             <Suspense fallback={<div>Loading...</div>}>
