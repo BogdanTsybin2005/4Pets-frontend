@@ -183,6 +183,18 @@ const allMyLanguageData = {
         or: 'или',
         optionOfTheProtectionType: ['Слабая', 'Средняя', 'Сильная'],
         authenticationButtonText: 'Войти',
+        messages: {
+          emailRequired: 'Введите email',
+          emailInvalid: 'Некорректный email',
+          passwordRequired: 'Введите пароль',
+          passwordMin: 'Минимум 8 символов',
+          usernameMin: 'Минимум 6 символов',
+          contactInvalid: 'Введите корректный номер',
+          invalidCredentials: 'Неверный email или пароль',
+          noToken: 'Токен не получен',
+          notVerified: 'Авторизация не подтверждена',
+          serverError: 'Ошибка авторизации'
+        }
       },
       FIP16_4pets: [
         {
@@ -427,7 +439,13 @@ const allMyLanguageData = {
         allCategories: 'Все',
         veterinaryClinics: 'Ветклиники',
         petStores: 'Зоомагазины'
-      }
+      },
+      blogPage: {
+        searchPlaceholder: 'Вы ищите на платформе 4Pets...',
+        readMore: 'Читать далее',
+        loading: 'Загрузка...'
+      },
+      changeAvatarButton: 'Сменить аватар'
     },
     kg: {
       headerLoginButton: 'КИРҮҮ',
@@ -594,6 +612,18 @@ const allMyLanguageData = {
         or: 'же',
         optionOfTheProtectionType: ['Алсыз', 'Орто', 'Күчтүү'],
         authenticationButtonText: 'Кирүү',
+        messages: {
+          emailRequired: 'Почтаны киргизиңиз',
+          emailInvalid: 'Почта туура эмес',
+          passwordRequired: 'Сырсөздү киргизиңиз',
+          passwordMin: 'Жок дегенде 8 символ',
+          usernameMin: 'Жок дегенде 6 символ',
+          contactInvalid: 'Телефонду туура киргизиңиз',
+          invalidCredentials: 'Почта же сырсөз туура эмес',
+          noToken: 'Токен алынган жок',
+          notVerified: 'Авторизация текшерилбеди',
+          serverError: 'Авторизация катасы'
+        }
       },
       FIP16_4pets: [
         {
@@ -838,7 +868,13 @@ const allMyLanguageData = {
         allCategories: 'баары',
         veterinaryClinics: 'ветклиника',
         petStores: 'жаныбарлар дүкөндөрү'
-      }
+      },
+      blogPage: {
+        searchPlaceholder: '4Pets платформасынан издеп жатасыз...',
+        readMore: 'Толук окуу',
+        loading: 'Жүктөлүүдө...'
+      },
+      changeAvatarButton: 'Аватарды алмаштыруу'
     },
     en: {
       headerLoginButton: 'LOGIN',
@@ -1002,6 +1038,18 @@ const allMyLanguageData = {
         or: 'or',
         optionOfTheProtectionType: ['Weak', 'Medium', 'Strong'],
         authenticationButtonText: 'Login',
+        messages: {
+          emailRequired: 'Enter email',
+          emailInvalid: 'Invalid email',
+          passwordRequired: 'Enter password',
+          passwordMin: 'Minimum 8 characters',
+          usernameMin: 'Minimum 6 characters',
+          contactInvalid: 'Enter a valid phone number',
+          invalidCredentials: 'Invalid email or password',
+          noToken: 'Token not received',
+          notVerified: 'Authorization not confirmed',
+          serverError: 'Authorization error'
+        }
       },
       FIP16_4pets: [
         {
@@ -1176,8 +1224,8 @@ const allMyLanguageData = {
           },
           {
             id: 2,
-            type: 'Индивидуальная',
-            subscriptionType: 'Базовая',
+            type: 'Individual',
+            subscriptionType: 'Basic',
             text: 'More features for everyday use.',
             priceInSoms: 500,
             icon: BasicSubscriptionIcon,
@@ -1246,7 +1294,13 @@ const allMyLanguageData = {
         allCategories: 'All',
         veterinaryClinics: 'Veterinary clinics',
         petStores: 'Pet stores'
-      }
+      },
+      blogPage: {
+        searchPlaceholder: 'Search on 4Pets...',
+        readMore: 'Read more',
+        loading: 'Loading...'
+      },
+      changeAvatarButton: 'Change avatar'
     },
   };
   

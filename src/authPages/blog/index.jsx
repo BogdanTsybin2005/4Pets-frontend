@@ -1,9 +1,12 @@
 import './style.scss';
 import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
-import { lazy, Suspense, useMemo, useState } from 'react';
+import { lazy, Suspense, useMemo, useState, useRef } from 'react';
 import SearchBar from './components/SearchBar';
- 
+import { useSelector } from 'react-redux';
+import allMyLanguageData from '../../data/data';
+import Loader from '../../components/loader';
+
  
  
 const BlogPost = lazy(() => import('./components/BlogPost'));
@@ -11,6 +14,9 @@ const ArticleCard = lazy(() => import('./components/ArticleCard'));
  
 export default function Blog() {
   const [query, setQuery] = useState('');
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
+  const lang = allMyLanguageData[interfaceLanguage]?.blogPage;
+  const footerRef = useRef(null);
  
   const posts = useMemo(
      () => [
@@ -49,16 +55,16 @@ export default function Blog() {
          link: 'https://kg.4pets.com/article/...',
          date: '5 апреля 2025 г.',
          title: '5 ПРОСТЫХ ПРАВИЛ УХОДА ЗА СОБАКОЙ: КАК СОХРАНИТЬ ЗДОРОВЬЕ И РАДОСТЬ ВАШЕГО ХВОСТИКА КАЖДЫЙ ДЕНЬ',
-         body: 'Ваш пёс — не просто питомец, а настоящий член семьи. Но знаете ли вы, что даже мелкие ошибки в уходе могут сказаться на его здоровье и настроении? Чтобы ваш хвостатый друг всегда оставался бодрым, весёлым и благодарным — достаточно помнить о нескольких простых вещах... <span class="more">ещё</span>',
-       },
+         body: 'Ваш пёс — не просто питомец, а настоящий член семьи. Но знаете ли вы, что даже мелкие ошибки в уходе могут сказаться на его здоровье и настроении? Чтобы ваш хвостатый друг всегда оставался бодрым, весёлым и благодарным — достаточно помнить о нескольких простых вещах. Регулярные прогулки, сбалансированное питание и внимание к его состоянию здоровья творят чудеса. Не забывайте про игры и ласку — это укрепляет вашу связь и делает жизнь собаки счастливее.',
+      },
        {
          id: 2,
          author: '@MAKSAT_K9',
          link: 'https://kg.4pets.com/article/o-5...',
          date: '22 декабря 2024 г.',
          title: 'ПОЧЕМУ СОБАКА ВЕДЁТ СЕБЯ СТРАННО? 7 ПОВЕДЕНЧЕСКИХ СИГНАЛОВ, КОТОРЫЕ НЕЛЬЗЯ ИГНОРИРОВАТЬ',
-         body: 'Однажды вы замечаете: ваш любимец ведёт себя не так, как обычно. Он стал прятаться в углу, слишком часто облизывает лапы, лает без видимой причины или наоборот — молчит и смотрит в одну точку. Многие списывают это на "характер" или "странности породы", но правда в том, что любые изменения в поведении собаки — это её способ что-то вам сказать... <span class="more">ещё</span>',
-       },
+         body: 'Однажды вы замечаете: ваш любимец ведёт себя не так, как обычно. Он стал прятаться в углу, слишком часто облизывает лапы, лает без видимой причины или наоборот — молчит и смотрит в одну точку. Многие списывают это на "характер" или "странности породы", но правда в том, что любые изменения в поведении собаки — это её способ что-то вам сказать. Важно прислушаться и разобраться, что именно беспокоит вашего любимца.',
+      },
      ],
      []
    );
@@ -69,21 +75,21 @@ export default function Blog() {
 
    return (
      <>
-      <Header />
+      <Header scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })} />
       <div className="blog-wrapper">
         <div className="blog-page">
           <div className="blog-feed">
-            <SearchBar value={query} onChange={setQuery} />
-            <Suspense fallback={<div>Loading...</div>}>
+            <SearchBar value={query} onChange={setQuery} placeholder={lang.searchPlaceholder} />
+            <Suspense fallback={<Loader text={lang.loading} />}>
               {filteredPosts.map(post => (
                 <BlogPost key={post.id} post={post} />
               ))}
             </Suspense>
            </div>
            <div className="blog-articles">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader text={lang.loading} />}>
               {articles.map(article => (
-                <ArticleCard key={article.id} article={article} />
+                <ArticleCard key={article.id} article={article} readMoreText={lang.readMore} />
               ))}
             </Suspense>
             <div className="comments">
@@ -103,7 +109,7 @@ export default function Blog() {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer ref={footerRef} />
     </>
   );
 }

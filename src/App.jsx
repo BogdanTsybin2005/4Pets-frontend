@@ -2,6 +2,9 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Main from './components/main'
 import { lazy, Suspense } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import allMyLanguageData from './data/data'
+import Loader from './components/loader'
 
 const MainPage = lazy(() => import('./pages/main-page'))
 const Info = lazy(() => import('./authPages/info'))
@@ -15,7 +18,6 @@ const UserProfile = lazy(() => import('./pages/user-profile'))
 const SuccessfulRegistrationPage = lazy(() => import('./pages/successful-registration-page'))
 
 import MainAuthPage from './authPages/main'
-import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { checkAuth } from './store/authorizationSlice'
   
@@ -30,13 +32,14 @@ function App() {
   useEffect(() => {
     dispatch(checkAuth(token));
   }, [dispatch, token]);
-  if (isLoading) return <div className="loading-screen">
-    <h1 className="loading-screen__title">Загрузка...</h1>
-  </div>;
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
+  const loadingText = allMyLanguageData[interfaceLanguage]?.blogPage.loading;
+
+  if (isLoading) return <Loader text={loadingText} />;
   return (
     <div className='wrapper'>
       <Main>
-        <Suspense fallback={<div className="loading-screen"><h1 className="loading-screen__title">Загрузка...</h1></div>}>
+        <Suspense fallback={<Loader text={loadingText} />}>
           <Routes>
           <Route path='/' element={userAuthorizationResult ? <MainAuthPage/> : <MainPage/>}/>
           <Route path='/blog' element={userAuthorizationResult ? <Blog/> : <MainPage/>}/>

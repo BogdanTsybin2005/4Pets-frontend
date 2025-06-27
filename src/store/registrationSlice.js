@@ -7,12 +7,13 @@ const defaultState = {
     city: '',
     contact: '',
     avatar: null,
+    avatarFile: null,
 };
 
 const loadState = () => {
     try {
         const item = localStorage.getItem('registrationData');
-        return item ? JSON.parse(item) : defaultState;
+        return item ? { ...defaultState, ...JSON.parse(item) } : defaultState;
     } catch (err) {
         console.error(err);
         return defaultState;
