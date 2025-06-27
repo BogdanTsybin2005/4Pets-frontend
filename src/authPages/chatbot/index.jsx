@@ -9,15 +9,26 @@ import allMyLanguageData from '../../data/data';
 
 
 
-function formatDate(date) {
-    const d = new Date(date);
-    const day = String(d.getDate()).padStart(2, "0");
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const year = d.getFullYear();
-    const hours = String(d.getHours()).padStart(2, "0");
-    const minutes = String(d.getMinutes()).padStart(2, "0");
-    return `${day}.${month}.${year} - ${hours}:${minutes}`;
+function formatDate(timestamp) {
+    if (typeof timestamp === "string") {
+        try {
+            const d = new Date(timestamp);
+            if (isNaN(d.getTime())) return "Неверная дата";
+            const day = String(d.getDate()).padStart(2, "0");
+            const month = String(d.getMonth() + 1).padStart(2, "0");
+            const year = d.getFullYear();
+            const hours = String(d.getHours()).padStart(2, "0");
+            const minutes = String(d.getMinutes()).padStart(2, "0");
+            return `${day}.${month}.${year} - ${hours}:${minutes}`;
+        } catch (err) {
+            console.error("Ошибка парсинга даты:", err, timestamp);
+            return "Неверная дата";
+        }
+    }
+    console.log("Timestamp value:", timestamp); // undefined
+    return "Неизвестный формат";
 }
+
 
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
