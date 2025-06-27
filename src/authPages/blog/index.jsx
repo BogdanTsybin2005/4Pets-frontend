@@ -1,10 +1,8 @@
 import './style.scss';
 import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
-import { Virtuoso } from 'react-virtuoso';
 import { lazy, Suspense, useMemo, useState } from 'react';
 import SearchBar from './components/SearchBar';
-import StoriesBar from './components/StoriesBar';
  
  
  
@@ -13,13 +11,6 @@ const ArticleCard = lazy(() => import('./components/ArticleCard'));
  
 export default function Blog() {
   const [query, setQuery] = useState('');
-  const [stories, setStories] = useState([
-    'https://i.pravatar.cc/40?img=1',
-    'https://i.pravatar.cc/40?img=2',
-    'https://i.pravatar.cc/40?img=3',
-    'https://i.pravatar.cc/40?img=4',
-    'https://i.pravatar.cc/40?img=5',
-  ]);
  
   const posts = useMemo(
      () => [
@@ -48,7 +39,7 @@ export default function Blog() {
            'В приюте сейчас много котят, которым нужны заботливые руки.',
          ]
       }
-    ]);
+    ], []);
  
    const articles = useMemo(
      () => [
@@ -76,11 +67,6 @@ export default function Blog() {
     p.caption.toLowerCase().includes(query.toLowerCase())
   );
 
-  const handleAddStory = () => {
-    const id = stories.length + 1;
-    setStories([...stories, `https://i.pravatar.cc/40?img=${id}`]);
-  };
-
    return (
      <>
       <Header />
@@ -88,7 +74,6 @@ export default function Blog() {
         <div className="blog-page">
           <div className="blog-feed">
             <SearchBar value={query} onChange={setQuery} />
-            <StoriesBar stories={stories} onAdd={handleAddStory} />
             <Suspense fallback={<div>Loading...</div>}>
               {filteredPosts.map(post => (
                 <BlogPost key={post.id} post={post} />
