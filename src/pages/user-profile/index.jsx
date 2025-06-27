@@ -49,9 +49,7 @@ export default function UserProfile() {
       if (registrationData.avatarFile) {
         formData.append('avatar', registrationData.avatarFile);
       }
-      await axios.post('http://localhost:5000/auth/register', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      await axios.post('http://localhost:5000/auth/register', formData);
       navigate('/success');
     } catch (err) {
       const msg = err.response?.data?.message || 'Ошибка сервера';

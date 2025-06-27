@@ -10,8 +10,12 @@ import './style.scss';
 
 
 
-export function UserProfileButton({children, onCLick}) {
-  return <button className="user-profile-button" onClick={() => onCLick()}>{children}</button>
+export function UserProfileButton({ children, onClick }) {
+  return (
+    <button className="user-profile-button" onClick={() => onClick?.()}>
+      {children}
+    </button>
+  );
 }
 
 export function LinkButton({linkText, url, isFixed=false}) {
