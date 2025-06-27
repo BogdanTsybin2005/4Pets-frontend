@@ -16,6 +16,7 @@ export default function ProfileRegistrationPage() {
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
   const formFields = allMyLanguageData[interfaceLanguage]?.registrationPage.form;
+  const messages = allMyLanguageData[interfaceLanguage]?.authenticationPage.messages;
   const navigate = useNavigate();
   const registrationData = useSelector(state => state.registration);
 
@@ -26,9 +27,9 @@ export default function ProfileRegistrationPage() {
   const validateField = (key, value) => {
     switch (key) {
       case 'username':
-        return value.trim().length >= 6 ? '' : 'Минимум 6 символов';
+        return value.trim().length >= 6 ? '' : messages.usernameMin;
       case 'contact':
-         return /^\+?[0-9\s-]{7,}$/.test(value) ? '' : 'Введите корректный номер';
+        return /^\+?[0-9\s-]{7,}$/.test(value) ? '' : messages.contactInvalid;
       default:
         return '';
     }

@@ -1,5 +1,5 @@
 import './style.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { UserProfileButton, TheLinkToPageButton, LinkButton } from '../../components/button';
 import { useSelector, useDispatch } from 'react-redux';
 import allMyLanguageData from '../../data/data';
@@ -21,10 +21,16 @@ export default function UserProfile() {
 
   const registrationData = useSelector(state => state.registration);
   const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef(null);
 
-  const handleImageUpload = (url) => {
-    dispatch(setRegistrationData({ avatar: url }));
+  const handleSelectFile = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      dispatch(setRegistrationData({ avatar: URL.createObjectURL(file), avatarFile: file }));
+    }
   };
+
+  const triggerFile = () => fileInputRef.current?.click();
 
   useEffect(() => {
     if (!registrationData.email || !registrationData.password || !registrationData.username) {
@@ -36,11 +42,20 @@ export default function UserProfile() {
     if (loading) return;
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/auth/register', registrationData);
+      const formData = new FormData();
+      Object.entries(registrationData).forEach(([key, value]) => {
+        if (key !== 'avatarFile') formData.append(key, value);
+      });
+      if (registrationData.avatarFile) {
+        formData.append('avatar', registrationData.avatarFile);
+      }
+      await axios.post('http://localhost:5000/auth/register', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       navigate('/success');
     } catch (err) {
       const msg = err.response?.data?.message || 'Ошибка сервера';
-      alert(msg);
+      console.error(msg);
     } finally {
       setLoading(false);
     }
@@ -57,14 +72,15 @@ export default function UserProfile() {
           <IntroPartOfProfilePage />
           <UserLogo src={registrationData.avatar} />
           <div className="user-profile-buttons">
-            <UserProfileButton onClick={() => handleImageUpload('https://via.placeholder.com/150')}>
+            <UserProfileButton onClick={triggerFile}>
               <InsertPictureLogoIcon />
               {lang.insertLogoTextForButton}
             </UserProfileButton>
-            <UserProfileButton onClick={() => handleImageUpload('https://via.placeholder.com/200')}>
+            <UserProfileButton onClick={triggerFile}>
               <ChangePictureLogoIcon />
               {lang.changeLogoTextForButton}
             </UserProfileButton>
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleSelectFile} hidden />
           </div>
           <TheLinkToPageButton
             buttonText={loading ? '⏳ Подождите...' : lang.buttonForRegistrationText}

@@ -40,10 +40,17 @@
       font-size: 14px;
       background-color: #f3f0fb;
       color: #333;
+      transition: box-shadow 0.3s;
 
       &::placeholder {
         color: #aaa;
         font-style: italic;
+      }
+
+      
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(213, 0, 127, 0.3);
       }
     }
   }
@@ -188,11 +195,23 @@
         margin-top: 6px;
         color: #555;
         line-height: 1.5;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
 
         .more {
           color: #a67aff;
           font-weight: 600;
           cursor: pointer;
+        }
+
+
+        
+        &.expanded {
+          .article-body {
+            -webkit-line-clamp: unset;
+          }
         }
       }
 

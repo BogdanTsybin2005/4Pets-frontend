@@ -3,7 +3,8 @@ import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import allMyLanguageData from '../../data/data';
 import ProfileSection from './components/ProfileSection';
 import FAQCard from './components/FAQCard';
 import TestimonialCard from './components/TestimonialCard';
@@ -12,7 +13,10 @@ import TestimonialCard from './components/TestimonialCard';
  
 export default function Info() {
   const token = useSelector(state => state.authorization.token);
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const [user, setUser] = useState(null);
+  const fileInputRef = useRef(null);
+  const footerRef = useRef(null);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showTestimonials, setShowTestimonials] = useState(false);
  
@@ -64,9 +68,28 @@ export default function Info() {
 
   return (
       <>
-        <Header />
+        <Header scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })} />
         <main className="profile-page">
           <ProfileSection user={user} />
+          <div className="info-header__actions">
+            <button className="info-toggle-button" onClick={() => fileInputRef.current?.click()}>
+              {allMyLanguageData[interfaceLanguage]?.changeAvatarButton}
+            </button>
+            <input ref={fileInputRef} type="file" hidden accept="image/*" onChange={async e => {
+              const file = e.target.files[0];
+              if (!file) return;
+              const form = new FormData();
+              form.append('avatar', file);
+              try {
+                await axios.patch('http://localhost:5000/user/avatar', form, {
+                  headers: { Authorization: `Bearer ${token}` }
+                });
+                setUser(u => ({ ...u, avatar: URL.createObjectURL(file) }));
+              } catch (err) {
+                console.error(err);
+              }
+            }} />
+          </div>
 
           <div className="info-buttons">
             <button className="info-toggle-button" onClick={() => setShowFAQ(!showFAQ)}>
@@ -93,7 +116,7 @@ export default function Info() {
             </section>
           )}
       </main>
-      <Footer />
+      <Footer ref={footerRef} />
     </>
   );
 }

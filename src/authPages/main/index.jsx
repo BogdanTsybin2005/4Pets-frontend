@@ -2,7 +2,7 @@ import './style.scss';
 import Footer from '../../components/footer';
 import Header from '../../authComponents/header';
 import Subscription from '../../authComponents/subcription';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -16,6 +16,7 @@ export default function MainAuthPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [token, setTokenLocal] = useLocalStorage('token', '');
+  const footerRef = useRef(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,9 +48,9 @@ export default function MainAuthPage() {
 
   return (
     <div className="main-auth">
-      <Header />
+      <Header scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })} />
       <Subscription />
-      <Footer />
+      <Footer ref={footerRef} />
     </div>
   );
 }

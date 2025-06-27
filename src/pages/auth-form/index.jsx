@@ -9,7 +9,7 @@ import CheckMarkIcon from '../../svg_pictures/check-mark-icon';
 import ChromeIcon from '../../svg_pictures/ChromeIcon';
 import AppleIcon from '../../svg_pictures/AppleIcon';
 import MicrosoftIcon from '../../svg_pictures/MicrosoftIcon';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
@@ -25,8 +25,7 @@ export default function AuthLayout({ currentForm }) {
   const registrationData = useSelector(state => state.registration);
   const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
   const navigate = useNavigate();
-
-
+  const [serverError, setServerError] = useState('');
 
   const {
     register,
@@ -56,14 +55,14 @@ export default function AuthLayout({ currentForm }) {
           dispatch(setUserAuthorizationResult(true));
           navigate('/', { replace: true });
           } else {
-          alert('⛔️ Авторизация не подтверждена');
+          setServerError(langData.messages.notVerified);alert('⛔️ Авторизация не подтверждена');
           }
       } else {
-        alert('⛔️ Токен не получен');
+        setServerError(langData.messages.noToken);
       }
     },
     onError: (err) => {
-      alert(err.response?.data?.message || 'Ошибка авторизации');
+      setServerError(err.response?.data?.message || langData.messages.serverError);
     },
   });
 
@@ -107,8 +106,8 @@ export default function AuthLayout({ currentForm }) {
           placeholder={langData.authenticationInputs[0].placeholder}
           type="email"
           register={register('email', {
-            required: 'Введите email',
-            validate: (v) => v.includes('@') || 'Некорректный email',
+            required: langData.messages.emailRequired,
+            validate: (v) => v.includes('@') || langData.messages.emailInvalid,
           })}
           error={errors.email?.message}
           success={touchedFields.email && !errors.email ? 'Отлично!' : ''}
@@ -118,8 +117,8 @@ export default function AuthLayout({ currentForm }) {
           placeholder={langData.authenticationInputs[1].placeholder}
           type="password"
           register={register('password', {
-            required: 'Введите пароль',
-            minLength: { value: 8, message: 'Минимум 8 символов' },
+            required: langData.messages.passwordRequired,
+            minLength: { value: 8, message: langData.messages.passwordMin },
           })}
           error={errors.password?.message}
           success={touchedFields.password && !errors.password ? 'Отлично!' : ''}
@@ -133,6 +132,8 @@ export default function AuthLayout({ currentForm }) {
               </li>
             ))}
           </ul>
+
+          {serverError && <div className="server-error">{serverError}</div>}
 
           <button
           type="submit"
