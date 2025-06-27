@@ -19,6 +19,7 @@ function formatDate(date) {
     return `${day}.${month}.${year} - ${hours}:${minutes}`;
 }
 
+
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
