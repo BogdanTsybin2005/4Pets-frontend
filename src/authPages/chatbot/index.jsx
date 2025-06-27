@@ -19,7 +19,6 @@ function formatDate(date) {
     return `${day}.${month}.${year} - ${hours}:${minutes}`;
 }
 
-
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
@@ -28,9 +27,7 @@ export default function ChatBot() {
     const messagesEndRef = useRef(null);
     const [token] = useLocalStorage("token", "");
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
-        const chatBotContent =
-        allMyLanguageData[interfaceLanguage]?.chat_bot_page ||
-        allMyLanguageData.ru.chat_bot_page;
+    const chatBotContent = allMyLanguageData[interfaceLanguage]?.chat_bot_page || allMyLanguageData.ru.chat_bot_page;
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -45,7 +42,7 @@ export default function ChatBot() {
                 const history = res.data || [];
                 const formatted = history
                     .map((msg) => {
-                        const timestampString = `${msg.timestamp.date} ${msg.timestamp.time}`;
+                        const timestampString = msg.user_timestamp;
                         return [
                             {
                                 id: msg.id * 2,
@@ -57,7 +54,7 @@ export default function ChatBot() {
                                 id: msg.id * 2 + 1,
                                 role: "bot",
                                 text: msg.response,
-                                timestamp: timestampString,
+                                timestamp: msg.bot_timestamp || timestampString,
                             }
                         ];
                     })
@@ -69,7 +66,6 @@ export default function ChatBot() {
                 setIsLoading(false);
             }
         };
-
         if (token) {
             fetchHistory();
         }
@@ -79,13 +75,14 @@ export default function ChatBot() {
         const trimmed = input.trim();
         if (!trimmed || !token) return;
 
-        const timestamp = new Date().toISOString();
+        const now = new Date();
+        const timestampString = now.toISOString();
 
         const userMessage = {
             id: Date.now(),
             role: "user",
             text: trimmed,
-            timestamp,
+            timestamp: timestampString,
         };
 
         const thinkingMessage = {
@@ -93,7 +90,7 @@ export default function ChatBot() {
             role: "bot",
             text: `🤖 ${chatBotContent.thinkingChatBotMessage}`,
             isThinking: true,
-            timestamp,
+            timestamp: timestampString,
         };
 
         setMessages((prev) => [...prev, userMessage, thinkingMessage]);
@@ -105,12 +102,10 @@ export default function ChatBot() {
                 "http://localhost:5000/gpt/ask",
                 {
                     message: trimmed,
-                    timestamp: timestamp,
+                    timestamp: timestampString, 
                 },
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 }
             );
 
@@ -122,7 +117,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: botText,
-                    timestamp: timestamp,
+                    timestamp: timestampString,
                 },
             ]);
         } catch (error) {
@@ -133,7 +128,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: `❌ ${errorMessage}`,
-                    timestamp: timestamp,
+                    timestamp: timestampString,
                 },
             ]);
         } finally {

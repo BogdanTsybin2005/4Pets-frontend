@@ -6,12 +6,14 @@ import {setInterfaceLanguage} from '../../store/languageSlice.js'
 import allMyLanguageData from '../../data/data';
 import { NavLink, Link } from 'react-router-dom';
 import { LogoutButton } from '../button';
+import { useLocation } from 'react-router-dom';
 
  
  
 export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActive}) {
     const dispatch = useDispatch();
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
+    const location = useLocation();
 
     return (
         <header className="auth-header">
@@ -31,11 +33,15 @@ export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActiv
                             </NavLink>
                         </li>
                     ))}
-                    <li>
-                        <button onClick={scrollToFooter}>
-                            {allMyLanguageData[interfaceLanguage]?.header[4].text}
-                        </button>
-                    </li>
+                    {
+                        ['/', '/info', '/blog'].includes(location.pathname) ? (
+                            <li>
+                                <button onClick={scrollToFooter}>
+                                    {allMyLanguageData[interfaceLanguage]?.header[4].text}
+                                </button>
+                            </li>
+                        ) : null
+                    }
                 </ul>
                 <div className="header-auth-button-block">
                 <LogoutButton/>
