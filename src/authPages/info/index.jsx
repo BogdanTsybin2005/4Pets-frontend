@@ -8,6 +8,7 @@ import allMyLanguageData from '../../data/data';
 import ProfileSection from './components/ProfileSection';
 import FAQCard from './components/FAQCard';
 import TestimonialCard from './components/TestimonialCard';
+import Loader from '../../components/loader';
    
  
  
@@ -64,7 +65,8 @@ export default function Info() {
     fetchUser();
   }, [token]);
    
-  if (!user) return <div>Загрузка...</div>;
+  const loadingText = allMyLanguageData[interfaceLanguage]?.blogPage.loading;
+  if (!user) return <Loader text={loadingText} />;
 
   return (
       <>

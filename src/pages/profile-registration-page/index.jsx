@@ -80,7 +80,7 @@ export default function ProfileRegistrationPage() {
                 onChange={(e) => handleChange('username', e.target.value)}
                 onBlur={() => handleBlur('username')}
                 error={touched.username ? errors.username : ''}
-                success={touched.username && !errors.username ? 'Ок!' : ''}
+                success={touched.username && !errors.username ? messages.success : ''}
               />
             </li>
             <li>
@@ -100,7 +100,7 @@ export default function ProfileRegistrationPage() {
                 onChange={(e) => handleChange('contact', e.target.value)}
                 onBlur={() => handleBlur('contact')}
                 error={touched.contact ? errors.contact : ''}
-                success={touched.contact && !errors.contact ? 'Ок!' : ''}
+                success={touched.contact && !errors.contact ? messages.success : ''}
               />
             </li>
           </ul>

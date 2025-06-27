@@ -193,7 +193,8 @@ const allMyLanguageData = {
           invalidCredentials: 'Неверный email или пароль',
           noToken: 'Токен не получен',
           notVerified: 'Авторизация не подтверждена',
-          serverError: 'Ошибка авторизации'
+          serverError: 'Ошибка авторизации',
+          success: 'Отлично!'
         }
       },
       FIP16_4pets: [
@@ -622,7 +623,8 @@ const allMyLanguageData = {
           invalidCredentials: 'Почта же сырсөз туура эмес',
           noToken: 'Токен алынган жок',
           notVerified: 'Авторизация текшерилбеди',
-          serverError: 'Авторизация катасы'
+          serverError: 'Авторизация катасы',
+          success: 'Азамат!'
         }
       },
       FIP16_4pets: [
@@ -1048,7 +1050,8 @@ const allMyLanguageData = {
           invalidCredentials: 'Invalid email or password',
           noToken: 'Token not received',
           notVerified: 'Authorization not confirmed',
-          serverError: 'Authorization error'
+          serverError: 'Authorization error',
+          success: 'Great!'
         }
       },
       FIP16_4pets: [
