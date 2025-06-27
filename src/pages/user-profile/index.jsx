@@ -44,7 +44,9 @@ export default function UserProfile() {
     try {
       const formData = new FormData();
       Object.entries(registrationData).forEach(([key, value]) => {
-        if (key !== 'avatarFile') formData.append(key, value);
+        if (key !== 'avatar' && key !== 'avatarFile') {
+          formData.append(key, value);
+        }
       });
       if (registrationData.avatarFile) {
         formData.append('avatar', registrationData.avatarFile);
