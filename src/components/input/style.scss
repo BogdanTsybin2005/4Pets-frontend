@@ -38,12 +38,19 @@
   margin-top: 2px;
   height: auto;
   min-height: 16px;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .input__helper-text.input-error {
   color: #d32f2f !important;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .input__helper-text.input-success {
   color: #2e7d32 !important;
+  opacity: 1;
+  transform: translateY(0);
 }

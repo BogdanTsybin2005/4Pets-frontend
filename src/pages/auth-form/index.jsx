@@ -110,7 +110,7 @@ export default function AuthLayout({ currentForm }) {
             validate: (v) => v.includes('@') || langData.messages.emailInvalid,
           })}
           error={errors.email?.message}
-          success={touchedFields.email && !errors.email ? 'Отлично!' : ''}
+          success={touchedFields.email && !errors.email ? langData.messages.success : ''}
         />
         <Input
           label={langData.authenticationInputs[1].label}
@@ -121,7 +121,7 @@ export default function AuthLayout({ currentForm }) {
             minLength: { value: 8, message: langData.messages.passwordMin },
           })}
           error={errors.password?.message}
-          success={touchedFields.password && !errors.password ? 'Отлично!' : ''}
+          success={touchedFields.password && !errors.password ? langData.messages.success : ''}
         />
 
           <ul className="auth__list-validation-criterias">

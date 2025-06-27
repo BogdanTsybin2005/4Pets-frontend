@@ -6,8 +6,10 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../../store/authorizationSlice';
+import allMyLanguageData from '../../data/data';
+import Loader from '../../components/loader';
 
 
 
@@ -16,6 +18,7 @@ export default function MainAuthPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [token, setTokenLocal] = useLocalStorage('token', '');
+  const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const footerRef = useRef(null);
 
   useEffect(() => {
@@ -44,7 +47,8 @@ export default function MainAuthPage() {
     fetchUser();
   }, [token]);
 
-  if (loading) return <div>Загрузка...</div>; 
+  const loadingText = allMyLanguageData[interfaceLanguage]?.blogPage.loading;
+  if (loading) return <Loader text={loadingText} />;
 
   return (
     <div className="main-auth">
