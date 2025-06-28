@@ -73,14 +73,13 @@ export default function ChatBot() {
         const trimmed = input.trim();
         if (!trimmed || !token) return;
 
-        const now = new Date();
-        const formattedTimestamp = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}.${now.getFullYear()} - ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+        const isoTimestamp = new Date().toISOString();
 
         const userMessage = {
             id: Date.now(),
             role: "user",
             text: trimmed,
-            timestamp: formattedTimestamp, 
+            timestamp: isoTimestamp, 
         };
 
         const thinkingMessage = {
@@ -88,7 +87,7 @@ export default function ChatBot() {
             role: "bot",
             text: `🤖 ${chatBotContent.thinkingChatBotMessage}`,
             isThinking: true,
-            timestamp: formattedTimestamp,
+            timestamp: isoTimestamp,
         };
 
         setMessages((prev) => [...prev, userMessage, thinkingMessage]);
@@ -100,7 +99,7 @@ export default function ChatBot() {
                 "http://localhost:5000/gpt/ask",
                 {
                     message: trimmed,
-                    timestamp: formattedTimestamp,
+                    timestamp: isoTimestamp,
                 },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -115,7 +114,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: botText,
-                    timestamp: formattedTimestamp,
+                    timestamp: isoTimestamp,
                 },
             ]);
         } catch (error) {
@@ -126,7 +125,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: `❌ ${errorMessage}`,
-                    timestamp: formattedTimestamp,
+                    timestamp: isoTimestamp,
                 },
             ]);
         } finally {
