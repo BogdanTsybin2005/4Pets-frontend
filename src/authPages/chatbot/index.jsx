@@ -9,26 +9,18 @@ import allMyLanguageData from '../../data/data';
 
 
 
-function formatDate(timestamp) {
-    if (typeof timestamp === "string") {
-        try {
-            const d = new Date(timestamp);
-            if (isNaN(d.getTime())) return "Неверная дата";
-            const day = String(d.getDate()).padStart(2, "0");
-            const month = String(d.getMonth() + 1).padStart(2, "0");
-            const year = d.getFullYear();
-            const hours = String(d.getHours()).padStart(2, "0");
-            const minutes = String(d.getMinutes()).padStart(2, "0");
-            return `${day}.${month}.${year} - ${hours}:${minutes}`;
-        } catch (err) {
-            console.error("Ошибка парсинга даты:", err, timestamp);
-            return "Неверная дата";
-        }
-    }
-    console.log("Timestamp value:", timestamp); // undefined
-    return "Неизвестный формат";
-}
+function formatDate(value) {
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return "Неверная дата";
 
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, "0");
+    const minutes = String(d.getMinutes()).padStart(2, "0");
+
+    return `${day}.${month}.${year} - ${hours}:${minutes}`;
+}
 
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
@@ -51,25 +43,20 @@ export default function ChatBot() {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const history = res.data || [];
-                const formatted = history
-                    .map((msg) => {
-                        const timestampString = msg.user_timestamp;
-                        return [
-                            {
-                                id: msg.id * 2,
-                                role: "user",
-                                text: msg.prompt,
-                                timestamp: timestampString,
-                            },
-                            {
-                                id: msg.id * 2 + 1,
-                                role: "bot",
-                                text: msg.response,
-                                timestamp: msg.bot_timestamp || timestampString,
-                            }
-                        ];
-                    })
-                    .flat();
+                const formatted = history.flatMap((msg) => [
+                    {
+                        id: msg.id * 2,
+                        role: "user",
+                        text: msg.prompt,
+                        timestamp: msg.timestamp,  
+                    },
+                    {
+                        id: msg.id * 2 + 1,
+                        role: "bot",
+                        text: msg.response,
+                        timestamp: msg.timestamp,  
+                    }
+                ]);
                 setMessages(formatted);
             } catch (err) {
                 console.error("Ошибка загрузки истории:", err);
@@ -87,13 +74,13 @@ export default function ChatBot() {
         if (!trimmed || !token) return;
 
         const now = new Date();
-        const timestampString = now.toISOString();
+        const formattedTimestamp = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}.${now.getFullYear()} - ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
         const userMessage = {
             id: Date.now(),
             role: "user",
             text: trimmed,
-            timestamp: timestampString,
+            timestamp: formattedTimestamp, 
         };
 
         const thinkingMessage = {
@@ -101,7 +88,7 @@ export default function ChatBot() {
             role: "bot",
             text: `🤖 ${chatBotContent.thinkingChatBotMessage}`,
             isThinking: true,
-            timestamp: timestampString,
+            timestamp: formattedTimestamp,
         };
 
         setMessages((prev) => [...prev, userMessage, thinkingMessage]);
@@ -113,7 +100,7 @@ export default function ChatBot() {
                 "http://localhost:5000/gpt/ask",
                 {
                     message: trimmed,
-                    timestamp: timestampString, 
+                    timestamp: formattedTimestamp,
                 },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -128,7 +115,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: botText,
-                    timestamp: timestampString,
+                    timestamp: formattedTimestamp,
                 },
             ]);
         } catch (error) {
@@ -139,13 +126,14 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: `❌ ${errorMessage}`,
-                    timestamp: timestampString,
+                    timestamp: formattedTimestamp,
                 },
             ]);
         } finally {
             setIsThinking(false);
         }
     };
+
 
 
     const handleKeyDown = (e) => {
