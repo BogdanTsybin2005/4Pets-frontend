@@ -6,6 +6,11 @@
     background: white;
     padding: 15px 0;
     z-index: 100000000000000000000000000000000000000000000000000;
+    transition-duration: .3s;
+
+    &._active {
+        background: transparent;
+    }
 
     .header-auth-burger {
         background: transparent;
@@ -20,6 +25,10 @@
         box-sizing: border-box;
         border: 2px solid #200B63;
         border-radius: 8px;
+
+        &._active {
+            border: 2px solid white;
+        }
 
         span {
             position: relative;
@@ -58,12 +67,14 @@
             &::before {
                 transform: rotate(40deg);
                 transform-origin: center;
+                background: white;
                 top: 0;
             }
 
             &::after {
                 transform: rotate(-40deg);
                 transform-origin: center;
+                background: white;
                 bottom: 0;
             }
         }

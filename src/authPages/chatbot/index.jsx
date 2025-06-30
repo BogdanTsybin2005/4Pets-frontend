@@ -36,7 +36,18 @@ export default function ChatBot() {
 
     useEffect(() => {
         document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
-        return () => { document.body.style.overflow = 'auto'; };
+        if (isBurgerActive) {
+            document.documentElement.classList.add('no-scroll');
+            document.body.classList.add('no-scroll');
+        } else {
+            document.documentElement.classList.remove('no-scroll');
+            document.body.classList.remove('no-scroll');
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+            document.documentElement.classList.remove('no-scroll');
+            document.body.classList.remove('no-scroll');
+        };
     }, [isBurgerActive]);
 
     useEffect(() => {

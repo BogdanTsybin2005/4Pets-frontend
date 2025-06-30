@@ -16,7 +16,7 @@ export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActiv
     const location = useLocation();
 
     return (
-        <header className="auth-header">
+        <header className={`auth-header ${isBurgerActive ? '_active' : ''}`}>
             <div className="auth-header__container">
                 <Link to={'/'}>
                     <Main4PetsLogo width={105} height={55} />
@@ -44,11 +44,11 @@ export default function Header({scrollToFooter, isBurgerActive, setIsBurgerActiv
                     }
                 </ul>
                 <div className="header-auth-button-block">
-                <LogoutButton/>
-                <LanguageSelect
-                    language={interfaceLanguage}
-                    setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
-                        useDarkStyle
+                    <LogoutButton useLightStyles={isBurgerActive} />
+                    <LanguageSelect
+                        language={interfaceLanguage}
+                        setLanguage={(lang) => dispatch(setInterfaceLanguage(lang))}
+                        useDarkStyle={!isBurgerActive}
                     />
                     <button className={`header-auth-burger ${isBurgerActive ? '_active' : ''}`} onClick={() => setIsBurgerActive(isBurgerActive => !isBurgerActive)}><span></span></button>
                 </div>

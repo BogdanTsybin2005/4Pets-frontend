@@ -10,6 +10,11 @@
     cursor: pointer;
     transition: 0.3s ease;
 
+    &.light {
+        color: white;
+        border: 2px solid white;
+    }
+
     &:hover {
         background-color: #D5007F;
         color: white;

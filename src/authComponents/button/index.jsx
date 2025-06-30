@@ -8,7 +8,7 @@ import allMyLanguageData from '../../data/data';
  
  
  
-export function LogoutButton() {
+export function LogoutButton({useLightStyles = false}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [token, setTokenLocal] = useLocalStorage("token", "");
@@ -36,7 +36,7 @@ export function LogoutButton() {
     };
 
     return (
-        <button className="logout-button" onClick={handleLogout}>
+        <button className={`logout-button ${useLightStyles ? 'light' : ''}`} onClick={handleLogout}>
             {allMyLanguageData[interfaceLanguage]?.headerLogoutButton}
         </button>
     );
