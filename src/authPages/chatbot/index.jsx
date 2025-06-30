@@ -133,8 +133,6 @@ export default function ChatBot() {
         }
     };
 
-
-
     const handleKeyDown = (e) => {
         if (e.key === "Enter") sendMessage();
     };
@@ -155,7 +153,7 @@ export default function ChatBot() {
                     <ul className="chat-bot__list">
                         {messages.map((msg) => (
                             <li key={msg.id} className={msg.role}>
-                                <div>{msg.text}</div>
+                                <span>{msg.text}</span>
                                 <small className="chat-bot__timestamp">{formatDate(msg.timestamp)}</small>
                             </li>
                         ))}

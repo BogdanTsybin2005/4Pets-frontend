@@ -89,6 +89,11 @@
     color: rgba(38, 32, 59, 1);
     font-size: 12px;
     align-items: center;
+    transition: color 0.3s;
+
+    svg path {
+      transition: stroke 0.3s;
+    }
   }
 }
 

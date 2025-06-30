@@ -153,3 +153,19 @@ body,
     text-align: left;
   }
 }
+
+
+@media (max-width: 540px) {
+  .chat-bot__list {
+    li {
+      padding: 6px 8px;
+      span {
+        font-size: 12px;
+        letter-spacing: .5px;
+      }
+    }
+  }
+  .chat-bot__timestamp {
+    font-size: 9px !important;
+  }
+}

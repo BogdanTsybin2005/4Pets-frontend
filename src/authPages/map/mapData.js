@@ -128,29 +128,3 @@ const mapData = {
 
 
 export default mapData;
-
-
-
-export const calculateMeanVeterinaryClinicsLatAndLon = (category) => {
-    let result = [];
-    let allLats = [];
-    let allLons = [];
-
-    switch (category) {
-        case 'клиники':
-            allLats = mapData.veterinaryClinics.map((item) => item.lat);
-            allLons = mapData.veterinaryClinics.map((item) => item.lon);
-            result.push(allLats.reduce((start, lat) => {return start + lat;}, 0) / allLats.length);
-            result.push(allLons.reduce((start, lon) => {return start + lon;}, 0) / allLons.length);
-            break;
-        case 'зоомагазины':
-            allLats = mapData.petStore.map((item) => item.lat);
-            allLons = mapData.petStore.map((item) => item.lon);
-            result.push(allLats.reduce((start, lat) => {return start + lat;}, 0) / allLats.length);
-            result.push(allLons.reduce((start, lon) => {return start + lon;}, 0) / allLons.length);
-            break;
-    }
-
-
-    return result;
-}

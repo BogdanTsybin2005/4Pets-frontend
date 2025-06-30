@@ -9,7 +9,7 @@ import CheckMarkIcon from '../../svg_pictures/check-mark-icon';
 import ChromeIcon from '../../svg_pictures/ChromeIcon';
 import AppleIcon from '../../svg_pictures/AppleIcon';
 import MicrosoftIcon from '../../svg_pictures/MicrosoftIcon';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
@@ -26,10 +26,16 @@ export default function AuthLayout({ currentForm }) {
   const langData = allMyLanguageData[interfaceLanguage].authenticationPage;
   const navigate = useNavigate();
   const [serverError, setServerError] = useState('');
+    const [criteriaStatus, setCriteriaStatus] = useState({
+    length: false,
+    digits: false,
+  });
+  const [passwordStrength, setPasswordStrength] = useState('weak');
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, touchedFields, isValid },
   } = useForm({
     mode: 'onBlur',
@@ -38,6 +44,23 @@ export default function AuthLayout({ currentForm }) {
       password: registrationData.password,
     },
   });
+
+  const passwordValue = watch('password');
+
+  useEffect(() => {
+    const hasLength = passwordValue.length >= 8;
+    const hasDigits = /\d/.test(passwordValue) && /[^A-Za-z0-9]/.test(passwordValue);
+    setCriteriaStatus({ length: hasLength, digits: hasDigits });
+
+    let strength = 'weak';
+    if (hasLength && hasDigits && passwordValue.length >= 12) {
+      strength = 'strong';
+    } else if (hasLength && (hasDigits || /\d/.test(passwordValue))) {
+      strength = 'medium';
+    }
+    setPasswordStrength(strength);
+  }, [passwordValue]);
+
 
   const loginMutation = useMutation({
     mutationFn: ({ email, password }) =>
@@ -125,12 +148,22 @@ export default function AuthLayout({ currentForm }) {
         />
 
           <ul className="auth__list-validation-criterias">
-            {langData.validationCriteria.map((item) => (
-              <li key={item.criteriaID}>
-                <CheckMarkIcon />
-                <span>{item.text}</span>
-              </li>
-            ))}
+            <li className={`password-${passwordStrength}`}>
+              <CheckMarkIcon />
+              <span>
+                {langData.validationCriteria[0].text}: {langData.optionOfTheProtectionType[
+                  passwordStrength === 'strong' ? 2 : passwordStrength === 'medium' ? 1 : 0
+                ]}
+              </span>
+            </li>
+            <li className={criteriaStatus.length ? 'valid' : 'invalid'}>
+              <CheckMarkIcon />
+              <span>{langData.validationCriteria[1].text}</span>
+            </li>
+            <li className={criteriaStatus.digits ? 'valid' : 'invalid'}>
+              <CheckMarkIcon />
+              <span>{langData.validationCriteria[2].text}</span>
+            </li>
           </ul>
 
           {serverError && <div className="server-error">{serverError}</div>}
