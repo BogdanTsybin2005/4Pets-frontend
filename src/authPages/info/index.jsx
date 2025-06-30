@@ -10,6 +10,7 @@ import FAQCard from '../../authComponents/info/FAQCard';
 import TestimonialCard from '../../authComponents/info/TestimonialCard';
 import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
+
    
  
  
@@ -23,19 +24,10 @@ export default function Info() {
   const [showTestimonials, setShowTestimonials] = useState(false);
   const [isBurgerActive, setIsBurgerActive] = useState(false);
 
-  const toggleBurger = () => {
-    setIsBurgerActive(prev => {
-      const newState = !prev;
-      document.body.style.overflow = newState ? 'hidden' : 'auto';
-      return newState;
-    });
-  };
-
   useEffect(() => {
     document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
     return () => { document.body.style.overflow = 'auto'; };
   }, [isBurgerActive]);
- 
  
   const faqItems = [
     {

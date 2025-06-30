@@ -28,14 +28,6 @@ export default function MainAuthPage() {
     return () => { document.body.style.overflow = 'auto'; };
   }, [isBurgerActive]);
 
-  const toggleBurger = () => {
-    setIsBurgerActive(prev => {
-      const newState = !prev;
-      document.body.style.overflow = newState ? 'hidden' : 'auto';
-      return newState;
-    });
-  };
-
   useEffect(() => {
     const fetchUser = async () => {
       if (!token || !token.includes('.')) {

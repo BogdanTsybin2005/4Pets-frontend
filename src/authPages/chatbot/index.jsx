@@ -39,14 +39,6 @@ export default function ChatBot() {
         return () => { document.body.style.overflow = 'auto'; };
     }, [isBurgerActive]);
 
-    const toggleBurger = () => {
-        setIsBurgerActive(prev => {
-            const newState = !prev;
-            document.body.style.overflow = newState ? 'hidden' : 'auto';
-            return newState;
-        });
-    };
-
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);

@@ -8,6 +8,7 @@ import map4PetsLabel from '../../svg_pictures/icons/4pets-map-label-1.png';
 import mapData from './mapData';
 import { useSelector } from 'react-redux';
 import allMyLanguageData from '../../data/data';
+import BurgerMenu from '../../authComponents/burgerMenu';
 
 
 
@@ -16,7 +17,12 @@ export default function Map() {
   const mapRef = useRef(null);
   const layerGroupRef = useRef(null);
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
-  
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isBurgerActive]);
 
   useEffect(() => {
     const map = L.map('map-container', {
@@ -112,7 +118,8 @@ export default function Map() {
 
   return (
     <div className="map-page">
-      <Header />
+      <BurgerMenu isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
+      <Header isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
       <div className="map-container" id="map-container">
         <div className="filter-panel">
           <button onClick={() => setMapType('clinics')}>{allMyLanguageData[interfaceLanguage]?.map.veterinaryClinics}</button>

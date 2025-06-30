@@ -1,41 +1,30 @@
 import './style.scss';
 import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
-import { lazy, Suspense, useMemo, useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import allMyLanguageData from '../../data/data';
 import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
+import { lazy, Suspense, useMemo, useState, useRef, useEffect } from 'react';
 import SearchBar from '../../authComponents/blog/SearchBar';
-
+ 
 
  
- 
-const BlogPost = lazy(() => import('./components/BlogPost'));
-const ArticleCard = lazy(() => import('./components/ArticleCard'));
+const BlogPost = lazy(() => import('../../authComponents/blog/BlogPost'));
+const ArticleCard = lazy(() => import('../../authComponents/blog/ArticleCard'));
  
 export default function Blog() {
-  const [isBurgerActive, setIsBurgerActive] = useState(false);
   const [query, setQuery] = useState('');
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const lang = allMyLanguageData[interfaceLanguage]?.blogPage;
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
   const footerRef = useRef(null);
-  const BlogPost = lazy(() => import('../../authComponents/blog/BlogPost'));
-  const ArticleCard = lazy(() => import('../../authComponents/blog/ArticleCard'));
+
 
   useEffect(() => {
     document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
     return () => { document.body.style.overflow = 'auto'; };
   }, [isBurgerActive]);
-
-  const toggleBurger = () => {
-    setIsBurgerActive(prev => {
-      const newState = !prev;
-      document.body.style.overflow = newState ? 'hidden' : 'auto';
-      return newState;
-    });
-  };
- 
  
   const posts = useMemo(
      () => [
@@ -74,7 +63,7 @@ export default function Blog() {
          link: 'https://kg.4pets.com/article/...',
          date: '5 апреля 2025 г.',
          title: '5 ПРОСТЫХ ПРАВИЛ УХОДА ЗА СОБАКОЙ: КАК СОХРАНИТЬ ЗДОРОВЬЕ И РАДОСТЬ ВАШЕГО ХВОСТИКА КАЖДЫЙ ДЕНЬ',
-         body: 'Ваш пёс — не просто питомец, а настоящий член семьи. Но знаете ли вы, что даже мелкие ошибки в уходе могут сказаться на его здоровье и настроении? Чтобы ваш хвостатый друг всегда оставался бодрым, весёлым и благодарным — достаточно помнить о нескольких простых вещах. Регулярные прогулки, сбалансированное питание и внимание к его состоянию здоровья творят чудеса. Не забывайте про игры и ласку — это укрепляет вашу связь и делает жизнь собаки счастливее. Если хотите узнать больше о повседневном уходе, обязательно посетите наш блог. Там мы делимся проверенными советами, которые пригодятся каждому хозяину.',
+         body: 'Ваш пёс — не просто питомец, а настоящий член семьи. Но знаете ли вы, что даже мелкие ошибки в уходе могут сказаться на его здоровье и настроении? Чтобы ваш хвостатый друг всегда оставался бодрым, весёлым и благодарным — достаточно помнить о нескольких простых вещах. Регулярные прогулки, сбалансированное питание и внимание к его состоянию здоровья творят чудеса. Не забывайте про игры и ласку — это укрепляет вашу связь и делает жизнь собаки счастливее.',
       },
        {
          id: 2,
@@ -82,7 +71,7 @@ export default function Blog() {
          link: 'https://kg.4pets.com/article/o-5...',
          date: '22 декабря 2024 г.',
          title: 'ПОЧЕМУ СОБАКА ВЕДЁТ СЕБЯ СТРАННО? 7 ПОВЕДЕНЧЕСКИХ СИГНАЛОВ, КОТОРЫЕ НЕЛЬЗЯ ИГНОРИРОВАТЬ',
-         body: 'Однажды вы замечаете: ваш любимец ведёт себя не так, как обычно. Он стал прятаться в углу, слишком часто облизывает лапы, лает без видимой причины или наоборот — молчит и смотрит в одну точку. Многие списывают это на "характер" или "странности породы", но правда в том, что любые изменения в поведении собаки — это её способ что-то вам сказать. Важно прислушаться и разобраться, что именно беспокоит вашего любимца. Порой эти сигналы говорят о серьёзных проблемах со здоровьем. Берегите своего друга и обращайте внимание даже на мелочи.',
+         body: 'Однажды вы замечаете: ваш любимец ведёт себя не так, как обычно. Он стал прятаться в углу, слишком часто облизывает лапы, лает без видимой причины или наоборот — молчит и смотрит в одну точку. Многие списывают это на "характер" или "странности породы", но правда в том, что любые изменения в поведении собаки — это её способ что-то вам сказать. Важно прислушаться и разобраться, что именно беспокоит вашего любимца.',
       },
      ],
      []
