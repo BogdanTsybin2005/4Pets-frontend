@@ -83,7 +83,7 @@ export default function UserProfile() {
             <input ref={fileInputRef} type="file" accept="image/*" onChange={handleSelectFile} hidden />
           </div>
           <TheLinkToPageButton
-            buttonText={loading ? '⏳ Подождите...' : lang.buttonForRegistrationText}
+            buttonText={loading ? allMyLanguageData[interfaceLanguage].authenticationPage.messages.pleaseWait : lang.buttonForRegistrationText}
             isPrimary
             isActive={!loading}
             onClick={handleNext}

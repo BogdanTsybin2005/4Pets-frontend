@@ -5,10 +5,11 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 import allMyLanguageData from '../../data/data';
-import ProfileSection from './components/ProfileSection';
-import FAQCard from './components/FAQCard';
-import TestimonialCard from './components/TestimonialCard';
+import ProfileSection from '../../authComponents/info/ProfileSection';
+import FAQCard from '../../authComponents/info/FAQCard';
+import TestimonialCard from '../../authComponents/info/TestimonialCard';
 import Loader from '../../components/loader';
+import BurgerMenu from '../../authComponents/burgerMenu';
    
  
  
@@ -20,6 +21,21 @@ export default function Info() {
   const footerRef = useRef(null);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showTestimonials, setShowTestimonials] = useState(false);
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
+
+  const toggleBurger = () => {
+    setIsBurgerActive(prev => {
+      const newState = !prev;
+      document.body.style.overflow = newState ? 'hidden' : 'auto';
+      return newState;
+    });
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isBurgerActive]);
+ 
  
   const faqItems = [
     {
@@ -70,7 +86,12 @@ export default function Info() {
 
   return (
       <>
-        <Header scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })} />
+        <BurgerMenu isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
+        <Header
+          scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })}
+          isBurgerActive={isBurgerActive}
+          setIsBurgerActive={setIsBurgerActive}
+        />
         <main className="profile-page">
           <ProfileSection user={user} />
           <div className="info-header__actions">

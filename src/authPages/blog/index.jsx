@@ -1,11 +1,13 @@
 import './style.scss';
 import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
-import { lazy, Suspense, useMemo, useState, useRef } from 'react';
-import SearchBar from './components/SearchBar';
+import { lazy, Suspense, useMemo, useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import allMyLanguageData from '../../data/data';
 import Loader from '../../components/loader';
+import BurgerMenu from '../../authComponents/burgerMenu';
+import SearchBar from '../../authComponents/blog/SearchBar';
+
 
  
  
@@ -13,10 +15,27 @@ const BlogPost = lazy(() => import('./components/BlogPost'));
 const ArticleCard = lazy(() => import('./components/ArticleCard'));
  
 export default function Blog() {
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
   const [query, setQuery] = useState('');
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const lang = allMyLanguageData[interfaceLanguage]?.blogPage;
   const footerRef = useRef(null);
+  const BlogPost = lazy(() => import('../../authComponents/blog/BlogPost'));
+  const ArticleCard = lazy(() => import('../../authComponents/blog/ArticleCard'));
+
+  useEffect(() => {
+    document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isBurgerActive]);
+
+  const toggleBurger = () => {
+    setIsBurgerActive(prev => {
+      const newState = !prev;
+      document.body.style.overflow = newState ? 'hidden' : 'auto';
+      return newState;
+    });
+  };
+ 
  
   const posts = useMemo(
      () => [
@@ -73,9 +92,14 @@ export default function Blog() {
     p.caption.toLowerCase().includes(query.toLowerCase())
   );
 
-   return (
-     <>
-      <Header scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })} />
+  return (
+    <>
+      <BurgerMenu isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
+      <Header
+        scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })}
+        isBurgerActive={isBurgerActive}
+        setIsBurgerActive={setIsBurgerActive}
+      />
       <div className="blog-wrapper">
         <div className="blog-page">
           <div className="blog-feed">

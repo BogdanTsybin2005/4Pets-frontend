@@ -194,7 +194,8 @@ const allMyLanguageData = {
           noToken: 'Токен не получен',
           notVerified: 'Авторизация не подтверждена',
           serverError: 'Ошибка авторизации',
-          success: 'Отлично!'
+          success: 'Отлично!',
+          pleaseWait: 'Подождите...'
         }
       },
       FIP16_4pets: [
@@ -624,7 +625,8 @@ const allMyLanguageData = {
           noToken: 'Токен алынган жок',
           notVerified: 'Авторизация текшерилбеди',
           serverError: 'Авторизация катасы',
-          success: 'Азамат!'
+          success: 'Азамат!',
+          pleaseWait: 'Күтө тұрыңыз...'
         }
       },
       FIP16_4pets: [
@@ -1051,7 +1053,8 @@ const allMyLanguageData = {
           noToken: 'Token not received',
           notVerified: 'Authorization not confirmed',
           serverError: 'Authorization error',
-          success: 'Great!'
+          success: 'Great!',
+          pleaseWait: 'Please wait...'
         }
       },
       FIP16_4pets: [

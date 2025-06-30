@@ -78,7 +78,7 @@ export default function SuccessfulRegistrationPage() {
           <h2 className='registration_subtitle'>{lang.subtitle}</h2>
         </div>
         <TheLinkToPageButton
-          buttonText={loading ? '⏳ Подождите...' : lang.buttonText}
+          buttonText={loading ? allMyLanguageData[interfaceLanguage].authenticationPage.messages.pleaseWait : lang.buttonText}
           isActive={!loading}
           onClick={handleLogin}
         />

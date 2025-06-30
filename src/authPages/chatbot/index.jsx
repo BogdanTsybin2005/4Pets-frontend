@@ -6,6 +6,7 @@ import SendMessageToChatBotIcon from "../../svg_pictures/send-message-to-chatbot
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useSelector } from 'react-redux';
 import allMyLanguageData from '../../data/data';
+import BurgerMenu from "../../authComponents/burgerMenu";
 
 
 
@@ -31,6 +32,20 @@ export default function ChatBot() {
     const [token] = useLocalStorage("token", "");
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     const chatBotContent = allMyLanguageData[interfaceLanguage]?.chat_bot_page || allMyLanguageData.ru.chat_bot_page;
+    const [isBurgerActive, setIsBurgerActive] = useState(false);
+
+    useEffect(() => {
+        document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
+        return () => { document.body.style.overflow = 'auto'; };
+    }, [isBurgerActive]);
+
+    const toggleBurger = () => {
+        setIsBurgerActive(prev => {
+            const newState = !prev;
+            document.body.style.overflow = newState ? 'hidden' : 'auto';
+            return newState;
+        });
+    };
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -139,7 +154,8 @@ export default function ChatBot() {
 
     return (
         <div className="chat-bot__page">
-            <Header />
+            <BurgerMenu isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
+            <Header isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
             <div className="chat-bot__container">
                 {isLoading ? (
                     <div className="chat-bot__no-messages-wrapper">

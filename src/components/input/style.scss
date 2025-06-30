@@ -40,7 +40,7 @@
   min-height: 16px;
   opacity: 0;
   transform: translateY(-2px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .input__helper-text.input-error {
@@ -50,7 +50,7 @@
 }
 
 .input__helper-text.input-success {
-  color: #2e7d32 !important;
+  color: #00ff00 !important;
   opacity: 1;
   transform: translateY(0);
 }

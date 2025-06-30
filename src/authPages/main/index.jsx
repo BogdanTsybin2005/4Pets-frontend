@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../../store/authorizationSlice';
 import allMyLanguageData from '../../data/data';
 import Loader from '../../components/loader';
+import BurgerMenu from '../../authComponents/burgerMenu';
 
 
 
@@ -19,7 +20,21 @@ export default function MainAuthPage() {
   const [loading, setLoading] = useState(true);
   const [token, setTokenLocal] = useLocalStorage('token', '');
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
   const footerRef = useRef(null);
+
+  useEffect(() => {
+    document.body.style.overflow = isBurgerActive ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isBurgerActive]);
+
+  const toggleBurger = () => {
+    setIsBurgerActive(prev => {
+      const newState = !prev;
+      document.body.style.overflow = newState ? 'hidden' : 'auto';
+      return newState;
+    });
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -52,7 +67,12 @@ export default function MainAuthPage() {
 
   return (
     <div className="main-auth">
-      <Header scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })} />
+      <BurgerMenu isBurgerActive={isBurgerActive} setIsBurgerActive={setIsBurgerActive} />
+      <Header
+        scrollToFooter={() => footerRef.current?.scrollIntoView({ behavior: 'smooth' })}
+        isBurgerActive={isBurgerActive}
+        setIsBurgerActive={setIsBurgerActive}
+      />
       <Subscription />
       <Footer ref={footerRef} />
     </div>

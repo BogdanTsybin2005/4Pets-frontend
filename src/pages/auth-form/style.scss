@@ -133,16 +133,16 @@
 }
 
 .valid {
-  color: #2e7d32; // Зелёный цвет
+  color: #00ff00;
   font-weight: 500;
 
   svg, path {
-    stroke: #2e7d32 !important;
+    stroke: #00ff00 !important;
   }
 }
 
 .invalid {
-  color: #d32f2f; // Красный цвет
+  color: #d32f2f; 
   font-weight: 400;
 
   svg, path {
@@ -150,7 +150,6 @@
   }
 }
 
-// 💪 Цвета для текста \"сильный пароль\", \"средний\" и \"слабый\"
 .password-strong {
   color: #2e7d32;
   font-weight: bold;
