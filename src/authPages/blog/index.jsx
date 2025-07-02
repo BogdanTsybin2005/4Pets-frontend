@@ -16,7 +16,7 @@ const ArticleCard = lazy(() => import('../../authComponents/blog/ArticleCard'));
 export default function Blog() {
   const [query, setQuery] = useState('');
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
-  const lang = allMyLanguageData[interfaceLanguage]?.blogPage;
+  const lang = allMyLanguageData[interfaceLanguage]?.blogPage || allMyLanguageData.ru.blogPage;
   const [isBurgerActive, setIsBurgerActive] = useState(false);
   const footerRef = useRef(null);
 
