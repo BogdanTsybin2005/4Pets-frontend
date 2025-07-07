@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
 import AuthAbstractImage from '../../svg_pictures/pictures/dog-1.png';
+import { API_BASE_URL } from '../../api';
 
 
 
@@ -69,13 +70,13 @@ export default function AuthLayout({ currentForm }) {
 
   const loginMutation = useMutation({
     mutationFn: ({ email, password }) =>
-      axios.post('http://localhost:5000/auth/login', { email, password }),
+      axios.post(`${API_BASE_URL}/auth/login`, { email, password }),
     onSuccess: async (res) => {
       const token = res.data?.data?.access_token;
       if (token && token.includes('.')) {
         dispatch(setToken(token));
 
-        const check = await axios.get('http://localhost:5000/auth/me', {
+        const check = await axios.get(`${API_BASE_URL}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
           });
         const user = check.data?.data;

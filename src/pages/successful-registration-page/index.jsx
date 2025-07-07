@@ -10,6 +10,7 @@ import allMyLanguageData from '../../data/data';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { API_BASE_URL } from '../../api';
 
 
 
@@ -34,7 +35,7 @@ export default function SuccessfulRegistrationPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/auth/login', {
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, {
         email: registrationData.email,
         password: registrationData.password,
       });
@@ -45,7 +46,7 @@ export default function SuccessfulRegistrationPage() {
         dispatch(setToken(token));
         setStoredToken(token);
 
-        const check = await axios.get("http://localhost:5000/auth/me", {
+        const check = await axios.get(`${API_BASE_URL}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

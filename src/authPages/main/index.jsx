@@ -11,6 +11,7 @@ import { setToken } from '../../store/authorizationSlice';
 import allMyLanguageData from '../../data/data';
 import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
+import { API_BASE_URL } from '../../api';
 
 
 
@@ -48,7 +49,7 @@ export default function MainAuthPage() {
       }
 
       try {
-        await axios.get('http://localhost:5000/auth/me', {
+        await axios.get(`${API_BASE_URL}/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

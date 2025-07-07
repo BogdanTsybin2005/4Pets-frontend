@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
 import useLocalStorage from "../../hooks/useLocalStorage";
 import allMyLanguageData from '../../data/data';
+import { API_BASE_URL } from "../../api";
  
  
  
@@ -17,7 +18,7 @@ export function LogoutButton({useLightStyles = false}) {
     const handleLogout = async () => {
         try {
             await axios.post(
-                "http://localhost:5000/auth/logout",
+                `${API_BASE_URL}/auth/logout`,,
                 {},
                 {
                     headers: {

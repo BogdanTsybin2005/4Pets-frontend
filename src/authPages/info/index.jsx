@@ -10,6 +10,7 @@ import FAQCard from '../../authComponents/info/FAQCard';
 import TestimonialCard from '../../authComponents/info/TestimonialCard';
 import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
+import { API_BASE_URL } from '../../api';
 
    
  
@@ -72,7 +73,7 @@ export default function Info() {
     const fetchUser = async () => {
       if (!token) return;
       try {
-        const res = await axios.get('http://localhost:5000/auth/me', {
+        const res = await axios.get(`${API_BASE_URL}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const u = res.data?.data;
@@ -107,7 +108,7 @@ export default function Info() {
               const form = new FormData();
               form.append('avatar', file);
               try {
-                await axios.patch('http://localhost:5000/user/avatar', form, {
+                await axios.patch(`${API_BASE_URL}/user/avatar`, form, {
                   headers: { Authorization: `Bearer ${token}` }
                 });
                 setUser(u => ({ ...u, avatar: URL.createObjectURL(file) }));

@@ -7,7 +7,7 @@ import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
 import { lazy, Suspense, useMemo, useState, useRef, useEffect } from 'react';
 import SearchBar from '../../authComponents/blog/SearchBar';
- 
+
 
  
 const BlogPost = lazy(() => import('../../authComponents/blog/BlogPost'));

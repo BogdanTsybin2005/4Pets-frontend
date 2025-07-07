@@ -10,6 +10,7 @@ import UserLogo from '../../components/userLogo';
 import { setRegistrationData } from '../../store/registrationSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../../api';
 
 
 
@@ -51,7 +52,7 @@ export default function UserProfile() {
       if (registrationData.avatarFile) {
         formData.append('avatar', registrationData.avatarFile);
       }
-      await axios.post('http://localhost:5000/auth/register', formData);
+      await axios.post(`${API_BASE_URL}/auth/register`, formData);
       navigate('/success');
     } catch (err) {
       const msg = err.response?.data?.message || 'Ошибка сервера';

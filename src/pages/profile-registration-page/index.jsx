@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 export default function ProfileRegistrationPage() {
   const dispatch = useDispatch();
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);

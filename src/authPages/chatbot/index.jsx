@@ -7,6 +7,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useSelector } from 'react-redux';
 import allMyLanguageData from '../../data/data';
 import BurgerMenu from "../../authComponents/burgerMenu";
+import { API_BASE_URL } from "../../api";
 
 
 
@@ -57,7 +58,7 @@ export default function ChatBot() {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/gpt/history", {
+                const res = await axios.get(`${API_BASE_URL}/gpt/history`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const history = res.data || [];
@@ -114,7 +115,7 @@ export default function ChatBot() {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/gpt/ask",
+                `${API_BASE_URL}/gpt/ask`,
                 {
                     message: trimmed,
                     timestamp: isoTimestamp,

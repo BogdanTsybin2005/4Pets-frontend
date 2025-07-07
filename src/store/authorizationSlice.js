@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 
 
 
@@ -10,7 +11,7 @@ export const checkAuth = createAsyncThunk(
             return rejectWithValue(false);
         }
         try {
-            const res = await axios.get('http://localhost:5000/auth/me', {
+            const res = await axios.get(`${API_BASE_URL}/auth/me`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const user = res.data?.data;
