@@ -18,7 +18,7 @@ export function LogoutButton({useLightStyles = false}) {
     const handleLogout = async () => {
         try {
             await axios.post(
-                `${API_BASE_URL}/auth/logout`,,
+                `${API_BASE_URL}/auth/logout`,
                 {},
                 {
                     headers: {
