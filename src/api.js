@@ -28,7 +28,7 @@ const readStoredToken = () => {
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  withCredentials: true,
+  withCredentials: false,
   headers: {
     Accept: 'application/json',
   },
