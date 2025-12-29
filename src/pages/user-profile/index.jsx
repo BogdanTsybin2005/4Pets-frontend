@@ -9,8 +9,7 @@ import IntroPartOfProfilePage from '../../components/intorPartOfProfilePage';
 import UserLogo from '../../components/userLogo';
 import { setRegistrationData } from '../../store/registrationSlice';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_BASE_URL } from '../../api';
+import { apiClient, getErrorMessage } from '../../api';
 
 
 
@@ -52,10 +51,12 @@ export default function UserProfile() {
       if (registrationData.avatarFile) {
         formData.append('avatar', registrationData.avatarFile);
       }
-      await axios.post(`${API_BASE_URL}/auth/register`, formData);
+      await apiClient.post('/auth/register', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       navigate('/success');
     } catch (err) {
-      const msg = err.response?.data?.message || 'Ошибка сервера';
+      const msg = getErrorMessage(err, 'Ошибка сервера');
       console.error(msg);
     } finally {
       setLoading(false);

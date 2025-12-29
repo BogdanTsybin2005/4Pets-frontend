@@ -1,5 +1,4 @@
 import "./style.scss";
-import axios from "axios";
 import Header from "../../authComponents/header";
 import { useEffect, useRef, useState } from "react";
 import SendMessageToChatBotIcon from "../../svg_pictures/send-message-to-chatbot-icon";
@@ -7,7 +6,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useSelector } from 'react-redux';
 import allMyLanguageData from '../../data/data';
 import BurgerMenu from "../../authComponents/burgerMenu";
-import { API_BASE_URL } from "../../api";
+import { apiClient, buildAuthHeaders, getErrorMessage } from "../../api";
 
 
 
@@ -58,10 +57,10 @@ export default function ChatBot() {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const res = await axios.get(`${API_BASE_URL}/gpt/history`, {
-                    headers: { Authorization: `Bearer ${token}` },
+                const res = await apiClient.get('/gpt/history', {
+                    headers: buildAuthHeaders(token),
                 });
-                const history = res.data || [];
+                const history = res.data?.data || res.data || [];
                 const formatted = history.flatMap((msg) => [
                     {
                         id: msg.id * 2,
@@ -114,18 +113,22 @@ export default function ChatBot() {
         setIsThinking(true);
 
         try {
-            const res = await axios.post(
-                `${API_BASE_URL}/gpt/ask`,
+            const res = await apiClient.post(
+                '/gpt/ask',
                 {
                     message: trimmed,
                     timestamp: isoTimestamp,
                 },
                 {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: buildAuthHeaders(token),
                 }
             );
 
-            const botText = res.data?.response || "Ответ пустой 🤖";
+            const botText =
+                res.data?.response ||
+                res.data?.data?.response ||
+                res.data?.answer ||
+                "Ответ пустой 🤖";
 
             setMessages((prev) => [
                 ...prev.filter((msg) => !msg.isThinking),
@@ -137,7 +140,7 @@ export default function ChatBot() {
                 },
             ]);
         } catch (error) {
-            const errorMessage = error.response?.data?.message || "Ошибка запроса";
+            const errorMessage = getErrorMessage(error, "Ошибка запроса");
             setMessages((prev) => [
                 ...prev.filter((msg) => !msg.isThinking),
                 {

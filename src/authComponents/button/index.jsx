@@ -1,11 +1,10 @@
 import './style.scss';
 import { useNavigate } from "react-router";
-import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
 import useLocalStorage from "../../hooks/useLocalStorage";
 import allMyLanguageData from '../../data/data';
-import { API_BASE_URL } from "../../api";
+import { apiClient, buildAuthHeaders } from "../../api";
  
  
  
@@ -17,13 +16,11 @@ export function LogoutButton({useLightStyles = false}) {
 
     const handleLogout = async () => {
         try {
-            await axios.post(
-                `${API_BASE_URL}/auth/logout`,
+            await apiClient.post(
+                '/auth/logout',
                 {},
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: buildAuthHeaders(token),
                 }
             );
         } catch (err) {

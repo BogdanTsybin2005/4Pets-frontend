@@ -11,12 +11,11 @@ import AppleIcon from '../../svg_pictures/AppleIcon';
 import MicrosoftIcon from '../../svg_pictures/MicrosoftIcon';
 import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { setUserAuthorizationResult, setToken } from '../../store/authorizationSlice';
 import AuthAbstractImage from '../../svg_pictures/pictures/dog-1.png';
-import { API_BASE_URL } from '../../api';
+import { apiClient, buildAuthHeaders, extractToken, extractUser, getErrorMessage } from '../../api';
 
 
 
@@ -69,17 +68,16 @@ export default function AuthLayout({ currentForm }) {
 
 
   const loginMutation = useMutation({
-    mutationFn: ({ email, password }) =>
-      axios.post(`${API_BASE_URL}/auth/login`, { email, password }),
+    mutationFn: ({ email, password }) => apiClient.post('/auth/login', { email, password }),
     onSuccess: async (res) => {
-      const token = res.data?.data?.access_token;
+      const token = extractToken(res.data);
       if (token && token.includes('.')) {
         dispatch(setToken(token));
 
-        const check = await axios.get(`${API_BASE_URL}/auth/me`, {
-          headers: { Authorization: `Bearer ${token}` },
-          });
-        const user = check.data?.data;
+        const check = await apiClient.get('/auth/me', {
+          headers: buildAuthHeaders(token),
+        });
+        const user = extractUser(check.data);
         if (user?.id || user?.email) {
           dispatch(setUserAuthorizationResult(true));
           navigate('/', { replace: true });
@@ -91,7 +89,7 @@ export default function AuthLayout({ currentForm }) {
       }
     },
     onError: (err) => {
-      setServerError(err.response?.data?.message || langData.messages.serverError);
+      setServerError(getErrorMessage(err, langData.messages.serverError));
     },
   });
 
