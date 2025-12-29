@@ -1,14 +1,26 @@
 import axios from 'axios';
 
 const normalizeUrl = (value) => (value || '').replace(/\/+$/, '');
-const ensureApiPrefix = (value) => {
-  const normalized = normalizeUrl(value || '');
-  if (/\/api($|\/)/i.test(normalized)) return normalized;
-  return `${normalized}/api`;
-};
 
-export const API_BASE_URL = ensureApiPrefix(
-  import.meta.env.VITE_BACKEND_URL || 'https://4-pets-backend.vercel.app'
+const DEFAULT_BASE_URL = 'https://4-pets-backend.vercel.app';
+const DEFAULT_PREFIX = '/api/v1';
+
+const rawBaseUrl = normalizeUrl(import.meta.env.VITE_BACKEND_URL || DEFAULT_BASE_URL);
+const hasApiSegment = /\/api($|\/)/i.test(rawBaseUrl);
+
+const configuredPrefix = import.meta.env.VITE_BACKEND_PREFIX;
+const prefixToUse = configuredPrefix === ''
+  ? ''
+  : configuredPrefix || (hasApiSegment ? '' : DEFAULT_PREFIX);
+
+const normalizedPrefix = prefixToUse
+  ? `/${prefixToUse.replace(/^\/+/, '').replace(/\/+$/, '')}`
+  : '';
+
+export const API_BASE_URL = normalizeUrl(
+  normalizedPrefix && !rawBaseUrl.endsWith(normalizedPrefix)
+    ? `${rawBaseUrl}${normalizedPrefix}`
+    : rawBaseUrl
 );
 
 const readStoredToken = () => {

@@ -95,6 +95,15 @@ The application demonstrates practical frontend development skills using modern 
 
 ---
 
+## 🔧 Environment configuration
+
+Set these variables in a `.env` file (or in your hosting provider) to point the frontend to the correct backend:
+
+- `VITE_BACKEND_URL` — base backend host (for example `https://4-pets-backend.vercel.app`).
+- `VITE_BACKEND_PREFIX` — optional path prefix. Leave empty (`""`) if the host already includes the API path, or set to `/api/v1` (default) when the backend exposes versioned routes.
+
+---
+
 ## 📫 Contact
 
 If you have any questions or want to collaborate, feel free to reach out:
