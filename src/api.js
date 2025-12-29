@@ -1,8 +1,13 @@
 import axios from 'axios';
 
 const normalizeUrl = (value) => (value || '').replace(/\/+$/, '');
+const ensureApiPrefix = (value) => {
+  const normalized = normalizeUrl(value || '');
+  if (/\/api($|\/)/i.test(normalized)) return normalized;
+  return `${normalized}/api`;
+};
 
-export const API_BASE_URL = normalizeUrl(
+export const API_BASE_URL = ensureApiPrefix(
   import.meta.env.VITE_BACKEND_URL || 'https://4-pets-backend.vercel.app'
 );
 
