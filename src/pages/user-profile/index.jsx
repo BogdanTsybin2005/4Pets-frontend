@@ -18,9 +18,11 @@ export default function UserProfile() {
   const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
   const navigate = useNavigate();
   const lang = allMyLanguageData[interfaceLanguage]?.userProfilePage;
+  const authMessages = allMyLanguageData[interfaceLanguage]?.authenticationPage?.messages || {};
 
   const registrationData = useSelector(state => state.registration);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const fileInputRef = useRef(null);
 
   const handleSelectFile = (e) => {
@@ -33,13 +35,28 @@ export default function UserProfile() {
   const triggerFile = () => fileInputRef.current?.click();
 
   useEffect(() => {
-    if (!registrationData.email || !registrationData.password || !registrationData.username) {
+    if (!registrationData.email || !registrationData.password) {
       navigate('/signup');
+      return;
     }
-  }, [registrationData]);
+    if (!registrationData.username || !registrationData.contact) {
+      navigate('/registration');
+    }
+  }, [registrationData, navigate]);
 
   const handleNext = async () => {
     if (loading) return;
+    if (!registrationData.email || !registrationData.password) {
+      navigate('/signup');
+      return;
+    }
+    if (!registrationData.username || !registrationData.contact) {
+      setError(authMessages?.contactInvalid || 'Пожалуйста, заполните данные профиля');
+      navigate('/registration');
+      return;
+    }
+
+    setError('');
     setLoading(true);
     try {
       const formData = new FormData();
@@ -57,6 +74,7 @@ export default function UserProfile() {
       navigate('/success');
     } catch (err) {
       const msg = getErrorMessage(err, 'Ошибка сервера');
+      setError(msg);
       console.error(msg);
     } finally {
       setLoading(false);
@@ -84,8 +102,9 @@ export default function UserProfile() {
             </UserProfileButton>
             <input ref={fileInputRef} type="file" accept="image/*" onChange={handleSelectFile} hidden />
           </div>
+          {error && <div className="user-profile-error">{error}</div>}
           <TheLinkToPageButton
-            buttonText={loading ? allMyLanguageData[interfaceLanguage].authenticationPage.messages.pleaseWait : lang.buttonForRegistrationText}
+            buttonText={loading ? authMessages.pleaseWait : lang.buttonForRegistrationText}
             isPrimary
             isActive={!loading}
             onClick={handleNext}
