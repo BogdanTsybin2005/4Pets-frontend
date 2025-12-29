@@ -8,9 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { resetRegistrationData } from '../../store/registrationSlice';
 import allMyLanguageData from '../../data/data';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { API_BASE_URL } from '../../api';
+import { apiClient, buildAuthHeaders, extractToken, extractUser, getErrorMessage } from '../../api';
 
 
 
@@ -35,22 +34,22 @@ export default function SuccessfulRegistrationPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/auth/login`, {
+      const res = await apiClient.post('/auth/login', {
         email: registrationData.email,
         password: registrationData.password,
       });
 
-      const token = res.data?.data?.access_token;
+      const token = extractToken(res.data);
 
       if (token && token.includes('.')) {
         dispatch(setToken(token));
         setStoredToken(token);
 
-        const check = await axios.get(`${API_BASE_URL}/auth/me`, {
-          headers: { Authorization: `Bearer ${token}` },
+        const check = await apiClient.get('/auth/me', {
+          headers: buildAuthHeaders(token),
         });
 
-        const user = check.data?.data;
+        const user = extractUser(check.data);
 
         if (user?.id || user?.email) {
           dispatch(resetRegistrationData());
@@ -63,7 +62,7 @@ export default function SuccessfulRegistrationPage() {
         alert("⛔️ Не удалось получить токен");
       }
     } catch (err) {
-      alert(err.response?.data?.message || "⛔️ Ошибка авторизации!");
+      alert(getErrorMessage(err, "⛔️ Ошибка авторизации!"));
     } finally {
       setLoading(false);
     }

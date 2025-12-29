@@ -3,7 +3,6 @@ import Footer from '../../components/footer';
 import Header from '../../authComponents/header';
 import Subscription from '../../authComponents/subcription';
 import { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +10,7 @@ import { setToken } from '../../store/authorizationSlice';
 import allMyLanguageData from '../../data/data';
 import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
-import { API_BASE_URL } from '../../api';
+import { apiClient, buildAuthHeaders } from '../../api';
 
 
 
@@ -49,10 +48,8 @@ export default function MainAuthPage() {
       }
 
       try {
-        await axios.get(`${API_BASE_URL}/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        await apiClient.get('/auth/me', {
+          headers: buildAuthHeaders(token),
         });
         setLoading(false);
       } catch (error) {

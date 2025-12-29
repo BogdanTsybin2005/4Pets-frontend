@@ -1,7 +1,6 @@
 import './style.scss';
 import Header from '../../authComponents/header';
 import Footer from '../../components/footer';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 import allMyLanguageData from '../../data/data';
@@ -10,7 +9,7 @@ import FAQCard from '../../authComponents/info/FAQCard';
 import TestimonialCard from '../../authComponents/info/TestimonialCard';
 import Loader from '../../components/loader';
 import BurgerMenu from '../../authComponents/burgerMenu';
-import { API_BASE_URL } from '../../api';
+import { apiClient, buildAuthHeaders } from '../../api';
 
    
  
@@ -73,10 +72,10 @@ export default function Info() {
     const fetchUser = async () => {
       if (!token) return;
       try {
-        const res = await axios.get(`${API_BASE_URL}/auth/me`, {
-          headers: { Authorization: `Bearer ${token}` },
+        const res = await apiClient.get('/auth/me', {
+          headers: buildAuthHeaders(token),
         });
-        const u = res.data?.data;
+        const u = res.data?.data || res.data?.user || res.data;
         setUser(u);
       } catch (err) {
         console.error('Failed to load user', err);
@@ -108,8 +107,11 @@ export default function Info() {
               const form = new FormData();
               form.append('avatar', file);
               try {
-                await axios.patch(`${API_BASE_URL}/user/avatar`, form, {
-                  headers: { Authorization: `Bearer ${token}` }
+                await apiClient.patch('/user/avatar', form, {
+                  headers: {
+                    ...buildAuthHeaders(token),
+                    'Content-Type': 'multipart/form-data',
+                  }
                 });
                 setUser(u => ({ ...u, avatar: URL.createObjectURL(file) }));
               } catch (err) {
