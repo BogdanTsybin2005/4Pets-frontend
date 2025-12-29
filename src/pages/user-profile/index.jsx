@@ -50,6 +50,11 @@ export default function UserProfile() {
       navigate('/signup');
       return;
     }
+    if (!registrationData.city) {
+      setError(authMessages?.cityRequired || 'Пожалуйста, выберите город');
+      navigate('/registration');
+      return;
+    }
     if (!registrationData.username || !registrationData.contact) {
       setError(authMessages?.contactInvalid || 'Пожалуйста, заполните данные профиля');
       navigate('/registration');
@@ -68,9 +73,7 @@ export default function UserProfile() {
       if (registrationData.avatarFile) {
         formData.append('avatar', registrationData.avatarFile);
       }
-      await apiClient.post('/auth/register', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      await apiClient.post('/auth/register', formData);
       navigate('/success');
     } catch (err) {
       const msg = getErrorMessage(err, 'Ошибка сервера');

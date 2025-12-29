@@ -11,6 +11,16 @@ const CustomSelect = ({ options, selected, onChange }) => {
     const interfaceLanguage = useSelector(state => state.language.interfaceLanguage);
     
     
+    useEffect(() => {
+        setSelectedOption(selected || null);
+    }, [selected]);
+
+    useEffect(() => {
+        if (!selected && !selectedOption && options?.length) {
+            const defaultOption = options.find(opt => opt.selected) || options[0];
+            setSelectedOption(defaultOption);
+        }
+    }, [options, selected, selectedOption]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

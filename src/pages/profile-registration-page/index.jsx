@@ -1,5 +1,5 @@
 import './style.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Input } from '../../components/input';
 import CustomSelect from '../../components/customSelect';
 import { LinkButton, TheLinkToPageButton } from '../../components/button';
@@ -25,7 +25,17 @@ export default function ProfileRegistrationPage() {
   const [errors, setErrors] = useState({ username: '', contact: '' });
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const validateField = (key, value) => {
+  useEffect(() => {
+    const cityOptions = formFields?.[1]?.options || [];
+    if (!registrationData.city && cityOptions.length) {
+      const defaultCity = cityOptions.find(opt => opt.selected) || cityOptions[0];
+      if (defaultCity?.cityName) {
+        dispatch(setRegistrationData({ city: defaultCity.cityName }));
+      }
+    }
+  }, [dispatch, formFields, registrationData.city]);
+
+  const validateField = useCallback((key, value) => {
     switch (key) {
       case 'username':
         return value.trim().length >= 6 ? '' : messages.usernameMin;
@@ -34,7 +44,7 @@ export default function ProfileRegistrationPage() {
       default:
         return '';
     }
-  };
+  }, [messages.contactInvalid, messages.usernameMin]);
 
   useEffect(() => {
     const usernameError = validateField('username', registrationData.username);
@@ -43,10 +53,11 @@ export default function ProfileRegistrationPage() {
     setErrors({ username: usernameError, contact: contactError });
 
     const baseValid = registrationData.email && registrationData.password;
-    const profileValid = registrationData.username && registrationData.contact;
+    const profileValid =
+      registrationData.username && registrationData.contact && registrationData.city;
 
     setIsFormValid(baseValid && profileValid && !usernameError && !contactError);
-  }, [registrationData]);
+  }, [registrationData, validateField]);
 
   const handleChange = (key, value) => {
     dispatch(setRegistrationData({ [key]: value }));
@@ -88,7 +99,7 @@ export default function ProfileRegistrationPage() {
               <label className="registration__label">{formFields[1].label}</label>
               <CustomSelect
                 options={formFields[1].options}
-                selected={formFields[1].options.find(opt => opt.value === registrationData.city)}
+                selected={formFields[1].options.find(opt => opt.cityName === registrationData.city)}
                 onChange={(selectedOption) => handleChange('city', selectedOption.cityName)}
               />
             </li>
