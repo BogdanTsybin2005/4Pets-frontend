@@ -13,9 +13,18 @@ const prefixToUse = configuredPrefix === ''
   ? ''
   : configuredPrefix || (hasApiSegment ? '' : DEFAULT_PREFIX);
 
-const normalizedPrefix = prefixToUse
-  ? `/${prefixToUse.replace(/^\/+/, '').replace(/\/+$/, '')}`
-  : '';
+const normalizePrefix = (value) => {
+  if (!value) return '';
+  const cleaned = `/${String(value).replace(/^\/+/, '').replace(/\/+$/, '')}`;
+
+  if (hasApiSegment || cleaned.startsWith('/api')) {
+    return cleaned;
+  }
+
+  return cleaned === '/api' ? cleaned : `/api${cleaned}`;
+};
+
+const normalizedPrefix = normalizePrefix(prefixToUse);
 
 export const API_BASE_URL = normalizeUrl(
   normalizedPrefix && !rawBaseUrl.endsWith(normalizedPrefix)
