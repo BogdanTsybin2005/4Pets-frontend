@@ -41,6 +41,112 @@ const normalizeHistoryPayload = (payload) => {
     return [];
 };
 
+const normalizeRole = (role = '') => {
+    const lowerCased = String(role).toLowerCase();
+    if (lowerCased === 'assistant' || lowerCased === 'bot' || lowerCased === 'system') {
+        return 'bot';
+    }
+    return 'user';
+};
+
+const extractTimestamp = (source, fallback = new Date().toISOString()) =>
+    pickFirstValue(
+        source,
+        ['timestamp', 'created_at', 'createdAt', 'updatedAt', 'date', 'datetime'],
+        fallback
+    );
+
+const normalizeHistoryEntry = (entry, index, chatBotContent) => {
+    const baseId = Number.isFinite(Number(entry?.id)) ? Number(entry.id) : index;
+    const timestamp = extractTimestamp(entry);
+
+    if (entry?.role && (entry?.content || entry?.text || entry?.message)) {
+        const text = pickFirstValue(
+            entry,
+            ['content', 'text', 'message', 'prompt', 'question', 'response', 'answer'],
+            chatBotContent.emptyDataText
+        );
+
+        return [
+            {
+                id: baseId,
+                role: normalizeRole(entry.role),
+                text,
+                timestamp,
+            },
+        ];
+    }
+
+    const userText = pickFirstValue(
+        entry,
+        ['prompt', 'message', 'question', 'text', 'content'],
+        chatBotContent.emptyDataText
+    );
+
+    const botText = pickFirstValue(
+        entry,
+        ['response', 'answer', 'reply', 'result', 'message', 'text'],
+        chatBotContent.loadingHistory
+    );
+
+    return [
+        {
+            id: baseId * 2,
+            role: 'user',
+            text: userText,
+            timestamp,
+        },
+        {
+            id: baseId * 2 + 1,
+            role: 'bot',
+            text: botText,
+            timestamp,
+        },
+    ];
+};
+
+const extractBotReply = (payload, fallback = 'Ответ пустой 🤖') => {
+    const candidates = [
+        payload?.data?.response,
+        payload?.data?.answer,
+        payload?.data?.message,
+        payload?.response,
+        payload?.answer,
+        payload?.message,
+        payload?.data?.result,
+        payload?.result,
+        payload?.data?.text,
+        payload?.text,
+        payload?.data?.content,
+        payload?.content,
+        payload?.data?.choices?.[0]?.message?.content,
+        payload?.choices?.[0]?.message?.content,
+        payload?.data?.choices?.[0]?.text,
+        payload?.choices?.[0]?.text,
+    ];
+
+    for (const candidate of candidates) {
+        if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+    }
+
+    const arrayChoices =
+        payload?.data?.choices ||
+        payload?.choices ||
+        payload?.data?.data ||
+        payload?.data?.messages;
+
+    if (Array.isArray(arrayChoices)) {
+        const combined = arrayChoices
+            .map((item) => item?.message?.content || item?.content || item?.text || '')
+            .filter(Boolean)
+            .join('\n')
+            .trim();
+        if (combined) return combined;
+    }
+
+    return fallback;
+};
+
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
@@ -79,30 +185,9 @@ export default function ChatBot() {
                     headers: buildAuthHeaders(token),
                 });
                 const history = normalizeHistoryPayload(res.data?.data || res.data || []);
-                const formatted = history.flatMap((msg, index) => {
-                    const baseId = Number.isFinite(Number(msg?.id)) ? Number(msg.id) : index;
-                    const timestamp =
-                        pickFirstValue(msg, ['timestamp', 'created_at', 'createdAt', 'updatedAt', 'date', 'datetime']) ||
-                        new Date().toISOString();
-
-                    const userText = pickFirstValue(msg, ['prompt', 'message', 'question', 'text', 'content'], chatBotContent.emptyDataText);
-                    const botText = pickFirstValue(msg, ['response', 'answer', 'reply', 'result', 'message', 'text'], chatBotContent.loadingHistory);
-
-                    return [
-                        {
-                            id: baseId * 2,
-                            role: "user",
-                            text: userText,
-                            timestamp,
-                        },
-                        {
-                            id: baseId * 2 + 1,
-                            role: "bot",
-                            text: botText,
-                            timestamp,
-                        }
-                    ];
-                });
+                const formatted = history.flatMap((msg, index) =>
+                    normalizeHistoryEntry(msg, index, chatBotContent)
+                );
                 setMessages(formatted);
             } catch (err) {
                 console.error("Ошибка загрузки истории:", err);
@@ -123,6 +208,13 @@ export default function ChatBot() {
         if (!trimmed || !token) return;
 
         const isoTimestamp = new Date().toISOString();
+        const conversation = messages
+            .filter((msg) => !msg.isThinking)
+            .slice(-20)
+            .map((msg) => ({
+                role: msg.role === 'bot' ? 'assistant' : 'user',
+                content: msg.text,
+            }));
 
         const userMessage = {
             id: Date.now(),
@@ -151,6 +243,7 @@ export default function ChatBot() {
                     message: trimmed,
                     question: trimmed,
                     text: trimmed,
+                    messages: [...conversation, { role: 'user', content: trimmed }],
                     timestamp: isoTimestamp,
                 },
                 {
@@ -158,22 +251,9 @@ export default function ChatBot() {
                 }
             );
 
-            const botText =
-                res.data?.response ||
-                res.data?.data?.response ||
-                res.data?.answer ||
-                res.data?.data?.answer ||
-                res.data?.message ||
-                res.data?.data?.message ||
-                res.data?.answer ||
-                "Ответ пустой 🤖";
+            const botText = extractBotReply(res, "Ответ пустой 🤖");
 
-            const responseTimestamp =
-                res.data?.timestamp ||
-                res.data?.data?.timestamp ||
-                res.data?.created_at ||
-                res.data?.createdAt ||
-                isoTimestamp;
+            const responseTimestamp = extractTimestamp(res?.data, isoTimestamp);
 
             setMessages((prev) => [
                 ...prev.filter((msg) => !msg.isThinking),
