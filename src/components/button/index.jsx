@@ -94,7 +94,7 @@ export const LanguageSelect = ({ language, setLanguage, useDarkStyle = false }) 
       setLanguage(storedLang);
       setSelected(storedLang);
     }
-  }, []);
+  }, [language, setLanguage, storedLang]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
