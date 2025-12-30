@@ -3,7 +3,7 @@ import axios from 'axios';
 const normalizeUrl = (value) => (value || '').replace(/\/+$/, '');
 
 const DEFAULT_BASE_URL = 'https://4-pets-backend.vercel.app';
-const DEFAULT_PREFIX = '/api/v1';
+const DEFAULT_PREFIX = '';
 
 const rawBaseUrl = normalizeUrl(import.meta.env.VITE_BACKEND_URL || DEFAULT_BASE_URL);
 const hasApiSegment = /\/api($|\/)/i.test(rawBaseUrl);
@@ -11,7 +11,7 @@ const hasApiSegment = /\/api($|\/)/i.test(rawBaseUrl);
 const configuredPrefix = import.meta.env.VITE_BACKEND_PREFIX;
 const prefixToUse = configuredPrefix === ''
   ? ''
-  : configuredPrefix || (hasApiSegment ? '' : DEFAULT_PREFIX);
+  : configuredPrefix ?? (hasApiSegment ? '' : DEFAULT_PREFIX);
 
 const normalizePrefix = (value) => {
   if (!value) return '';
