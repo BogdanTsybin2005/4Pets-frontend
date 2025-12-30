@@ -116,7 +116,7 @@ export default function ChatBot() {
             const res = await apiClient.post(
                 '/gpt/ask',
                 {
-                    message: trimmed,
+                    prompt: trimmed,
                     timestamp: isoTimestamp,
                 },
                 {
@@ -127,8 +127,15 @@ export default function ChatBot() {
             const botText =
                 res.data?.response ||
                 res.data?.data?.response ||
+                res.data?.message ||
+                res.data?.data?.message ||
                 res.data?.answer ||
                 "Ответ пустой 🤖";
+
+            const responseTimestamp =
+                res.data?.timestamp ||
+                res.data?.data?.timestamp ||
+                isoTimestamp;
 
             setMessages((prev) => [
                 ...prev.filter((msg) => !msg.isThinking),
@@ -136,7 +143,7 @@ export default function ChatBot() {
                     id: Date.now() + 2,
                     role: "bot",
                     text: botText,
-                    timestamp: isoTimestamp,
+                    timestamp: responseTimestamp,
                 },
             ]);
         } catch (error) {
