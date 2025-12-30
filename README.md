@@ -100,7 +100,7 @@ The application demonstrates practical frontend development skills using modern 
 Set these variables in a `.env` file (or in your hosting provider) to point the frontend to the correct backend:
 
 - `VITE_BACKEND_URL` — base backend host (for example `https://4-pets-backend.vercel.app`).
-- `VITE_BACKEND_PREFIX` — optional path prefix. Leave empty (`""`) if the host already includes the API path. By default the frontend now sends requests directly to the host root; specify `/api` or `/api/v1` only when your backend is mounted under that path.
+- `VITE_BACKEND_PREFIX` — optional path prefix. Leave empty (`""`) if the host already includes the API path. By default the frontend targets `/api` (useful for Vercel Serverless Functions); override with `/api/v1` or set to an empty string if your backend listens on the domain root.
 
 ---
 

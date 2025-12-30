@@ -23,6 +23,24 @@ function formatDate(value) {
     return `${day}.${month}.${year} - ${hours}:${minutes}`;
 }
 
+const pickFirstValue = (source, keys, fallback = "") => {
+    for (const key of keys) {
+        const candidate = source?.[key];
+        if (candidate !== undefined && candidate !== null && candidate !== "") {
+            return candidate;
+        }
+    }
+    return fallback;
+};
+
+const normalizeHistoryPayload = (payload) => {
+    if (Array.isArray(payload)) return payload;
+    if (Array.isArray(payload?.history)) return payload.history;
+    if (Array.isArray(payload?.messages)) return payload.messages;
+    if (Array.isArray(payload?.data)) return payload.data;
+    return [];
+};
+
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
@@ -60,21 +78,31 @@ export default function ChatBot() {
                 const res = await apiClient.get('/gpt/history', {
                     headers: buildAuthHeaders(token),
                 });
-                const history = res.data?.data || res.data || [];
-                const formatted = history.flatMap((msg) => [
-                    {
-                        id: msg.id * 2,
-                        role: "user",
-                        text: msg.prompt,
-                        timestamp: msg.timestamp,  
-                    },
-                    {
-                        id: msg.id * 2 + 1,
-                        role: "bot",
-                        text: msg.response,
-                        timestamp: msg.timestamp,  
-                    }
-                ]);
+                const history = normalizeHistoryPayload(res.data?.data || res.data || []);
+                const formatted = history.flatMap((msg, index) => {
+                    const baseId = Number.isFinite(Number(msg?.id)) ? Number(msg.id) : index;
+                    const timestamp =
+                        pickFirstValue(msg, ['timestamp', 'created_at', 'createdAt', 'updatedAt', 'date', 'datetime']) ||
+                        new Date().toISOString();
+
+                    const userText = pickFirstValue(msg, ['prompt', 'message', 'question', 'text', 'content'], chatBotContent.emptyDataText);
+                    const botText = pickFirstValue(msg, ['response', 'answer', 'reply', 'result', 'message', 'text'], chatBotContent.loadingHistory);
+
+                    return [
+                        {
+                            id: baseId * 2,
+                            role: "user",
+                            text: userText,
+                            timestamp,
+                        },
+                        {
+                            id: baseId * 2 + 1,
+                            role: "bot",
+                            text: botText,
+                            timestamp,
+                        }
+                    ];
+                });
                 setMessages(formatted);
             } catch (err) {
                 console.error("Ошибка загрузки истории:", err);
@@ -84,8 +112,11 @@ export default function ChatBot() {
         };
         if (token) {
             fetchHistory();
+        } else {
+            setIsLoading(false);
+            setMessages([]);
         }
-    }, [token]);
+    }, [token, chatBotContent.emptyDataText, chatBotContent.loadingHistory]);
 
     const sendMessage = async () => {
         const trimmed = input.trim();
@@ -117,6 +148,9 @@ export default function ChatBot() {
                 '/gpt/ask',
                 {
                     prompt: trimmed,
+                    message: trimmed,
+                    question: trimmed,
+                    text: trimmed,
                     timestamp: isoTimestamp,
                 },
                 {
@@ -127,6 +161,8 @@ export default function ChatBot() {
             const botText =
                 res.data?.response ||
                 res.data?.data?.response ||
+                res.data?.answer ||
+                res.data?.data?.answer ||
                 res.data?.message ||
                 res.data?.data?.message ||
                 res.data?.answer ||
@@ -135,6 +171,8 @@ export default function ChatBot() {
             const responseTimestamp =
                 res.data?.timestamp ||
                 res.data?.data?.timestamp ||
+                res.data?.created_at ||
+                res.data?.createdAt ||
                 isoTimestamp;
 
             setMessages((prev) => [
