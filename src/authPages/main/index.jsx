@@ -61,7 +61,7 @@ export default function MainAuthPage() {
     };
 
     fetchUser();
-  }, [token]);
+  }, [dispatch, navigate, setTokenLocal, token]);
 
   const loadingText = allMyLanguageData[interfaceLanguage]?.blogPage.loading;
   if (loading) return <Loader text={loadingText} />;

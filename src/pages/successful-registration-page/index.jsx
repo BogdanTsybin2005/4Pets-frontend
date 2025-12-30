@@ -27,7 +27,7 @@ export default function SuccessfulRegistrationPage() {
     if (!registrationData?.email || !registrationData?.password || !registrationData?.username) {
       navigate('/signup');
     }
-  }, [registrationData]);
+  }, [navigate, registrationData]);
 
   const handleLogin = async () => {
     if (loading) return;

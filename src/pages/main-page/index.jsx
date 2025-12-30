@@ -59,7 +59,7 @@ export default function MainPage() {
             setIsBurgerActive(false);
             document.body.style.overflow = 'auto';
         }
-    }, [customWindowWidth]);    
+    }, [customWindowWidth, isBurgerActive]);
 
 
     useEffect(() => {
