@@ -22,8 +22,8 @@ const Footer = forwardRef((props, ref) => {
                             <InstagramIcon/>
                         </div>
                         <div className="footer__instagram-links-block">
-                            <a href="https://www.instagram.com/4petssss/" target="blank">@4petssss</a>
-                            <a href="https://www.instagram.com/tsi.auca.kg/" target="blank">@tsiauca.kg</a>
+                            <a href="https://www.instagram.com/4petssss/" target="_blank" rel="noopener noreferrer">@4petssss</a>
+                            <a href="https://www.instagram.com/tsi.auca.kg/" target="_blank" rel="noopener noreferrer">@tsiauca.kg</a>
                         </div>
                     </div>
                     <div className="footer__contacts-info">

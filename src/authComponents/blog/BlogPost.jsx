@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { sanitizeHtml, sanitizeImageUrl } from '../../utils/security';
  
 export default React.memo(function BlogPost({ post }) {
     const [liked, setLiked] = useState(false);
+    const sanitizedText = useMemo(
+        () => (Array.isArray(post.text) ? post.text.map((p) => sanitizeHtml(p)) : []),
+        [post.text]
+    );
+    const avatarSrc = useMemo(() => sanitizeImageUrl(post.avatar), [post.avatar]);
+    const imageSrc = useMemo(() => sanitizeImageUrl(post.image), [post.image]);
 
     return (
         <div className="blog-post">
             <div className="post-header">
                 <div className="post-user">
-                    <img src={post.avatar} alt="avatar" className="avatar" />
+                    <img src={avatarSrc} alt="avatar" className="avatar" />
                     <div>
                         <strong>{post.nickname}</strong>
                         <div className="post-location">{post.location}</div>
@@ -16,9 +23,9 @@ export default React.memo(function BlogPost({ post }) {
                 <div className="post-caption">{post.caption}</div>
             </div>
             <div className="post-image-block">
-                <img src={post.image} alt="Post" className="post-image" loading="lazy" />
+                <img src={imageSrc} alt="Post" className="post-image" loading="lazy" />
                 <div className="post-overlay-text">
-                    {post.text.map((p, idx) => (
+                    {sanitizedText.map((p, idx) => (
                         <p key={idx} dangerouslySetInnerHTML={{ __html: p }} />
                     ))}
                 </div>
