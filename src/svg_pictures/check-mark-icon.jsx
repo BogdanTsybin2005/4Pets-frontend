@@ -12,8 +12,7 @@ function CheckMarkIcon() {
     >
       <path
         d="M12.333 1.24L5 8.573 1.667 5.24"
-        stroke="#465FF1"
-        strokeOpacity={0.25}
+        stroke="currentColor"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
