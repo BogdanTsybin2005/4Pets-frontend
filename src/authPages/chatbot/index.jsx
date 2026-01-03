@@ -201,7 +201,7 @@ export default function ChatBot() {
             setIsLoading(false);
             setMessages([]);
         }
-    }, [token, chatBotContent.emptyDataText, chatBotContent.loadingHistory]);
+    }, [token, chatBotContent]);
 
     const sendMessage = async () => {
         const trimmed = input.trim();

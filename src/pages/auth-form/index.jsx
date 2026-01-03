@@ -45,14 +45,9 @@ export default function AuthLayout({ currentForm }) {
     },
   });
 
-  const passwordValue = watch('password');
+  const passwordValue = watch('password') || '';
 
   useEffect(() => {
-    if (currentForm === 'login') {
-      setCriteriaStatus({ length: true, digits: true });
-      setPasswordStrength('strong');
-      return;
-    }
     const hasLength = passwordValue.length >= 8;
     const hasDigits = /\d/.test(passwordValue) && /[^A-Za-z0-9]/.test(passwordValue);
     setCriteriaStatus({ length: hasLength, digits: hasDigits });
@@ -64,7 +59,7 @@ export default function AuthLayout({ currentForm }) {
       strength = 'medium';
     }
     setPasswordStrength(strength);
-  }, [passwordValue, currentForm]);
+  }, [passwordValue]);
 
 
   const loginMutation = useMutation({

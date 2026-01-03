@@ -133,11 +133,11 @@
 }
 
 .valid {
-  color: #00ff00;
+  color: #0b780a;
   font-weight: 500;
 
   svg, path {
-    stroke: #00ff00 !important;
+    stroke: #0b780a !important;
   }
 }
 
@@ -151,18 +151,30 @@
 }
 
 .password-strong {
-  color: #2e7d32;
+  color: #0b780a;
   font-weight: bold;
+
+  svg, path {
+    stroke: #0b780a !important;
+  }
 }
 
 .password-medium {
   color: #fbc02d;
   font-weight: bold;
+
+  svg, path {
+    stroke: #fbc02d !important;
+  }
 }
 
 .password-weak {
   color: #d32f2f;
   font-weight: bold;
+
+  svg, path {
+    stroke: #d32f2f !important;
+  }
 }
 
 
